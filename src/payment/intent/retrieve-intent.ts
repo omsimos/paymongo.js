@@ -14,7 +14,7 @@ export interface RetrievePaymentIntentProps {
  *
  * @example
  * ```js
- * import PaymongoClient from "paymongo-client";
+ * import PaymongoClient from "paymongo.js";
  *
  * const main = async () => {
  *  const client = PaymongoClient("sk_test_key");
