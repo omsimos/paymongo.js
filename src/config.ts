@@ -1,1 +1,5 @@
-export const BASE_URL = "https://api.paymongo.com/v1";
+const config = {
+  BASE_URL: "https://api.paymongo.com/v1",
+};
+
+export default config;
