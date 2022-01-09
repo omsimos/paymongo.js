@@ -14,10 +14,9 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test",
-    "lint": "tsdx lint",
+    "lint": "eslint --fix src/**/*.{js,ts}",
     "prepare": "tsdx build && husky install",
-    "size": "size-limit",
-    "analyze": "size-limit --why"
+    "size": "size-limit"
   },
   "peerDependencies": {},
   "name": "paymongo-client",
