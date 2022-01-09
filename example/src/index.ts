@@ -3,10 +3,17 @@ import PaymongoClient from "../../dist";
 const client = PaymongoClient("sk_test_23KHZ8zqFLdvSufpLjrHnko7");
 
 const main = async () => {
-  const paymentIntent = await client.retrievePaymentIntent({
-    id: "pi_qocS57N9DSz3UvDa9Fjj4fYY",
+  const payment = await client.createPaymentIntent({
+    amount: 10000,
+    metadata: {
+      order_id: "abc123",
+    },
   });
-  console.log(paymentIntent);
+
+  const paymentIntent = await client.retrievePaymentIntent({
+    id: payment.data.id,
+  });
+  console.log(paymentIntent.data.attributes);
 };
 
 main().catch(console.error);
