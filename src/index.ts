@@ -3,7 +3,13 @@ import { store } from "./store";
 
 export * from "./payment";
 
-const PaymongoClient = (secretKey: string) => {
+export interface PaymongoClient {
+  retrievePaymentIntent: typeof retrievePaymentIntent;
+}
+
+export type ClientFunction = (secretKey: string) => PaymongoClient;
+
+const PaymongoClient: ClientFunction = (secretKey: string) => {
   store.setState((state) => ({ ...state, secretKey }));
 
   return {
