@@ -16,7 +16,8 @@
     "test": "tsdx test",
     "lint": "eslint --fix src/**/*.{js,ts}",
     "prepare": "tsdx build && husky install",
-    "size": "size-limit"
+    "size": "size-limit",
+    "release": "np"
   },
   "peerDependencies": {},
   "name": "paymongo-client",
@@ -40,6 +41,7 @@
     "eslint-config-prettier": "^8.3.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.7",
+    "np": "^7.6.0",
     "prettier": "2.5.1",
     "size-limit": "^7.0.5",
     "tsdx": "^0.14.1",
