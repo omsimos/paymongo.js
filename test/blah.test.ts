@@ -1,3 +1,3 @@
 describe("test", () => {
-  it("works", () => true);
+  it("works", () => undefined);
 });
