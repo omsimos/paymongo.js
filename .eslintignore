@@ -5,3 +5,6 @@
 package-lock.json
 yarn.lock
 tsconfig.json
+
+dist
+node_modules
