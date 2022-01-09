@@ -1,13 +1,5 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-
-function _interopDefault(ex) {
-  return ex && typeof ex === "object" && "default" in ex ? ex["default"] : ex;
-}
-
-var axios = _interopDefault(require("axios"));
-var create = _interopDefault(require("zustand/vanilla"));
+import axios from "axios";
+import create from "zustand/vanilla";
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -1079,5 +1071,5 @@ var PaymongoClient = function PaymongoClient(secretKey) {
   };
 };
 
-exports.default = PaymongoClient;
-//# sourceMappingURL=paymongo-client.cjs.development.js.map
+export default PaymongoClient;
+//# sourceMappingURL=paymongo.js.esm.js.map
