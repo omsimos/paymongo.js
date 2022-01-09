@@ -47,7 +47,8 @@
     "typescript": "^4.5.4"
   },
   "dependencies": {
-    "axios": "^0.24.0"
+    "axios": "^0.24.0",
+    "zustand": "^3.6.8"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",
