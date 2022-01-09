@@ -25,11 +25,11 @@
   "size-limit": [
     {
       "path": "dist/paymongo-client.cjs.production.min.js",
-      "limit": "10 KB"
+      "limit": "15 KB"
     },
     {
       "path": "dist/paymongo-client.esm.js",
-      "limit": "10 KB"
+      "limit": "15 KB"
     }
   ],
   "devDependencies": {
