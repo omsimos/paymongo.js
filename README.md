@@ -1,6 +1,6 @@
-# paymongo-client
+# paymongo.js
 
-A lightweight, fully-featured, typescript compatible node library for Paymongo.
+A lightweight, fully-featured, modular, typescript-compatible javascript library for Paymongo.
 
 ## Installation
 
@@ -76,7 +76,7 @@ declare var __DEV__: boolean;
 
 // inside your code...
 if (__DEV__) {
-  console.log('foo');
+  console.log("foo");
 }
 ```
 
