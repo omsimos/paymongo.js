@@ -1,10 +1,10 @@
-import { CurrencyType, RedirectType, SourceType, StatusType } from "../types";
+import { CurrencyType, RedirectType, SourceType, StatusType, BillingType } from "../types";
 export interface CreateSourceProps {
     amount: number;
     redirect: RedirectType;
     type: SourceType;
     currency: CurrencyType;
-    billing?: BillingProps;
+    billing?: BillingType;
 }
 export interface PaymentSourceResponse {
     data: {
@@ -15,7 +15,7 @@ export interface PaymentSourceResponse {
 }
 export interface PaymentSourceAttributes {
     amount: number;
-    billing?: BillingProps;
+    billing?: BillingType;
     currency: CurrencyType;
     description?: any;
     livemode: boolean;
@@ -25,21 +25,4 @@ export interface PaymentSourceAttributes {
     type: SourceType;
     created_at: number;
     updated_at: number;
-}
-export interface BillingProps {
-    name?: string;
-    phone?: string;
-    email?: string;
-    address?: AddressType;
-}
-export declare type AddressType = {
-    line1?: string;
-    line2?: string;
-    city?: string;
-    state?: string;
-    postal_code?: string;
-    country?: string;
-};
-export interface RetrieveSourceProps {
-    sourceId: string;
 }

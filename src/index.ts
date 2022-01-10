@@ -13,28 +13,43 @@ import {
   updateWebhook,
 } from "./payment/webhook";
 import { createSource, retrieveSource } from "./payment/source";
+import { createPayment, retrievePayment, listPayments } from "./payment";
 import { store } from "./store";
 
 export * from "./payment/types";
 
 export interface PaymongoClient {
   // intent
-  attachPaymentIntent: typeof attachPaymentIntent;
-  createPaymentIntent: typeof createPaymentIntent;
-  retrievePaymentIntent: typeof retrievePaymentIntent;
+  intent: {
+    attach: typeof attachPaymentIntent;
+    create: typeof createPaymentIntent;
+    retrieve: typeof retrievePaymentIntent;
+  };
   // method
-  createPaymentMethod: typeof createPaymentMethod;
-  retrievePaymentMethod: typeof retrievePaymentMethod;
+  method: {
+    create: typeof createPaymentMethod;
+    retrieve: typeof retrievePaymentMethod;
+  };
   // webhook
-  createWebhook: typeof createWebhook;
-  disableWebhook: typeof disableWebhook;
-  enableWebhook: typeof enableWebhook;
-  listWebhooks: typeof listWebhooks;
-  retrieveWebhook: typeof retrieveWebhook;
-  updateWebhook: typeof updateWebhook;
+  webhook: {
+    create: typeof createWebhook;
+    disable: typeof disableWebhook;
+    enable: typeof enableWebhook;
+    list: typeof listWebhooks;
+    retrieve: typeof retrieveWebhook;
+    update: typeof updateWebhook;
+  };
   // source
-  createSource: typeof createSource;
-  retrieveSource: typeof retrieveSource;
+  source: {
+    create: typeof createSource;
+    retrieve: typeof retrieveSource;
+  };
+  // payment
+  payment: {
+    create: typeof createPayment;
+    retrieve: typeof retrievePayment;
+    list: typeof listPayments;
+  };
 }
 
 export type ClientFunction = (secretKey: string) => PaymongoClient;
@@ -43,19 +58,32 @@ const PaymongoClient: ClientFunction = (secretKey: string) => {
   store.setState((state) => ({ ...state, secretKey }));
 
   return {
-    attachPaymentIntent,
-    createPaymentIntent,
-    retrievePaymentIntent,
-    createPaymentMethod,
-    retrievePaymentMethod,
-    createWebhook,
-    disableWebhook,
-    enableWebhook,
-    listWebhooks,
-    retrieveWebhook,
-    updateWebhook,
-    createSource,
-    retrieveSource,
+    intent: {
+      attach: attachPaymentIntent,
+      create: createPaymentIntent,
+      retrieve: retrievePaymentIntent,
+    },
+    method: {
+      create: createPaymentMethod,
+      retrieve: retrievePaymentMethod,
+    },
+    webhook: {
+      create: createWebhook,
+      disable: disableWebhook,
+      enable: enableWebhook,
+      list: listWebhooks,
+      retrieve: retrieveWebhook,
+      update: updateWebhook,
+    },
+    source: {
+      create: createSource,
+      retrieve: retrieveSource,
+    },
+    payment: {
+      create: createPayment,
+      retrieve: retrievePayment,
+      list: listPayments,
+    },
   };
 };
 

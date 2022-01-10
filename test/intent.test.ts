@@ -7,7 +7,7 @@ describe("PaymentIntent", () => {
 
   beforeAll(async () => {
     client = PaymongoClient(SECRET_KEY);
-    intent = await client.createPaymentIntent({
+    intent = await client.intent.create({
       amount: 100000,
     });
   });
@@ -30,7 +30,7 @@ describe("PaymentIntent", () => {
     let retrieved: PaymentIntentResponse;
 
     beforeAll(async () => {
-      retrieved = await client.retrievePaymentIntent({
+      retrieved = await client.intent.retrieve({
         intentId: intent.data.id,
       });
     });

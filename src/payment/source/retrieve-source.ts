@@ -1,5 +1,5 @@
 import api from "../../utils/api-base";
-import { RetrieveSourceProps, PaymentSourceResponse } from "./types";
+import { PaymentSourceResponse } from "./types";
 
 /**
  * @module retrieveSource
@@ -12,16 +12,14 @@ import { RetrieveSourceProps, PaymentSourceResponse } from "./types";
  *
  * const main = async () => {
  *  const client = PaymongoClient("pk_test_key");
- *  data = await client.retrieveSource({
- *    sourceId: "source_id",
- *  });
+ *  data = await client.retrieveSource("source_id");
  *  return data
  * }
  * ```
  */
-export const retrieveSource = async ({
-  sourceId,
-}: RetrieveSourceProps): Promise<PaymentSourceResponse> => {
+export const retrieveSource = async (
+  sourceId: string
+): Promise<PaymentSourceResponse> => {
   try {
     const res = await api.get<PaymentSourceResponse>(`/sources/${sourceId}`);
     return res.data;

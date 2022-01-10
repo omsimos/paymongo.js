@@ -7,7 +7,7 @@ describe("PaymentMethod", () => {
 
   beforeAll(async () => {
     client = PaymongoClient(SECRET_KEY);
-    method = await client.createPaymentMethod({
+    method = await client.method.create({
       details: {
         card_number: "4343434343434345",
         exp_month: 3,
@@ -38,7 +38,7 @@ describe("PaymentMethod", () => {
     let retrieved: PaymentMethodResponse;
 
     beforeAll(async () => {
-      retrieved = await client.retrievePaymentMethod({
+      retrieved = await client.method.retrieve({
         methodId: method.data.id,
       });
     });
