@@ -18,6 +18,7 @@ jobs:
 
     steps:
       - name: Set env variables
+        run: echo "id $WEBHOOK_ID"
         env:
           SECRET_KEY: sk_test_23KHZ8zqFLdvSufpLjrHnko7
           WEBHOOK_ID: hook_dqj7oTfHNxkQ6BBHsPTmnrxr
