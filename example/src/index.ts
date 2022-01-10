@@ -36,8 +36,9 @@ export const methodSample = async () => {
 };
 
 const main = async () => {
+  // comment out the line you want to test
   // await intentSample();
-  await methodSample();
+  // await methodSample();
 };
 
 main().catch(console.error);
