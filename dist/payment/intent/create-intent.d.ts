@@ -1,4 +1,15 @@
-import { PaymentIntentResponse, CreatePaymentIntentProps } from "./types";
+import { PaymentIntentResponse, PaymentType } from "../types";
+export interface CreatePaymentIntentProps {
+    amount: number;
+    paymentMethodAllowed?: PaymentType[];
+    request3DS?: "any" | "automatic";
+    currency?: string;
+    description?: string;
+    statementDescriptor?: string;
+    metadata?: {
+        [key: string]: string;
+    };
+}
 /**
  * @module createPaymentIntent
  * @property {number} amount - amount of the payment intent in cents (PHP100 = 100000).

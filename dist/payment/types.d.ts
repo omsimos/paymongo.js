@@ -5,3 +5,9 @@ export declare type MetaData = {
 };
 export declare type PaymentType = "card" | "paymaya" | string;
 export declare type SourceType = "gcash" | "grab_pay" | string;
+export declare type CurrencyType = "PHP";
+export declare type RedirectType = {
+    success: string;
+    failed: string;
+    checkout_url?: string;
+};
