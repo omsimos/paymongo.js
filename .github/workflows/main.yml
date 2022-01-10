@@ -17,12 +17,6 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
-      - name: Set env variables
-        run: echo "id $WEBHOOK_ID"
-        env:
-          SECRET_KEY: sk_test_23KHZ8zqFLdvSufpLjrHnko7
-          WEBHOOK_ID: hook_dqj7oTfHNxkQ6BBHsPTmnrxr
-
       - name: Checkout repo
         uses: actions/checkout@v2
 
@@ -38,7 +32,7 @@ jobs:
         run: yarn lint
 
       - name: Test
-        run: yarn test --ci --coverage --maxWorkers=2
+        run: SECRET_KEY=sk_test_23KHZ8zqFLdvSufpLjrHnko7 WEBHOOK_ID=hook_dqj7oTfHNxkQ6BBHsPTmnrxr yarn test --ci --coverage --maxWorkers=2
 
       - name: Build
         run: yarn build
