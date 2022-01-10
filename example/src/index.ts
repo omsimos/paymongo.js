@@ -9,12 +9,13 @@ export const intentSample = async () => {
       order_id: "abc123",
     },
   });
-  console.log(payment.data);
 
   const paymentIntent = await client.retrievePaymentIntent({
-    id: payment.data.id,
+    intentId: payment.data.id,
   });
-  console.log(paymentIntent.data);
+
+  console.log("paymentIntent:", paymentIntent.data.id);
+  return paymentIntent;
 };
 
 export const methodSample = async () => {
@@ -27,18 +28,27 @@ export const methodSample = async () => {
     },
     type: "card",
   });
-  console.log(payment.data);
 
   const paymentMethod = await client.retrievePaymentMethod({
-    id: payment.data.id,
+    methodId: payment.data.id,
   });
-  console.log(paymentMethod.data);
+
+  console.log("paymentMethod:", paymentMethod.data.id);
+  return paymentMethod;
 };
 
 const main = async () => {
   // comment out the line you want to test
-  // await intentSample();
-  // await methodSample();
+  const intent = await intentSample();
+  const method = await methodSample();
+
+  const attachResponse = await client.attachPaymentIntent({
+    intentId: intent.data.id,
+    methodId: method.data.id,
+  });
+
+  console.log(attachResponse.data.id, attachResponse.data.type);
+  console.log(attachResponse.data.attributes);
 };
 
 main().catch(console.error);

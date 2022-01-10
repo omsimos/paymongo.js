@@ -3,11 +3,11 @@ import { CreatePaymentMethodProps, PaymentMethodResponse } from "./types";
 
 /**
  * @module createPaymentMethod
- * @property {Object} details - amount of the payment intent in cents (PHP100 = 100000).
- * @property {string} type - The currency of the payment intent defaults to PHP.
- * @property {Object} billing - The description of the payment intent.
+ * @property {Object} details - The payment method details
+ * @property {string} type - The type of payment method. The possible values are card and paymaya for now.
+ * @property {Object} billing - The billing details
  * @property {Object} metadata - The metadata of the payment intent.
- * @returns {PaymentMethodResponse} - The payment intent data.
+ * @returns {PaymentMethodResponse} - The payment method data.
  *
  * @example
  * ```js

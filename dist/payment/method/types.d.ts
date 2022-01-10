@@ -32,7 +32,7 @@ export interface CreatePaymentMethodProps {
  * @see https://developers.paymongo.com/reference/retrieve-a-paymentmethod
  */
 export interface RetrievePaymentMethodProps {
-    id: string;
+    methodId: string;
 }
 export interface PMDetailsResponse {
     exp_month: number;

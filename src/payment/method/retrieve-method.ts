@@ -3,8 +3,8 @@ import { RetrievePaymentMethodProps, PaymentMethodResponse } from "./types";
 
 /**
  * @module retrievePaymentMethod
- * @property {string} id - The id of the payment intent.
- * @returns {PaymentMethodResponse} - The payment intent data.
+ * @property {string} id - The id of the payment method.
+ * @returns {PaymentMethodResponse} - The payment method data.
  *
  * @example
  * ```js
@@ -20,10 +20,12 @@ import { RetrievePaymentMethodProps, PaymentMethodResponse } from "./types";
  * ```
  */
 export const retrievePaymentMethod = async ({
-  id,
+  methodId,
 }: RetrievePaymentMethodProps): Promise<PaymentMethodResponse> => {
   try {
-    const res = await api.get<PaymentMethodResponse>(`/payment_methods/${id}`);
+    const res = await api.get<PaymentMethodResponse>(
+      `/payment_methods/${methodId}`
+    );
     return res.data;
   } catch (err) {
     const error: any = err;

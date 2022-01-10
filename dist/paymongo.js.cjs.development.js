@@ -855,6 +855,73 @@ store.subscribe(function (state) {
   };
 });
 
+/**
+ * @module attachPaymentIntent
+ * @property {string} intentId - The id of the payment intent.
+ * @property {string} methodId - The is of the payment method.
+ * @property {string} clientKey - The client key of the payment intent.
+ * @property {string} returnUrl - The return url of the payment intent.
+ * @returns {AttachPaymentIntentResponse} - The payment intent data.
+ *
+ * @example
+ * ```js
+ * import PaymongoClient from "paymongo.js";
+ *
+ * const main = async () => {
+ *  const client = PaymongoClient("sk_test_key");
+ *  data = await client.attachPaymentIntent({
+ *    intentId: intent.data.id,
+ *    methodId: method.data.id,
+ *  });
+ *  return data
+ * }
+ * ```
+ */
+
+var attachPaymentIntent = /*#__PURE__*/function () {
+  var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref) {
+    var intentId, methodId, clientKey, returnUrl, data, res, error;
+    return runtime_1.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            intentId = _ref.intentId, methodId = _ref.methodId, clientKey = _ref.clientKey, returnUrl = _ref.returnUrl;
+            data = {
+              attributes: {
+                payment_method: methodId
+              }
+            };
+            if (clientKey) data.attributes.client_key = clientKey;
+            if (returnUrl) data.attributes.return_url = returnUrl;
+            _context.prev = 4;
+            _context.next = 7;
+            return axiosInstance.post("/payment_intents/" + intentId + "/attach", {
+              data: data
+            });
+
+          case 7:
+            res = _context.sent;
+            return _context.abrupt("return", res.data);
+
+          case 11:
+            _context.prev = 11;
+            _context.t0 = _context["catch"](4);
+            error = _context.t0;
+            return _context.abrupt("return", error.response.data);
+
+          case 15:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[4, 11]]);
+  }));
+
+  return function attachPaymentIntent(_x) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
 var defaultProps = {
   amount: 0,
   paymentMethodAllowed: ["card", "paymaya"],
@@ -964,14 +1031,14 @@ var createPaymentIntent = /*#__PURE__*/function () {
 
 var retrievePaymentIntent = /*#__PURE__*/function () {
   var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref) {
-    var id, clientKey, url, res, error;
+    var intentId, clientKey, url, res, error;
     return runtime_1.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            id = _ref.id, clientKey = _ref.clientKey;
+            intentId = _ref.intentId, clientKey = _ref.clientKey;
             _context.prev = 1;
-            url = "/payment_intents/" + id;
+            url = "/payment_intents/" + intentId;
             if (clientKey) url = url + "?client_key=" + clientKey;
             _context.next = 6;
             return axiosInstance.get(url);
@@ -1001,11 +1068,11 @@ var retrievePaymentIntent = /*#__PURE__*/function () {
 
 /**
  * @module createPaymentMethod
- * @property {Object} details - amount of the payment intent in cents (PHP100 = 100000).
- * @property {string} type - The currency of the payment intent defaults to PHP.
- * @property {Object} billing - The description of the payment intent.
+ * @property {Object} details - The payment method details
+ * @property {string} type - The type of payment method. The possible values are card and paymaya for now.
+ * @property {Object} billing - The billing details
  * @property {Object} metadata - The metadata of the payment intent.
- * @returns {PaymentMethodResponse} - The payment intent data.
+ * @returns {PaymentMethodResponse} - The payment method data.
  *
  * @example
  * ```js
@@ -1074,8 +1141,8 @@ var createPaymentMethod = /*#__PURE__*/function () {
 
 /**
  * @module retrievePaymentMethod
- * @property {string} id - The id of the payment intent.
- * @returns {PaymentMethodResponse} - The payment intent data.
+ * @property {string} id - The id of the payment method.
+ * @returns {PaymentMethodResponse} - The payment method data.
  *
  * @example
  * ```js
@@ -1093,15 +1160,15 @@ var createPaymentMethod = /*#__PURE__*/function () {
 
 var retrievePaymentMethod = /*#__PURE__*/function () {
   var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref) {
-    var id, res, error;
+    var methodId, res, error;
     return runtime_1.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            id = _ref.id;
+            methodId = _ref.methodId;
             _context.prev = 1;
             _context.next = 4;
-            return axiosInstance.get("/payment_methods/" + id);
+            return axiosInstance.get("/payment_methods/" + methodId);
 
           case 4:
             res = _context.sent;
@@ -1133,6 +1200,7 @@ var PaymongoClient = function PaymongoClient(secretKey) {
     });
   });
   return {
+    attachPaymentIntent: attachPaymentIntent,
     createPaymentIntent: createPaymentIntent,
     retrievePaymentIntent: retrievePaymentIntent,
     createPaymentMethod: createPaymentMethod,

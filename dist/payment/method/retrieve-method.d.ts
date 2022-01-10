@@ -1,8 +1,8 @@
 import { RetrievePaymentMethodProps, PaymentMethodResponse } from "./types";
 /**
  * @module retrievePaymentMethod
- * @property {string} id - The id of the payment intent.
- * @returns {PaymentMethodResponse} - The payment intent data.
+ * @property {string} id - The id of the payment method.
+ * @returns {PaymentMethodResponse} - The payment method data.
  *
  * @example
  * ```js
@@ -17,4 +17,4 @@ import { RetrievePaymentMethodProps, PaymentMethodResponse } from "./types";
  * }
  * ```
  */
-export declare const retrievePaymentMethod: ({ id, }: RetrievePaymentMethodProps) => Promise<PaymentMethodResponse>;
+export declare const retrievePaymentMethod: ({ methodId, }: RetrievePaymentMethodProps) => Promise<PaymentMethodResponse>;

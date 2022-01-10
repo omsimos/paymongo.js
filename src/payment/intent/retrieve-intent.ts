@@ -21,11 +21,11 @@ import { PaymentIntentResponse, RetrievePaymentIntentProps } from "./types";
  * ```
  */
 export const retrievePaymentIntent = async ({
-  id,
+  intentId,
   clientKey,
 }: RetrievePaymentIntentProps): Promise<PaymentIntentResponse> => {
   try {
-    let url = `/payment_intents/${id}`;
+    let url = `/payment_intents/${intentId}`;
     if (clientKey) url = `${url}?client_key=${clientKey}`;
     const res = await api.get<PaymentIntentResponse>(url);
     return res.data;
