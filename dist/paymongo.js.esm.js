@@ -1362,7 +1362,7 @@ var listWebhooks = /*#__PURE__*/function () {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return axiosInstance.post("/webhooks");
+            return axiosInstance.get("/webhooks");
 
           case 3:
             response = _context.sent;
@@ -1438,6 +1438,71 @@ var retrieveWebhook = /*#__PURE__*/function () {
   };
 }();
 
+/**
+ * @module updateWebhook
+ * @property {string} webhookId - The ID of the webhook to update.
+ * @property {string} url - The webhook url
+ * @property {string[]} events - The webhook events ("source.chargeable" | "payment.paid" | "payment.failed")
+ * @returns {PaymentWebhookResponse} - The payment webhook data.
+ *
+ * @example
+ * ```js
+ * import PaymongoClient from "paymongo.js";
+ *
+ * const main = async () => {
+ *  const client = PaymongoClient("sk_test_key");
+ *  const webhook = await client.createWebhook({
+ *    events: ["payment.failed", "payment.paid", "source.chargeable"],
+ *    url: "https://example.com/webhook",
+ *  });
+ *  return webhook;
+ * }
+ * ```
+ */
+
+var updateWebhook = /*#__PURE__*/function () {
+  var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref) {
+    var webhookId, url, events, data, response, error;
+    return runtime_1.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            webhookId = _ref.webhookId, url = _ref.url, events = _ref.events;
+            data = {
+              attributes: {
+                url: url,
+                events: events
+              }
+            };
+            _context.prev = 2;
+            _context.next = 5;
+            return axiosInstance.put("/webhooks/" + webhookId, {
+              data: data
+            });
+
+          case 5:
+            response = _context.sent;
+            return _context.abrupt("return", response.data);
+
+          case 9:
+            _context.prev = 9;
+            _context.t0 = _context["catch"](2);
+            error = _context.t0;
+            return _context.abrupt("return", error.response.data);
+
+          case 13:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[2, 9]]);
+  }));
+
+  return function updateWebhook(_x) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
 var PaymongoClient = function PaymongoClient(secretKey) {
   store.setState(function (state) {
     return _extends({}, state, {
@@ -1454,7 +1519,8 @@ var PaymongoClient = function PaymongoClient(secretKey) {
     disableWebhook: disableWebhook,
     enableWebhook: enableWebhook,
     listWebhooks: listWebhooks,
-    retrieveWebhook: retrieveWebhook
+    retrieveWebhook: retrieveWebhook,
+    updateWebhook: updateWebhook
   };
 };
 

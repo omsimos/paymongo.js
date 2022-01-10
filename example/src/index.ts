@@ -50,18 +50,31 @@ export const attachSample = async () => {
   console.log(attachResponse.data.attributes);
 };
 
-const main = async () => {
-  // comment out the line you want to test
+export const webhookSample = async () => {
   // const webhook = await client.createWebhook({
   //   events: ["payment.failed", "payment.paid", "source.chargeable"],
   //   url: "https://example.com/webhook",
   // });
-
   // console.log(webhook.data);
+
   const webhookId = "hook_dqj7oTfHNxkQ6BBHsPTmnrxr";
-  console.log("retrieve", (await client.retrieveWebhook(webhookId)).data);
+  const webhook = await client.retrieveWebhook(webhookId);
+  console.log("retrieve:", webhook.data);
+
+  const newData = await client.updateWebhook({
+    webhookId,
+    events: ["payment.failed"],
+  });
+  console.log("update:", newData.data);
+
   console.log("disable", (await client.disableWebhook(webhookId)).data);
   console.log("enable", (await client.enableWebhook(webhookId)).data);
+  console.log("all", await client.listWebhooks());
+};
+
+const main = async () => {
+  // comment out the line you want to test
+  await webhookSample();
 };
 
 main().catch(console.error);

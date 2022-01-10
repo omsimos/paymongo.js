@@ -10,6 +10,7 @@ import {
   enableWebhook,
   listWebhooks,
   retrieveWebhook,
+  updateWebhook,
 } from "./payment/webhook";
 import { store } from "./store";
 
@@ -29,6 +30,7 @@ export interface PaymongoClient {
   enableWebhook: typeof enableWebhook;
   listWebhooks: typeof listWebhooks;
   retrieveWebhook: typeof retrieveWebhook;
+  updateWebhook: typeof updateWebhook;
 }
 
 export type ClientFunction = (secretKey: string) => PaymongoClient;
@@ -47,6 +49,7 @@ const PaymongoClient: ClientFunction = (secretKey: string) => {
     enableWebhook,
     listWebhooks,
     retrieveWebhook,
+    updateWebhook,
   };
 };
 

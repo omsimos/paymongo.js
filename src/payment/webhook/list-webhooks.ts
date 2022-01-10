@@ -3,7 +3,7 @@ import { PaymentWebhookResponse } from "./types";
 
 export const listWebhooks = async (): Promise<PaymentWebhookResponse[]> => {
   try {
-    const response = await api.post<PaymentWebhookResponse[]>("/webhooks");
+    const response = await api.get<PaymentWebhookResponse[]>("/webhooks");
     return response.data;
   } catch (err) {
     const error: any = err;

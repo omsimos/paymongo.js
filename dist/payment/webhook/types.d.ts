@@ -3,6 +3,9 @@ export interface CreateWebhookProps {
     url: string;
     events: WebhookEvent[];
 }
+export interface UpdateWebhookProps extends Partial<CreateWebhookProps> {
+    webhookId: string;
+}
 export interface WHAttributes {
     livemode: boolean;
     secret_key: string;
