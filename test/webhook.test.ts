@@ -5,18 +5,18 @@ describe("PaymentWebhook", () => {
   let webhook: PaymentWebhookResponse;
 
   beforeAll(async () => {
-    client = PaymongoClient(process.env.SECRET_KEY!);
-    webhook = await client.retrieveWebhook(process.env.WEBHOOK_ID!);
-    await client.enableWebhook(process.env.WEBHOOK_ID!);
+    client = PaymongoClient(process.env.SECRET_KEY as string);
+    webhook = await client.retrieveWebhook(process.env.WEBHOOK_ID as string);
+    await client.enableWebhook(process.env.WEBHOOK_ID as string);
     await client.updateWebhook({
-      webhookId: process.env.WEBHOOK_ID!,
+      webhookId: process.env.WEBHOOK_ID as string,
       events: ["payment.failed", "payment.paid", "source.chargeable"],
     });
   });
 
   afterAll(async () => {
     await client.updateWebhook({
-      webhookId: process.env.WEBHOOK_ID!,
+      webhookId: process.env.WEBHOOK_ID as string,
       events: ["payment.failed", "payment.paid", "source.chargeable"],
     });
   });
@@ -36,21 +36,21 @@ describe("PaymentWebhook", () => {
     });
   });
 
-  // Paymongo issue stuck on: "Webhook with id hook<process.env.WEBHOOK_ID!> is still being processed."
+  // Paymongo issue stuck on: "Webhook with id hook<process.env.WEBHOOK_ID as string> is still being processed."
   // describe("can disable then enable webhook", () => {
   //   it("can disabled", async () => {
-  //     const hook = await client.disableWebhook(process.env.WEBHOOK_ID!);
+  //     const hook = await client.disableWebhook(process.env.WEBHOOK_ID as string);
   //     expect(hook.data.attributes.status).toBe("disabled");
   //   });
   //   it("can enable", async () => {
-  //     const hook = await client.enableWebhook(process.env.WEBHOOK_ID!);
+  //     const hook = await client.enableWebhook(process.env.WEBHOOK_ID as string);
   //     expect(hook.data.attributes.status).toBe("enabled");
   //   });
   // });
   // describe("can update webhook", () => {
   //   it("can update events", async () => {
   //     const hook = await client.updateWebhook({
-  //       webhookId: process.env.WEBHOOK_ID!,
+  //       webhookId: process.env.WEBHOOK_ID as string,
   //       events: ["payment.failed"],
   //     });
   //     console.log(hook);

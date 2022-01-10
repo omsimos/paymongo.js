@@ -5,7 +5,7 @@ describe("PaymentMethod", () => {
   let method: PaymentMethodResponse;
 
   beforeAll(async () => {
-    client = PaymongoClient(process.env.SECRET_KEY!);
+    client = PaymongoClient(process.env.SECRET_KEY as string);
     method = await client.createPaymentMethod({
       details: {
         card_number: "4343434343434345",

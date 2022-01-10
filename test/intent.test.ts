@@ -5,7 +5,7 @@ describe("PaymentIntent", () => {
   let intent: PaymentIntentResponse;
 
   beforeAll(async () => {
-    client = PaymongoClient(process.env.SECRET_KEY!);
+    client = PaymongoClient(process.env.SECRET_KEY as string);
     intent = await client.createPaymentIntent({
       amount: 100000,
     });
