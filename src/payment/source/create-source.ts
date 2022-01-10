@@ -1,14 +1,9 @@
 import api from "../../utils/api-base";
+import { CurrencyType } from "../types";
 import { CreateSourceResponse, CreateSourceProps } from "./types";
 
-const WEB_URL = "http://localhost:3000";
-
-const defaultProps: CreateSourceProps = {
+const defaultProps = {
   amount: 0,
-  redirect: {
-    success: `${WEB_URL}/payments/success`,
-    failed: `${WEB_URL}/payments/error`,
-  },
   type: "gcash",
   currency: "PHP",
 };
@@ -44,9 +39,9 @@ const defaultProps: CreateSourceProps = {
  */
 export const createSource = async ({
   amount = defaultProps.amount,
-  redirect = defaultProps.redirect,
   type = defaultProps.type,
-  currency = defaultProps.currency,
+  currency = defaultProps.currency as CurrencyType,
+  redirect,
   billing,
 }: CreateSourceProps): Promise<CreateSourceResponse> => {
   const data: any = {

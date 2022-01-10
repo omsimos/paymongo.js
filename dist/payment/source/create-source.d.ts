@@ -1,11 +1,4 @@
-import { CreateSourceResponse, SourceType, RedirectType, CurrencyType, BillingProps } from "../types";
-export interface CreateSourceProps {
-    amount: number;
-    redirect: RedirectType;
-    type: SourceType;
-    currency: CurrencyType;
-    billing?: BillingProps;
-}
+import { CreateSourceResponse, CreateSourceProps } from "./types";
 /**
  * @module createSource
  * @property {number} amount - amount of the payment source in cents (PHP100 = 100000).
@@ -35,4 +28,4 @@ export interface CreateSourceProps {
  * }
  * ```
  */
-export declare const createSource: ({ amount, redirect, type, currency, billing, }: CreateSourceProps) => Promise<CreateSourceResponse>;
+export declare const createSource: ({ amount, type, currency, redirect, billing, }: CreateSourceProps) => Promise<CreateSourceResponse>;

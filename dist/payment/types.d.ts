@@ -11,3 +11,4 @@ export declare type RedirectType = {
     failed: string;
     checkout_url?: string;
 };
+export declare type StatusType = "pending" | "paid" | string;
