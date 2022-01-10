@@ -1,8 +1,8 @@
 import { RetrievePaymentMethodProps, PaymentMethodResponse } from "./types";
 /**
  * @module retrievePaymentMethod
- * @property {string} id - The id of the payment intent.
- * @returns {PaymentMethodResponse} - The payment intent data.
+ * @property {string} id - The id of the payment method.
+ * @returns {PaymentMethodResponse} - The payment method data.
  *
  * @example
  * ```js
