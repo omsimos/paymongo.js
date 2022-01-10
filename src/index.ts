@@ -1,11 +1,21 @@
-import { retrievePaymentIntent, createPaymentIntent } from "./payment/intent";
+import {
+  attachPaymentIntent,
+  createPaymentIntent,
+  retrievePaymentIntent,
+} from "./payment/intent";
+import { createPaymentMethod, retrievePaymentMethod } from "./payment/method";
 import { store } from "./store";
 
 export * from "./payment/types";
 
 export interface PaymongoClient {
-  retrievePaymentIntent: typeof retrievePaymentIntent;
+  // intent
+  attachPaymentIntent: typeof attachPaymentIntent;
   createPaymentIntent: typeof createPaymentIntent;
+  retrievePaymentIntent: typeof retrievePaymentIntent;
+  // method
+  createPaymentMethod: typeof createPaymentMethod;
+  retrievePaymentMethod: typeof retrievePaymentMethod;
 }
 
 export type ClientFunction = (secretKey: string) => PaymongoClient;
@@ -14,8 +24,11 @@ const PaymongoClient: ClientFunction = (secretKey: string) => {
   store.setState((state) => ({ ...state, secretKey }));
 
   return {
-    retrievePaymentIntent,
+    attachPaymentIntent,
     createPaymentIntent,
+    retrievePaymentIntent,
+    createPaymentMethod,
+    retrievePaymentMethod,
   };
 };
 

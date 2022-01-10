@@ -1,21 +1,7 @@
 import api from "../../utils/api-base";
-import {
-  CreateSourceResponse,
-  SourceType,
-  RedirectType,
-  CurrencyType,
-  BillingProps,
-} from "../types";
+import { CreateSourceResponse, CreateSourceProps } from "./types";
 
 const WEB_URL = "http://localhost:3000";
-
-export interface CreateSourceProps {
-  amount: number;
-  redirect: RedirectType;
-  type: SourceType;
-  currency: CurrencyType;
-  billing?: BillingProps;
-}
 
 const defaultProps: CreateSourceProps = {
   amount: 0,
