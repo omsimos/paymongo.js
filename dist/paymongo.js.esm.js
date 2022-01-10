@@ -1503,6 +1503,140 @@ var updateWebhook = /*#__PURE__*/function () {
   };
 }();
 
+var defaultProps$1 = {
+  amount: 0,
+  type: "gcash",
+  currency: "PHP"
+};
+/**
+ * @module createSource
+ * @property {number} amount - amount of the payment source in cents (PHP100 = 100000).
+ * @property {RedirectType} redirect - redirect url for success and failed payment.
+ * @property {SourceType} type - type of the payment source, it's either gcash | grab_pay.
+ * @property {CurrencyType} currency - currency of the payment source, defaults to PHP.
+ * @property {BillingProps} billing - billing information of the payment source.
+ * @returns {CreateSourceResponse} - The response of the create source request.
+ *
+ * @example
+ * ```js
+ * import PaymongoClient from "paymongo.js";
+ *
+ * const main = async () => {
+ *  const client = PaymongoClient("pk_test_key");
+ *  const data = await client.createSource({
+ *    amount: 10000,
+ *    redirect: {
+ *      success: `http://localhost:3000/payments/success`,
+ *      failed: `http://localhost:3000/payments/error`,
+ *    },
+ *    type: "gcash",
+ *    currency: "PHP",
+ *  });
+ *
+ *  return data
+ * }
+ * ```
+ */
+
+var createSource = /*#__PURE__*/function () {
+  var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref) {
+    var _ref$amount, amount, _ref$type, type, _ref$currency, currency, redirect, billing, data, response, error;
+
+    return runtime_1.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _ref$amount = _ref.amount, amount = _ref$amount === void 0 ? defaultProps$1.amount : _ref$amount, _ref$type = _ref.type, type = _ref$type === void 0 ? defaultProps$1.type : _ref$type, _ref$currency = _ref.currency, currency = _ref$currency === void 0 ? defaultProps$1.currency : _ref$currency, redirect = _ref.redirect, billing = _ref.billing;
+            data = {
+              attributes: {
+                amount: amount,
+                redirect: redirect,
+                type: type,
+                currency: currency
+              }
+            };
+            if (billing) data.attributes.billing = billing;
+            _context.prev = 3;
+            _context.next = 6;
+            return axiosInstance.post("/sources", data);
+
+          case 6:
+            response = _context.sent;
+            return _context.abrupt("return", response.data);
+
+          case 10:
+            _context.prev = 10;
+            _context.t0 = _context["catch"](3);
+            error = _context.t0;
+            return _context.abrupt("return", error.response.data);
+
+          case 14:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[3, 10]]);
+  }));
+
+  return function createSource(_x) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+/**
+ * @module retrieveSource
+ * @property {string} sourceId - The id of the payment source.
+ * @returns {RetrieveSourceResponse} - The payment source data.
+ *
+ * @example
+ * ```js
+ * import PaymongoClient from "paymongo.js";
+ *
+ * const main = async () => {
+ *  const client = PaymongoClient("pk_test_key");
+ *  data = await client.retrieveSource({
+ *    sourceId: "source_id",
+ *  });
+ *  return data
+ * }
+ * ```
+ */
+
+var retrieveSource = /*#__PURE__*/function () {
+  var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref) {
+    var sourceId, res, error;
+    return runtime_1.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            sourceId = _ref.sourceId;
+            _context.prev = 1;
+            _context.next = 4;
+            return axiosInstance.get("/sources/" + sourceId);
+
+          case 4:
+            res = _context.sent;
+            return _context.abrupt("return", res.data);
+
+          case 8:
+            _context.prev = 8;
+            _context.t0 = _context["catch"](1);
+            error = _context.t0;
+            return _context.abrupt("return", error.response.data);
+
+          case 12:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[1, 8]]);
+  }));
+
+  return function retrieveSource(_x) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
 var PaymongoClient = function PaymongoClient(secretKey) {
   store.setState(function (state) {
     return _extends({}, state, {
@@ -1520,7 +1654,9 @@ var PaymongoClient = function PaymongoClient(secretKey) {
     enableWebhook: enableWebhook,
     listWebhooks: listWebhooks,
     retrieveWebhook: retrieveWebhook,
-    updateWebhook: updateWebhook
+    updateWebhook: updateWebhook,
+    createSource: createSource,
+    retrieveSource: retrieveSource
   };
 };
 
