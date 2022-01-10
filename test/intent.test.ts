@@ -1,13 +1,11 @@
 import PaymongoClient, { PaymentIntentResponse } from "../src";
 
-const SECRET_KEY: string = process.env.SECRET_KEY!;
-
 describe("PaymentIntent", () => {
   let client: ReturnType<typeof PaymongoClient>;
   let intent: PaymentIntentResponse;
 
   beforeAll(async () => {
-    client = PaymongoClient(SECRET_KEY);
+    client = PaymongoClient(process.env.SECRET_KEY!);
     intent = await client.createPaymentIntent({
       amount: 100000,
     });
