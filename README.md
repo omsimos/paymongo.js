@@ -3,6 +3,7 @@
 ![CI](https://github.com/princejoogie/paymongo.js/actions/workflows/main.yml/badge.svg)
 ![CJS](https://img.badgesize.io/princejoogie/paymongo.js/main/dist/paymongo.js.cjs.production.min.js?label=CJS)
 ![ESM](https://img.badgesize.io/princejoogie/paymongo.js/main/dist/paymongo.js.esm.js?label=ESM)
+![License](https://img.shields.io/github/license/princejoogie/paymongo.js.svg)
 
 A lightweight, fully-featured, modular, typescript-compatible javascript library for Paymongo.
 
