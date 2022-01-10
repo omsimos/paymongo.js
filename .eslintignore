@@ -2,6 +2,7 @@
 .eslintrc.js
 .prettierrc.js
 .prettierignore
+jest.config.js
 package-lock.json
 yarn.lock
 tsconfig.json
