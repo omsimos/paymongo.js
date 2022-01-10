@@ -2,3 +2,5 @@
 .DS_Store
 node_modules
 .eslintcache
+
+test/keys.ts
