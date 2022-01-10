@@ -37,8 +37,7 @@ export const methodSample = async () => {
   return paymentMethod;
 };
 
-const main = async () => {
-  // comment out the line you want to test
+export const attachSample = async () => {
   const intent = await intentSample();
   const method = await methodSample();
 
@@ -49,6 +48,16 @@ const main = async () => {
 
   console.log(attachResponse.data.id, attachResponse.data.type);
   console.log(attachResponse.data.attributes);
+};
+
+const main = async () => {
+  // comment out the line you want to test
+  const webhook = await client.createWebhook({
+    events: ["payment.failed", "payment.paid", "source.chargeable"],
+    url: "https://example.com/webhook",
+  });
+
+  console.log(webhook.data);
 };
 
 main().catch(console.error);
