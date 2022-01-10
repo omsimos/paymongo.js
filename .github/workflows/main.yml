@@ -31,11 +31,8 @@ jobs:
       - name: Lint
         run: yarn lint
 
-      - name: Clear Test cache
-        run: yarn test -- --clearCache
-
       - name: Test
-        run: SECRET_KEY=sk_test_22KHZ8zqFLdvSufpLjrHnko7 WEBHOOK_ID=hook_4BaS7Poh9cuxXDBuQDeVBVd3 yarn test --ci --coverage --maxWorkers=2
+        run: yarn test -- --clearCache && SECRET_KEY=sk_test_22KHZ8zqFLdvSufpLjrHnko7 WEBHOOK_ID=hook_4BaS7Poh9cuxXDBuQDeVBVd3 yarn test
 
       - name: Build
         run: yarn build
