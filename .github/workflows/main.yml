@@ -17,6 +17,11 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
+      - name: Set env variables
+        env:
+          SECRET_KEY: sk_test_23KHZ8zqFLdvSufpLjrHnko7
+          WEBHOOK_ID: hook_dqj7oTfHNxkQ6BBHsPTmnrxr
+
       - name: Checkout repo
         uses: actions/checkout@v2
 
