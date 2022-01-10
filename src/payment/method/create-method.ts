@@ -2,15 +2,12 @@ import api from "../../utils/api-base";
 import { CreatePaymentMethodProps, PaymentMethodResponse } from "./types";
 
 /**
- * @module createPaymentIntent
- * @property {number} amount - amount of the payment intent in cents (PHP100 = 100000).
- * @property {PaymentType} paymentMethodAllowed - The payment method allowed.
- * @property {string} request3DS - any | automatic
- * @property {string} currency - The currency of the payment intent defaults to PHP.
- * @property {string} description - The description of the payment intent.
- * @property {string} statementDescriptor - The statement descriptor of the payment intent.
- * @property {object} metadata - The metadata of the payment intent.
- * @returns {PaymentIntentResponse} - The payment intent data.
+ * @module createPaymentMethod
+ * @property {Object} details - amount of the payment intent in cents (PHP100 = 100000).
+ * @property {string} type - The currency of the payment intent defaults to PHP.
+ * @property {Object} billing - The description of the payment intent.
+ * @property {Object} metadata - The metadata of the payment intent.
+ * @returns {PaymentMethodResponse} - The payment intent data.
  *
  * @example
  * ```js
@@ -18,7 +15,7 @@ import { CreatePaymentMethodProps, PaymentMethodResponse } from "./types";
  *
  * const main = async () => {
  *  const client = PaymongoClient("sk_test_key");
- *  const data = await client.createPaymentIntent({
+ *  const data = await client.createPaymentMethod({
  *    amount: 10000,
  *    metadata: {
  *      order_id: "abc123",
@@ -33,7 +30,7 @@ export const createPaymentMethod = async ({
   type,
   billing,
   metadata,
-}: CreatePaymentMethodProps) => {
+}: CreatePaymentMethodProps): Promise<PaymentMethodResponse> => {
   const data: any = {
     attributes: {
       details,
@@ -45,7 +42,9 @@ export const createPaymentMethod = async ({
   if (metadata) data.attributes.metadata = metadata;
 
   try {
-    const res = await api.post<PaymentMethodResponse>("/payment_methods", data);
+    const res = await api.post<PaymentMethodResponse>("/payment_methods", {
+      data,
+    });
     return res.data;
   } catch (err) {
     const error: any = err;

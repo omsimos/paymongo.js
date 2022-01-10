@@ -3,7 +3,7 @@ import { RetrievePaymentMethodProps, PaymentMethodResponse } from "./types";
 
 export const retrievePaymentMethod = async ({
   id,
-}: RetrievePaymentMethodProps) => {
+}: RetrievePaymentMethodProps): Promise<PaymentMethodResponse> => {
   try {
     const res = await api.get<PaymentMethodResponse>(`/payment_methods/${id}`);
     return res.data;

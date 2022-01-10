@@ -993,6 +993,111 @@ var retrievePaymentIntent = /*#__PURE__*/function () {
   };
 }();
 
+/**
+ * @module createPaymentMethod
+ * @property {Object} details - amount of the payment intent in cents (PHP100 = 100000).
+ * @property {string} type - The currency of the payment intent defaults to PHP.
+ * @property {Object} billing - The description of the payment intent.
+ * @property {Object} metadata - The metadata of the payment intent.
+ * @returns {PaymentMethodResponse} - The payment intent data.
+ *
+ * @example
+ * ```js
+ * import PaymongoClient from "paymongo.js";
+ *
+ * const main = async () => {
+ *  const client = PaymongoClient("sk_test_key");
+ *  const data = await client.createPaymentMethod({
+ *    amount: 10000,
+ *    metadata: {
+ *      order_id: "abc123",
+ *    },
+ *  });
+ *  return data
+ * }
+ * ```
+ */
+
+var createPaymentMethod = /*#__PURE__*/function () {
+  var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref) {
+    var details, type, billing, metadata, data, res, error;
+    return runtime_1.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            details = _ref.details, type = _ref.type, billing = _ref.billing, metadata = _ref.metadata;
+            data = {
+              attributes: {
+                details: details,
+                type: type
+              }
+            };
+            if (billing) data.attributes.billing = billing;
+            if (metadata) data.attributes.metadata = metadata;
+            _context.prev = 4;
+            _context.next = 7;
+            return axiosInstance.post("/payment_methods", {
+              data: data
+            });
+
+          case 7:
+            res = _context.sent;
+            return _context.abrupt("return", res.data);
+
+          case 11:
+            _context.prev = 11;
+            _context.t0 = _context["catch"](4);
+            error = _context.t0;
+            return _context.abrupt("return", error.response.data);
+
+          case 15:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[4, 11]]);
+  }));
+
+  return function createPaymentMethod(_x) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+var retrievePaymentMethod = /*#__PURE__*/function () {
+  var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref) {
+    var id, res, error;
+    return runtime_1.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            id = _ref.id;
+            _context.prev = 1;
+            _context.next = 4;
+            return axiosInstance.get("/payment_methods/" + id);
+
+          case 4:
+            res = _context.sent;
+            return _context.abrupt("return", res.data);
+
+          case 8:
+            _context.prev = 8;
+            _context.t0 = _context["catch"](1);
+            error = _context.t0;
+            return _context.abrupt("return", error.response.data);
+
+          case 12:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[1, 8]]);
+  }));
+
+  return function retrievePaymentMethod(_x) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
 var PaymongoClient = function PaymongoClient(secretKey) {
   store.setState(function (state) {
     return _extends({}, state, {
@@ -1000,8 +1105,10 @@ var PaymongoClient = function PaymongoClient(secretKey) {
     });
   });
   return {
+    createPaymentIntent: createPaymentIntent,
     retrievePaymentIntent: retrievePaymentIntent,
-    createPaymentIntent: createPaymentIntent
+    createPaymentMethod: createPaymentMethod,
+    retrievePaymentMethod: retrievePaymentMethod
   };
 };
 

@@ -12,13 +12,13 @@ export interface RetrievePaymentIntentProps {
     id: string;
     clientKey?: string;
 }
-export interface PICard {
+export interface PICardResponse {
     request_three_d_secure: string;
 }
-export interface PIPaymentMethodOptions {
-    card: PICard;
+export interface PIPaymentMethodOptionsResponse {
+    card: PICardResponse;
 }
-export interface PIAttributes {
+export interface PIAttributesResponse {
     amount: number;
     currency: string;
     description?: string;
@@ -32,13 +32,13 @@ export interface PIAttributes {
     payment_method_allowed: PaymentType[];
     payments: any[];
     next_action?: any;
-    payment_method_options?: PIPaymentMethodOptions;
+    payment_method_options?: PIPaymentMethodOptionsResponse;
     metadata?: MetaData;
 }
 export interface PIData {
     id: string;
     type: string;
-    attributes: PIAttributes;
+    attributes: PIAttributesResponse;
 }
 export interface PaymentIntentResponse {
     data: PIData;

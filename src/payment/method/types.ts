@@ -24,6 +24,9 @@ export interface PMBilling {
   phone: string;
 }
 
+/**
+ * @see https://developers.paymongo.com/reference/create-a-paymentmethod
+ */
 export interface CreatePaymentMethodProps {
   details: PMDetails;
   type: string;
@@ -31,6 +34,9 @@ export interface CreatePaymentMethodProps {
   metadata?: MetaData;
 }
 
+/**
+ * @see https://developers.paymongo.com/reference/retrieve-a-paymentmethod
+ */
 export interface RetrievePaymentMethodProps {
   id: string;
 }
