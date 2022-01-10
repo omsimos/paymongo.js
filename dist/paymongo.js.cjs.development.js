@@ -1193,6 +1193,322 @@ var retrievePaymentMethod = /*#__PURE__*/function () {
   };
 }();
 
+/**
+ * @module createWebhook
+ * @property {string} url - The webhook url
+ * @property {string[]} events - The webhook events ("source.chargeable" | "payment.paid" | "payment.failed")
+ * @returns {PaymentWebhookResponse} - The payment webhook data.
+ *
+ * @example
+ * ```js
+ * import PaymongoClient from "paymongo.js";
+ *
+ * const main = async () => {
+ *  const client = PaymongoClient("sk_test_key");
+ *  const webhook = await client.createWebhook({
+ *    events: ["payment.failed", "payment.paid", "source.chargeable"],
+ *    url: "https://example.com/webhook",
+ *  });
+ *  return webhook;
+ * }
+ * ```
+ */
+
+var createWebhook = /*#__PURE__*/function () {
+  var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref) {
+    var url, events, data, response, error;
+    return runtime_1.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            url = _ref.url, events = _ref.events;
+            data = {
+              attributes: {
+                url: url,
+                events: events
+              }
+            };
+            _context.prev = 2;
+            _context.next = 5;
+            return axiosInstance.post("/webhooks", {
+              data: data
+            });
+
+          case 5:
+            response = _context.sent;
+            return _context.abrupt("return", response.data);
+
+          case 9:
+            _context.prev = 9;
+            _context.t0 = _context["catch"](2);
+            error = _context.t0;
+            return _context.abrupt("return", error.response.data);
+
+          case 13:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[2, 9]]);
+  }));
+
+  return function createWebhook(_x) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+/**
+ * @module disableWebhook
+ * @property {string} webhookId - The webhook id
+ * @returns {PaymentWebhookResponse} - The payment webhook data.
+ *
+ * @example
+ * ```js
+ * import PaymongoClient from "paymongo.js";
+ *
+ * const main = async () => {
+ *  const client = PaymongoClient("sk_test_key");
+ *  const webhook = await client.disableWebhook("webhook_id");
+ *  return webhook;
+ * }
+ * ```
+ */
+
+var disableWebhook = /*#__PURE__*/function () {
+  var _ref = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(webhookId) {
+    var response, error;
+    return runtime_1.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            _context.next = 3;
+            return axiosInstance.post("/webhooks/" + webhookId + "/disable");
+
+          case 3:
+            response = _context.sent;
+            return _context.abrupt("return", response.data);
+
+          case 7:
+            _context.prev = 7;
+            _context.t0 = _context["catch"](0);
+            error = _context.t0;
+            return _context.abrupt("return", error.response.data);
+
+          case 11:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[0, 7]]);
+  }));
+
+  return function disableWebhook(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/**
+ * @module enableWebhook
+ * @property {string} webhookId - The webhook id
+ * @returns {PaymentWebhookResponse} - The payment webhook data.
+ *
+ * @example
+ * ```js
+ * import PaymongoClient from "paymongo.js";
+ *
+ * const main = async () => {
+ *  const client = PaymongoClient("sk_test_key");
+ *  const webhook = await client.enableWebhook("webhook_id");
+ *  return webhook;
+ * }
+ * ```
+ */
+
+var enableWebhook = /*#__PURE__*/function () {
+  var _ref = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(webhookId) {
+    var response, error;
+    return runtime_1.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            _context.next = 3;
+            return axiosInstance.post("/webhooks/" + webhookId + "/enable");
+
+          case 3:
+            response = _context.sent;
+            return _context.abrupt("return", response.data);
+
+          case 7:
+            _context.prev = 7;
+            _context.t0 = _context["catch"](0);
+            error = _context.t0;
+            return _context.abrupt("return", error.response.data);
+
+          case 11:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[0, 7]]);
+  }));
+
+  return function enableWebhook(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+var listWebhooks = /*#__PURE__*/function () {
+  var _ref = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee() {
+    var response, error;
+    return runtime_1.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            _context.next = 3;
+            return axiosInstance.get("/webhooks");
+
+          case 3:
+            response = _context.sent;
+            return _context.abrupt("return", response.data);
+
+          case 7:
+            _context.prev = 7;
+            _context.t0 = _context["catch"](0);
+            error = _context.t0;
+            return _context.abrupt("return", error.response.data);
+
+          case 11:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[0, 7]]);
+  }));
+
+  return function listWebhooks() {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/**
+ * @module retrieveWebhook
+ * @property {string} webhookId - The webhook id
+ * @returns {PaymentWebhookResponse} - The payment webhook data.
+ *
+ * @example
+ * ```js
+ * import PaymongoClient from "paymongo.js";
+ *
+ * const main = async () => {
+ *  const client = PaymongoClient("sk_test_key");
+ *  const webhook = await client.retrieveWebhook("webhook_id");
+ *  return webhook;
+ * }
+ * ```
+ */
+
+var retrieveWebhook = /*#__PURE__*/function () {
+  var _ref = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(webhookId) {
+    var response, error;
+    return runtime_1.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            _context.next = 3;
+            return axiosInstance.get("/webhooks/" + webhookId);
+
+          case 3:
+            response = _context.sent;
+            return _context.abrupt("return", response.data);
+
+          case 7:
+            _context.prev = 7;
+            _context.t0 = _context["catch"](0);
+            error = _context.t0;
+            return _context.abrupt("return", error.response.data);
+
+          case 11:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[0, 7]]);
+  }));
+
+  return function retrieveWebhook(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/**
+ * @module updateWebhook
+ * @property {string} webhookId - The ID of the webhook to update.
+ * @property {string} url - The webhook url
+ * @property {string[]} events - The webhook events ("source.chargeable" | "payment.paid" | "payment.failed")
+ * @returns {PaymentWebhookResponse} - The payment webhook data.
+ *
+ * @example
+ * ```js
+ * import PaymongoClient from "paymongo.js";
+ *
+ * const main = async () => {
+ *  const client = PaymongoClient("sk_test_key");
+ *  const webhook = await client.createWebhook({
+ *    events: ["payment.failed", "payment.paid", "source.chargeable"],
+ *    url: "https://example.com/webhook",
+ *  });
+ *  return webhook;
+ * }
+ * ```
+ */
+
+var updateWebhook = /*#__PURE__*/function () {
+  var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref) {
+    var webhookId, url, events, data, response, error;
+    return runtime_1.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            webhookId = _ref.webhookId, url = _ref.url, events = _ref.events;
+            data = {
+              attributes: {
+                url: url,
+                events: events
+              }
+            };
+            _context.prev = 2;
+            _context.next = 5;
+            return axiosInstance.put("/webhooks/" + webhookId, {
+              data: data
+            });
+
+          case 5:
+            response = _context.sent;
+            return _context.abrupt("return", response.data);
+
+          case 9:
+            _context.prev = 9;
+            _context.t0 = _context["catch"](2);
+            error = _context.t0;
+            return _context.abrupt("return", error.response.data);
+
+          case 13:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[2, 9]]);
+  }));
+
+  return function updateWebhook(_x) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
 var PaymongoClient = function PaymongoClient(secretKey) {
   store.setState(function (state) {
     return _extends({}, state, {
@@ -1204,7 +1520,13 @@ var PaymongoClient = function PaymongoClient(secretKey) {
     createPaymentIntent: createPaymentIntent,
     retrievePaymentIntent: retrievePaymentIntent,
     createPaymentMethod: createPaymentMethod,
-    retrievePaymentMethod: retrievePaymentMethod
+    retrievePaymentMethod: retrievePaymentMethod,
+    createWebhook: createWebhook,
+    disableWebhook: disableWebhook,
+    enableWebhook: enableWebhook,
+    listWebhooks: listWebhooks,
+    retrieveWebhook: retrieveWebhook,
+    updateWebhook: updateWebhook
   };
 };
 

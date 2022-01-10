@@ -4,6 +4,9 @@ export * from "./intent/types";
 // method
 export * from "./method/types";
 
+// webhook
+export * from "./webhook/types";
+
 // general types
 export type MetaData = {
   [key: string]: string;
@@ -17,4 +20,8 @@ export type RedirectType = {
   failed: string;
   checkout_url?: string;
 };
-export type StatusType = "pending" | "paid" | string; // remove string later
+export type StatusType = "pending" | "paid" | string; // remove string
+export type WebhookEvent =
+  | "source.chargeable"
+  | "payment.paid"
+  | "payment.failed";
