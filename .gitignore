@@ -3,5 +3,3 @@
 node_modules
 .eslintcache
 .env
-
-test/keys.ts
