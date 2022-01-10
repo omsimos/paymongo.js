@@ -3,13 +3,13 @@ export * from "./method/types";
 export * from "./webhook/types";
 export interface PaymentProps {
     amount: number;
-    currency: CurrencyType;
-    description?: string;
-    statement_descriptor?: string;
-    source?: {
+    source: {
         id: string;
         type: string;
     };
+    currency?: CurrencyType;
+    description?: string;
+    statement_descriptor?: string;
 }
 export interface PaymentResponse {
     data: PaymentData;
@@ -48,9 +48,6 @@ export interface PaymentAttributes {
 export interface PaymentSource {
     id: string;
     type: SourceType;
-}
-export interface RetrievePaymentProps {
-    paymentId: string;
 }
 export interface ListPaymentResponse {
     has_more: boolean;

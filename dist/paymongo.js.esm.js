@@ -1672,13 +1672,13 @@ var defaultProps$2 = {
 
 var createPayment = /*#__PURE__*/function () {
   var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref) {
-    var _ref$amount, amount, _ref$currency, currency, description, statement_descriptor, source, data, res, error;
+    var _ref$amount, amount, _ref$currency, currency, source, description, statement_descriptor, data, res, error;
 
     return runtime_1.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _ref$amount = _ref.amount, amount = _ref$amount === void 0 ? defaultProps$2.amount : _ref$amount, _ref$currency = _ref.currency, currency = _ref$currency === void 0 ? defaultProps$2.currency : _ref$currency, description = _ref.description, statement_descriptor = _ref.statement_descriptor, source = _ref.source;
+            _ref$amount = _ref.amount, amount = _ref$amount === void 0 ? defaultProps$2.amount : _ref$amount, _ref$currency = _ref.currency, currency = _ref$currency === void 0 ? defaultProps$2.currency : _ref$currency, source = _ref.source, description = _ref.description, statement_descriptor = _ref.statement_descriptor;
             data = {
               attributes: {
                 amount: amount,
@@ -1728,46 +1728,43 @@ var createPayment = /*#__PURE__*/function () {
  *
  * const main = async () => {
  *  const client = PaymongoClient("pk_test_key");
- *  data = await client.retrievePayment({
- *    paymentId: "payment_id",
- *  });
+ *  data = await client.retrievePayment("payment_id");
  *  return data
  * }
  * ```
  */
 
 var retrievePayment = /*#__PURE__*/function () {
-  var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref) {
-    var paymentId, res, error;
+  var _ref = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(paymentId) {
+    var res, error;
     return runtime_1.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            paymentId = _ref.paymentId;
-            _context.prev = 1;
-            _context.next = 4;
+            _context.prev = 0;
+            _context.next = 3;
             return axiosInstance.get("/payments/" + paymentId);
 
-          case 4:
+          case 3:
             res = _context.sent;
             return _context.abrupt("return", res.data);
 
-          case 8:
-            _context.prev = 8;
-            _context.t0 = _context["catch"](1);
+          case 7:
+            _context.prev = 7;
+            _context.t0 = _context["catch"](0);
             error = _context.t0;
             return _context.abrupt("return", error.response.data);
 
-          case 12:
+          case 11:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[1, 8]]);
+    }, _callee, null, [[0, 7]]);
   }));
 
   return function retrievePayment(_x) {
-    return _ref2.apply(this, arguments);
+    return _ref.apply(this, arguments);
   };
 }();
 

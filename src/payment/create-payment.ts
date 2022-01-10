@@ -1,9 +1,9 @@
 import api from "../utils/api-base";
-import { PaymentProps, PaymentResponse } from "./types";
+import { PaymentProps, PaymentResponse, CurrencyType } from "./types";
 
-const defaultProps: PaymentProps = {
+const defaultProps = {
   amount: 0,
-  currency: "PHP",
+  currency: "PHP" as CurrencyType,
 };
 
 /**
@@ -38,9 +38,9 @@ const defaultProps: PaymentProps = {
 export const createPayment = async ({
   amount = defaultProps.amount,
   currency = defaultProps.currency,
+  source,
   description,
   statement_descriptor,
-  source,
 }: PaymentProps): Promise<PaymentResponse> => {
   const data: any = {
     attributes: {

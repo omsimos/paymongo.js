@@ -110,6 +110,28 @@ See [Payment Resource](https://developers.paymongo.com/reference/payment-source)
 
 - [**Create a Payment**](https://developers.paymongo.com/reference/create-a-payment)
 
+  ```js
+  const p = await client.payment.create({
+    amount: 10000,
+    source: {
+      id: "some_source_id"
+      type: "source",
+    },
+  });
+  ```
+
+- [**List all Payments**](https://developers.paymongo.com/reference/list-all-payments)
+
+  ```js
+  const p = await client.payment.list();
+  ```
+
+- [**Retrieve a Payment**](https://developers.paymongo.com/reference/retrieve-a-payment)
+
+  ```js
+  const p = await client.payment.retrieve("some_payment_id");
+  ```
+
 ### Webhooks
 
 See [Webhook Resource](https://developers.paymongo.com/reference/webhook-resource) reference.
@@ -240,4 +262,4 @@ We recommend using [np](https://github.com/sindresorhus/np).
 
 ---
 
-Made by [**Prince Carlo Juguilon**](https://princecaarlo.tech/)
+Made by [**Prince Carlo Juguilon**](https://princecaarlo.tech/) together with these awesome [**Contributors**](https://github.com/princejoogie/paymongo.js/graphs/contributors).

@@ -28,4 +28,4 @@ import { PaymentProps, PaymentResponse } from "./types";
  * }
  * ```
  */
-export declare const createPayment: ({ amount, currency, description, statement_descriptor, source, }: PaymentProps) => Promise<PaymentResponse>;
+export declare const createPayment: ({ amount, currency, source, description, statement_descriptor, }: PaymentProps) => Promise<PaymentResponse>;
