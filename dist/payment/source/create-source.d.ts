@@ -1,11 +1,4 @@
-import { CreateSourceResponse, SourceType, RedirectType, CurrencyType, BillingProps } from "../types";
-export interface CreateSourceProps {
-    amount: number;
-    redirect: RedirectType;
-    type: SourceType;
-    currency: CurrencyType;
-    billing?: BillingProps;
-}
+import { CreateSourceResponse, CreateSourceProps } from "./types";
 /**
  * @module createSource
  * @property {number} amount - amount of the payment source in cents (PHP100 = 100000).
