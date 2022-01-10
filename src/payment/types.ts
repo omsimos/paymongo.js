@@ -20,11 +20,13 @@ export interface PaymentProps {
 }
 
 export interface PaymentResponse {
-  data: {
-    id: string;
-    type: string;
-    attributes: PaymentAttributes;
-  };
+  data: PaymentData;
+}
+
+export interface PaymentData {
+  id: string;
+  type: string;
+  attributes: PaymentAttributes;
 }
 
 export interface PaymentAttributes {
@@ -65,7 +67,7 @@ export interface RetrievePaymentProps {
 
 export interface ListPaymentResponse {
   has_more: boolean;
-  data: PaymentResponse[];
+  data: PaymentData[];
 }
 
 // general types
