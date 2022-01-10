@@ -7,15 +7,15 @@ export interface CreateSourceProps {
   currency: CurrencyType;
   billing?: BillingProps;
 }
-export interface CreateSourceResponse {
+export interface PaymentSourceResponse {
   data: {
     id: string;
     type: string;
-    attributes: CreateSourceAttributes;
+    attributes: PaymentSourceAttributes;
   };
 }
 
-export interface CreateSourceAttributes {
+export interface PaymentSourceAttributes {
   amount: number;
   billing?: BillingProps;
   currency: CurrencyType;
@@ -47,26 +47,4 @@ export type AddressType = {
 
 export interface RetrieveSourceProps {
   sourceId: string;
-}
-
-export interface RetrieveSourceResponse {
-  data: {
-    id: string;
-    type: string;
-    attributes: RetrieveSourceAttributes;
-  };
-}
-
-export interface RetrieveSourceAttributes {
-  amount: number;
-  billing?: BillingProps;
-  currency: CurrencyType;
-  description?: any;
-  livemode: boolean;
-  redirect: RedirectType;
-  statement_descriptor?: any;
-  status: StatusType;
-  type: SourceType;
-  created_at: number;
-  updated_at: number;
 }

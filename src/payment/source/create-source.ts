@@ -1,6 +1,6 @@
 import api from "../../utils/api-base";
 import { CurrencyType } from "../types";
-import { CreateSourceResponse, CreateSourceProps } from "./types";
+import { PaymentSourceResponse, CreateSourceProps } from "./types";
 
 const defaultProps = {
   amount: 0,
@@ -43,7 +43,7 @@ export const createSource = async ({
   currency = defaultProps.currency as CurrencyType,
   redirect,
   billing,
-}: CreateSourceProps): Promise<CreateSourceResponse> => {
+}: CreateSourceProps): Promise<PaymentSourceResponse> => {
   const data: any = {
     attributes: {
       amount,
@@ -56,7 +56,7 @@ export const createSource = async ({
   if (billing) data.attributes.billing = billing;
 
   try {
-    const response = await api.post<CreateSourceResponse>("/sources", data);
+    const response = await api.post<PaymentSourceResponse>("/sources", data);
     return response.data;
   } catch (err) {
     const error: any = err;
