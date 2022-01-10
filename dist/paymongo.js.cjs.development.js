@@ -964,14 +964,14 @@ var createPaymentIntent = /*#__PURE__*/function () {
 
 var retrievePaymentIntent = /*#__PURE__*/function () {
   var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref) {
-    var id, clientKey, url, res, error;
+    var intentId, clientKey, url, res, error;
     return runtime_1.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            id = _ref.id, clientKey = _ref.clientKey;
+            intentId = _ref.intentId, clientKey = _ref.clientKey;
             _context.prev = 1;
-            url = "/payment_intents/" + id;
+            url = "/payment_intents/" + intentId;
             if (clientKey) url = url + "?client_key=" + clientKey;
             _context.next = 6;
             return axiosInstance.get(url);
@@ -1093,15 +1093,15 @@ var createPaymentMethod = /*#__PURE__*/function () {
 
 var retrievePaymentMethod = /*#__PURE__*/function () {
   var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref) {
-    var id, res, error;
+    var methodId, res, error;
     return runtime_1.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            id = _ref.id;
+            methodId = _ref.methodId;
             _context.prev = 1;
             _context.next = 4;
-            return axiosInstance.get("/payment_methods/" + id);
+            return axiosInstance.get("/payment_methods/" + methodId);
 
           case 4:
             res = _context.sent;

@@ -5,8 +5,73 @@ A lightweight, fully-featured, modular, typescript-compatible javascript library
 ## Installation
 
 ```bash
-npm install paymongo-client # or yarn add paymongo-client
+npm install paymongo.js # or yarn add paymongo.js
 ```
+
+## Usage
+
+```js
+import PaymongoClient from "paymongo.js";
+export const client = PaymongoClient("sk_key");
+```
+
+### Payment Intents
+
+See [PaymentIntent Resource](https://developers.paymongo.com/reference/the-payment-intent-object) reference.
+
+- [**Create Payment Intent**](https://developers.paymongo.com/reference/create-a-paymentintent)
+
+  ```js
+  const createResponse = await client.createPaymentIntent({
+    amount: 10000,
+    metadata: {
+      order_id: "some_order_id",
+    },
+  });
+  ```
+
+- [**Retrieve Payment Intent**](https://developers.paymongo.com/reference/retrieve-a-paymentintent)
+
+  ```js
+  const retrieveResponse = await client.retrievePaymentIntent({
+    intentId: "some_intent_id",
+  });
+  ```
+
+- [**Attach Payment Intent**](https://developers.paymongo.com/reference/attach-to-paymentintent)
+
+  ```js
+  const attachResponse = await client.attachPaymentIntent({
+    intentId: "some_intent_id",
+    methodId: "some_method_id",
+  });
+  ```
+
+### Payment Methods
+
+See [PaymentMethod Resource](https://developers.paymongo.com/reference/the-payment-method-object) reference.
+
+- [**Create Payment Method**](https://developers.paymongo.com/reference/create-a-paymentmethod)
+
+  ```js
+  const createResponse = await client.createPaymentMethod({
+    details: {
+      card_number: "4343434343434345",
+      exp_month: 3,
+      exp_year: 2023,
+      cvc: "321",
+    },
+    type: "card",
+  });
+  ```
+
+- [**Retrieve Payment Method**](https://developers.paymongo.com/reference/create-a-paymentmethod)
+
+  ```js
+  const retrieveResponse = await client.retrievePaymentMethod({
+    methodId: "some_method_id",
+  });
+  ```
 
 ---
 
@@ -34,8 +99,6 @@ This builds to `/dist` and runs the project in watch mode so any edits you save 
 To do a one-off build, use `npm run build` or `yarn build`.
 
 To run tests, use `npm test` or `yarn test`.
-
----
 
 ## Configuration
 

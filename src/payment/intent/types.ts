@@ -12,7 +12,7 @@ export interface CreatePaymentIntentProps {
 }
 
 export interface RetrievePaymentIntentProps {
-  id: string;
+  intentId: string;
   clientKey?: string;
 }
 

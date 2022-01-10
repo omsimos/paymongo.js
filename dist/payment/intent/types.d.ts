@@ -9,7 +9,7 @@ export interface CreatePaymentIntentProps {
     metadata?: MetaData;
 }
 export interface RetrievePaymentIntentProps {
-    id: string;
+    intentId: string;
     clientKey?: string;
 }
 export interface PICardResponse {

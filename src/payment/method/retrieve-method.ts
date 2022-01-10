@@ -20,10 +20,12 @@ import { RetrievePaymentMethodProps, PaymentMethodResponse } from "./types";
  * ```
  */
 export const retrievePaymentMethod = async ({
-  id,
+  methodId,
 }: RetrievePaymentMethodProps): Promise<PaymentMethodResponse> => {
   try {
-    const res = await api.get<PaymentMethodResponse>(`/payment_methods/${id}`);
+    const res = await api.get<PaymentMethodResponse>(
+      `/payment_methods/${methodId}`
+    );
     return res.data;
   } catch (err) {
     const error: any = err;

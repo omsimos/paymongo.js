@@ -12,7 +12,7 @@ export const intentSample = async () => {
   console.log(payment.data);
 
   const paymentIntent = await client.retrievePaymentIntent({
-    id: payment.data.id,
+    intentId: payment.data.id,
   });
   console.log(paymentIntent.data);
 };
@@ -30,7 +30,7 @@ export const methodSample = async () => {
   console.log(payment.data);
 
   const paymentMethod = await client.retrievePaymentMethod({
-    id: payment.data.id,
+    methodId: payment.data.id,
   });
   console.log(paymentMethod.data);
 };

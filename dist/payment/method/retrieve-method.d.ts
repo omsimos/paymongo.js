@@ -17,4 +17,4 @@ import { RetrievePaymentMethodProps, PaymentMethodResponse } from "./types";
  * }
  * ```
  */
-export declare const retrievePaymentMethod: ({ id, }: RetrievePaymentMethodProps) => Promise<PaymentMethodResponse>;
+export declare const retrievePaymentMethod: ({ methodId, }: RetrievePaymentMethodProps) => Promise<PaymentMethodResponse>;

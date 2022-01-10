@@ -18,4 +18,4 @@ import { PaymentIntentResponse, RetrievePaymentIntentProps } from "./types";
  * }
  * ```
  */
-export declare const retrievePaymentIntent: ({ id, clientKey, }: RetrievePaymentIntentProps) => Promise<PaymentIntentResponse>;
+export declare const retrievePaymentIntent: ({ intentId, clientKey, }: RetrievePaymentIntentProps) => Promise<PaymentIntentResponse>;
