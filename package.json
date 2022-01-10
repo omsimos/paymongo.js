@@ -56,5 +56,9 @@
   "lint-staged": {
     "*.{ts,d.ts}": "eslint --cache --fix --no-ignore",
     "*.{ts,d.ts,md,json}": "prettier --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/princejoogie/paymongo.js.git"
   }
 }
