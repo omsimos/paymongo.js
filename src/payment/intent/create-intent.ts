@@ -1,17 +1,5 @@
 import api from "../../utils/api-base";
-import { PaymentIntentResponse, PaymentType } from "../types";
-
-export interface CreatePaymentIntentProps {
-  amount: number;
-  paymentMethodAllowed?: PaymentType[];
-  request3DS?: "any" | "automatic";
-  currency?: string;
-  description?: string;
-  statementDescriptor?: string;
-  metadata?: {
-    [key: string]: string;
-  };
-}
+import { PaymentIntentResponse, CreatePaymentIntentProps } from "./types";
 
 const defaultProps: CreatePaymentIntentProps = {
   amount: 0,

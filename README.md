@@ -1,12 +1,130 @@
-# paymongo-client
+# paymongo.js
 
-A lightweight, fully-featured, typescript compatible node library for Paymongo.
+![CI](https://github.com/princejoogie/paymongo.js/actions/workflows/main.yml/badge.svg)
+![CJS](https://img.badgesize.io/princejoogie/paymongo.js/main/dist/paymongo.js.cjs.production.min.js?label=CJS)
+![ESM](https://img.badgesize.io/princejoogie/paymongo.js/main/dist/paymongo.js.esm.js?label=ESM)
+![License](https://img.shields.io/github/license/princejoogie/paymongo.js.svg)
+
+A lightweight, fully-featured, modular, typescript-compatible javascript library for Paymongo.
 
 ## Installation
 
+[![NPM](https://nodei.co/npm/paymongo.js.png)](https://npmjs.org/package/paymongo.js)
+
 ```bash
-npm install paymongo-client # or yarn add paymongo-client
+npm install paymongo.js # or yarn add paymongo.js
 ```
+
+## Usage
+
+```js
+import PaymongoClient from "paymongo.js";
+export const client = PaymongoClient("sk_key");
+```
+
+### Payment Methods
+
+See [PaymentMethod Resource](https://developers.paymongo.com/reference/the-payment-method-object) reference.
+
+- [**Create a Method**](https://developers.paymongo.com/reference/create-a-paymentmethod)
+
+  ```js
+  const createResponse = await client.createPaymentMethod({
+    details: {
+      card_number: "4343434343434345",
+      exp_month: 3,
+      exp_year: 2023,
+      cvc: "321",
+    },
+    type: "card",
+  });
+  ```
+
+- [**Retrieve a Method**](https://developers.paymongo.com/reference/create-a-paymentmethod)
+
+  ```js
+  const retrieveResponse = await client.retrievePaymentMethod({
+    methodId: "some_method_id",
+  });
+  ```
+
+### Payment Intents
+
+See [PaymentIntent Resource](https://developers.paymongo.com/reference/the-payment-intent-object) reference.
+
+- [**Create a Intent**](https://developers.paymongo.com/reference/create-a-paymentintent)
+
+  ```js
+  const createResponse = await client.createPaymentIntent({
+    amount: 10000,
+    metadata: {
+      order_id: "some_order_id",
+    },
+  });
+  ```
+
+- [**Retrieve a PaymentIntent**](https://developers.paymongo.com/reference/retrieve-a-paymentintent)
+
+  ```js
+  const retrieveResponse = await client.retrievePaymentIntent({
+    intentId: "some_intent_id",
+  });
+  ```
+
+- [**Attach to PaymentIntent**](https://developers.paymongo.com/reference/attach-to-paymentintent)
+
+  ```js
+  const attachResponse = await client.attachPaymentIntent({
+    intentId: "some_intent_id",
+    methodId: "some_method_id",
+  });
+  ```
+
+### Payment Webhooks
+
+See [Webhook Resource](https://developers.paymongo.com/reference/webhook-resource)
+
+- [**Create a Webhook**](https://developers.paymongo.com/reference/create-a-webhook)
+
+  ```js
+  const webhook = await client.createWebhook({
+    events: ["payment.failed", "payment.paid", "source.chargeable"],
+    url: "https://example.com/webhook",
+  });
+  ```
+
+- [**Update a Webhook**](https://developers.paymongo.com/reference/update-a-webhook)
+
+  ```js
+  const webhook = await client.updateWebhook({
+    webhookId: "some_webhook_id",
+    events: ["payment.failed"],
+  });
+  ```
+
+- [**List all Webhooks**](https://developers.paymongo.com/reference/list-all-webhooks)
+
+  ```js
+  const webhooks = await client.listWebhooks();
+  ```
+
+- [**Retrieve a Webhook**](https://developers.paymongo.com/reference/retrieve-a-webhook)
+
+  ```js
+  const webhook = await client.retrieveWebhook("some_webhook_id");
+  ```
+
+- [**Enable a Webhook**](https://developers.paymongo.com/reference/enable-a-webhook)
+
+  ```js
+  const webhook = await client.enableWebhook("some_webhook_id");
+  ```
+
+- [**Disable a Webhook**](https://developers.paymongo.com/reference/disable-a-webhook)
+
+  ```js
+  const webhook = await client.disableWebhook("some_webhook_id");
+  ```
 
 ---
 
@@ -21,8 +139,8 @@ todo
 Clone the repository
 
 ```bash
-git clone https://github.com/princejoogie/paymongo-client.git
-cd paymongo-client
+git clone https://github.com/princejoogie/paymongo.js.git
+cd paymongo.js
 ```
 
 ```bash
@@ -34,8 +152,6 @@ This builds to `/dist` and runs the project in watch mode so any edits you save 
 To do a one-off build, use `npm run build` or `yarn build`.
 
 To run tests, use `npm test` or `yarn test`.
-
----
 
 ## Configuration
 
@@ -76,7 +192,7 @@ declare var __DEV__: boolean;
 
 // inside your code...
 if (__DEV__) {
-  console.log('foo');
+  console.log("foo");
 }
 ```
 

@@ -1,8 +1,4 @@
-import { PaymentIntentResponse } from "../types";
-export interface RetrievePaymentIntentProps {
-    id: string;
-    clientKey?: string;
-}
+import { PaymentIntentResponse, RetrievePaymentIntentProps } from "./types";
 /**
  * @module retrievePaymentIntent
  * @property {string} id - The id of the payment intent.
@@ -22,4 +18,4 @@ export interface RetrievePaymentIntentProps {
  * }
  * ```
  */
-export declare const retrievePaymentIntent: ({ id, clientKey, }: RetrievePaymentIntentProps) => Promise<PaymentIntentResponse>;
+export declare const retrievePaymentIntent: ({ intentId, clientKey, }: RetrievePaymentIntentProps) => Promise<PaymentIntentResponse>;
