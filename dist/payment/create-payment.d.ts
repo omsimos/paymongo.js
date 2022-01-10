@@ -1,4 +1,4 @@
-import { CreatePaymentProps, CreatePaymentResponse } from "./types";
+import { PaymentProps, PaymentResponse } from "./types";
 /**
  * @module createPayment
  * @property {number} amount - amount of the payment intent in cents (PHP100 = 100000).
@@ -28,4 +28,4 @@ import { CreatePaymentProps, CreatePaymentResponse } from "./types";
  * }
  * ```
  */
-export declare const createPayment: ({ amount, currency, description, statement_descriptor, source, }: CreatePaymentProps) => Promise<CreatePaymentResponse>;
+export declare const createPayment: ({ amount, currency, description, statement_descriptor, source, }: PaymentProps) => Promise<PaymentResponse>;

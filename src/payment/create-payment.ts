@@ -1,7 +1,7 @@
 import api from "../utils/api-base";
-import { CreatePaymentProps, CreatePaymentResponse } from "./types";
+import { PaymentProps, PaymentResponse } from "./types";
 
-const defaultProps: CreatePaymentProps = {
+const defaultProps: PaymentProps = {
   amount: 0,
   currency: "PHP",
 };
@@ -41,7 +41,7 @@ export const createPayment = async ({
   description,
   statement_descriptor,
   source,
-}: CreatePaymentProps): Promise<CreatePaymentResponse> => {
+}: PaymentProps): Promise<PaymentResponse> => {
   const data: any = {
     attributes: {
       amount,
@@ -55,7 +55,7 @@ export const createPayment = async ({
     data.attributes.statement_descriptor = statement_descriptor;
 
   try {
-    const res = await api.post<CreatePaymentResponse>("/payments", { data });
+    const res = await api.post<PaymentResponse>("/payments", { data });
     return res.data;
   } catch (err) {
     const error: any = err;

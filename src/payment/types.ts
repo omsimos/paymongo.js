@@ -8,7 +8,7 @@ export * from "./method/types";
 export * from "./webhook/types";
 
 // payments
-export interface CreatePaymentProps {
+export interface PaymentProps {
   amount: number;
   currency: CurrencyType;
   description?: string;
@@ -19,15 +19,15 @@ export interface CreatePaymentProps {
   };
 }
 
-export interface CreatePaymentResponse {
+export interface PaymentResponse {
   data: {
     id: string;
     type: string;
-    attributes: CreatePaymentAttributes;
+    attributes: PaymentAttributes;
   };
 }
 
-export interface CreatePaymentAttributes {
+export interface PaymentAttributes {
   access_url?: any;
   amount: number;
   balance_transaction_id: string;
@@ -57,6 +57,10 @@ export interface CreatePaymentAttributes {
 export interface PaymentSource {
   id: string;
   type: SourceType;
+}
+
+export interface RetrievePaymentProps {
+  paymentId: string;
 }
 
 // general types
