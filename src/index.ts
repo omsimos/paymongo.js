@@ -32,6 +32,9 @@ export interface PaymongoClient {
   listWebhooks: typeof listWebhooks;
   retrieveWebhook: typeof retrieveWebhook;
   updateWebhook: typeof updateWebhook;
+  // source
+  createSource: typeof createSource;
+  retrieveSource: typeof retrieveSource;
 }
 
 export type ClientFunction = (secretKey: string) => PaymongoClient;
