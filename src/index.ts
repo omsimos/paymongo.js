@@ -12,6 +12,7 @@ import {
   retrieveWebhook,
   updateWebhook,
 } from "./payment/webhook";
+import { createSource, retrieveSource } from "./payment/source";
 import { store } from "./store";
 
 export * from "./payment/types";
@@ -50,6 +51,8 @@ const PaymongoClient: ClientFunction = (secretKey: string) => {
     listWebhooks,
     retrieveWebhook,
     updateWebhook,
+    createSource,
+    retrieveSource,
   };
 };
 

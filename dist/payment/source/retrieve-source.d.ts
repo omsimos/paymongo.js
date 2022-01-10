@@ -1,4 +1,4 @@
-import { RetrieveSourceProps, RetrieveSourceResponse } from "./types";
+import { RetrieveSourceProps, PaymentSourceResponse } from "./types";
 /**
  * @module retrieveSource
  * @property {string} sourceId - The id of the payment source.
@@ -17,4 +17,4 @@ import { RetrieveSourceProps, RetrieveSourceResponse } from "./types";
  * }
  * ```
  */
-export declare const retrieveSource: ({ sourceId, }: RetrieveSourceProps) => Promise<RetrieveSourceResponse>;
+export declare const retrieveSource: ({ sourceId, }: RetrieveSourceProps) => Promise<PaymentSourceResponse>;

@@ -1,5 +1,5 @@
 import api from "../../utils/api-base";
-import { RetrieveSourceProps, RetrieveSourceResponse } from "./types";
+import { RetrieveSourceProps, PaymentSourceResponse } from "./types";
 
 /**
  * @module retrieveSource
@@ -21,9 +21,9 @@ import { RetrieveSourceProps, RetrieveSourceResponse } from "./types";
  */
 export const retrieveSource = async ({
   sourceId,
-}: RetrieveSourceProps): Promise<RetrieveSourceResponse> => {
+}: RetrieveSourceProps): Promise<PaymentSourceResponse> => {
   try {
-    const res = await api.get<RetrieveSourceResponse>(`/sources/${sourceId}`);
+    const res = await api.get<PaymentSourceResponse>(`/sources/${sourceId}`);
     return res.data;
   } catch (err) {
     const error: any = err;

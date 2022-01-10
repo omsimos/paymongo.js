@@ -1,4 +1,4 @@
-import { CreateSourceResponse, CreateSourceProps } from "./types";
+import { PaymentSourceResponse, CreateSourceProps } from "./types";
 /**
  * @module createSource
  * @property {number} amount - amount of the payment source in cents (PHP100 = 100000).
@@ -28,4 +28,4 @@ import { CreateSourceResponse, CreateSourceProps } from "./types";
  * }
  * ```
  */
-export declare const createSource: ({ amount, type, currency, redirect, billing, }: CreateSourceProps) => Promise<CreateSourceResponse>;
+export declare const createSource: ({ amount, type, currency, redirect, billing, }: CreateSourceProps) => Promise<PaymentSourceResponse>;
