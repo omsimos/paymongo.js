@@ -12,4 +12,5 @@ export declare type RedirectType = {
     failed: string;
     checkout_url?: string;
 };
+export declare type StatusType = "pending" | "paid" | string;
 export declare type WebhookEvent = "source.chargeable" | "payment.paid" | "payment.failed";

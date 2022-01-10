@@ -20,6 +20,7 @@ export type RedirectType = {
   failed: string;
   checkout_url?: string;
 };
+export type StatusType = "pending" | "paid" | string; // remove string
 export type WebhookEvent =
   | "source.chargeable"
   | "payment.paid"
