@@ -5,22 +5,32 @@ import { createSource, retrieveSource } from "./payment/source";
 import { createPayment, retrievePayment, listPayments } from "./payment";
 export * from "./payment/types";
 export interface PaymongoClient {
-    attachPaymentIntent: typeof attachPaymentIntent;
-    createPaymentIntent: typeof createPaymentIntent;
-    retrievePaymentIntent: typeof retrievePaymentIntent;
-    createPaymentMethod: typeof createPaymentMethod;
-    retrievePaymentMethod: typeof retrievePaymentMethod;
-    createWebhook: typeof createWebhook;
-    disableWebhook: typeof disableWebhook;
-    enableWebhook: typeof enableWebhook;
-    listWebhooks: typeof listWebhooks;
-    retrieveWebhook: typeof retrieveWebhook;
-    updateWebhook: typeof updateWebhook;
-    createSource: typeof createSource;
-    retrieveSource: typeof retrieveSource;
-    createPayment: typeof createPayment;
-    retrievePayment: typeof retrievePayment;
-    listPayments: typeof listPayments;
+    intent: {
+        attach: typeof attachPaymentIntent;
+        create: typeof createPaymentIntent;
+        retrieve: typeof retrievePaymentIntent;
+    };
+    method: {
+        create: typeof createPaymentMethod;
+        retrieve: typeof retrievePaymentMethod;
+    };
+    webhook: {
+        create: typeof createWebhook;
+        disable: typeof disableWebhook;
+        enable: typeof enableWebhook;
+        list: typeof listWebhooks;
+        retrieve: typeof retrieveWebhook;
+        update: typeof updateWebhook;
+    };
+    source: {
+        create: typeof createSource;
+        retrieve: typeof retrieveSource;
+    };
+    payment: {
+        create: typeof createPayment;
+        retrieve: typeof retrievePayment;
+        list: typeof listPayments;
+    };
 }
 export declare type ClientFunction = (secretKey: string) => PaymongoClient;
 declare const PaymongoClient: ClientFunction;

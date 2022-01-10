@@ -1815,22 +1815,32 @@ var PaymongoClient = function PaymongoClient(secretKey) {
     });
   });
   return {
-    attachPaymentIntent: attachPaymentIntent,
-    createPaymentIntent: createPaymentIntent,
-    retrievePaymentIntent: retrievePaymentIntent,
-    createPaymentMethod: createPaymentMethod,
-    retrievePaymentMethod: retrievePaymentMethod,
-    createWebhook: createWebhook,
-    disableWebhook: disableWebhook,
-    enableWebhook: enableWebhook,
-    listWebhooks: listWebhooks,
-    retrieveWebhook: retrieveWebhook,
-    updateWebhook: updateWebhook,
-    createSource: createSource,
-    retrieveSource: retrieveSource,
-    createPayment: createPayment,
-    retrievePayment: retrievePayment,
-    listPayments: listPayments
+    intent: {
+      attach: attachPaymentIntent,
+      create: createPaymentIntent,
+      retrieve: retrievePaymentIntent
+    },
+    method: {
+      create: createPaymentMethod,
+      retrieve: retrievePaymentMethod
+    },
+    webhook: {
+      create: createWebhook,
+      disable: disableWebhook,
+      enable: enableWebhook,
+      list: listWebhooks,
+      retrieve: retrieveWebhook,
+      update: updateWebhook
+    },
+    source: {
+      create: createSource,
+      retrieve: retrieveSource
+    },
+    payment: {
+      create: createPayment,
+      retrieve: retrievePayment,
+      list: listPayments
+    }
   };
 };
 

@@ -7,16 +7,16 @@ describe("PaymentWebhook", () => {
 
   beforeAll(async () => {
     client = PaymongoClient(SECRET_KEY);
-    webhook = await client.retrieveWebhook(WEBHOOK_ID);
-    await client.enableWebhook(WEBHOOK_ID);
-    await client.updateWebhook({
+    webhook = await client.webhook.retrieve(WEBHOOK_ID);
+    await client.webhook.enable(WEBHOOK_ID);
+    await client.webhook.update({
       webhookId: WEBHOOK_ID,
       events: ["payment.failed", "payment.paid", "source.chargeable"],
     });
   });
 
   afterAll(async () => {
-    await client.updateWebhook({
+    await client.webhook.update({
       webhookId: WEBHOOK_ID,
       events: ["payment.failed", "payment.paid", "source.chargeable"],
     });

@@ -3,14 +3,14 @@ import PaymongoClient from "../../dist";
 const client = PaymongoClient("sk_test_23KHZ8zqFLdvSufpLjrHnko7");
 
 export const intentSample = async () => {
-  const payment = await client.createPaymentIntent({
+  const payment = await client.intent.create({
     amount: 10000,
     metadata: {
       order_id: "abc123",
     },
   });
 
-  const paymentIntent = await client.retrievePaymentIntent({
+  const paymentIntent = await client.intent.retrieve({
     intentId: payment.data.id,
   });
 
@@ -19,7 +19,7 @@ export const intentSample = async () => {
 };
 
 export const methodSample = async () => {
-  const payment = await client.createPaymentMethod({
+  const payment = await client.method.create({
     details: {
       card_number: "4343434343434345",
       exp_month: 3,
@@ -29,7 +29,7 @@ export const methodSample = async () => {
     type: "card",
   });
 
-  const paymentMethod = await client.retrievePaymentMethod({
+  const paymentMethod = await client.method.retrieve({
     methodId: payment.data.id,
   });
 
@@ -41,7 +41,7 @@ export const attachSample = async () => {
   const intent = await intentSample();
   const method = await methodSample();
 
-  const attachResponse = await client.attachPaymentIntent({
+  const attachResponse = await client.intent.attach({
     intentId: intent.data.id,
     methodId: method.data.id,
   });
@@ -58,22 +58,22 @@ export const webhookSample = async () => {
   // console.log(webhook.data);
 
   const webhookId = "hook_dqj7oTfHNxkQ6BBHsPTmnrxr";
-  const webhook = await client.retrieveWebhook(webhookId);
+  const webhook = await client.webhook.retrieve(webhookId);
   console.log("retrieve:", webhook.data);
 
-  const newData = await client.updateWebhook({
+  const newData = await client.webhook.update({
     webhookId,
     events: ["payment.failed"],
   });
   console.log("update:", newData.data);
 
-  console.log("disable", (await client.disableWebhook(webhookId)).data);
-  console.log("enable", (await client.enableWebhook(webhookId)).data);
-  console.log("all", await client.listWebhooks());
+  console.log("disable", (await client.webhook.disable(webhookId)).data);
+  console.log("enable", (await client.webhook.enable(webhookId)).data);
+  console.log("all", await client.webhook.list());
 };
 
 export const createSourceSample = async () => {
-  const source = await client.createSource({
+  const source = await client.source.create({
     type: "gcash",
     currency: "PHP",
     amount: 10000,
