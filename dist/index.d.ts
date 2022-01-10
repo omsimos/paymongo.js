@@ -2,7 +2,7 @@ import { attachPaymentIntent, createPaymentIntent, retrievePaymentIntent } from 
 import { createPaymentMethod, retrievePaymentMethod } from "./payment/method";
 import { createWebhook, disableWebhook, enableWebhook, listWebhooks, retrieveWebhook, updateWebhook } from "./payment/webhook";
 import { createSource, retrieveSource } from "./payment/source";
-import { createPayment } from "./payment";
+import { createPayment, retrievePayment, listPayments } from "./payment";
 export * from "./payment/types";
 export interface PaymongoClient {
     attachPaymentIntent: typeof attachPaymentIntent;
@@ -19,6 +19,8 @@ export interface PaymongoClient {
     createSource: typeof createSource;
     retrieveSource: typeof retrieveSource;
     createPayment: typeof createPayment;
+    retrievePayment: typeof retrievePayment;
+    listPayments: typeof listPayments;
 }
 export declare type ClientFunction = (secretKey: string) => PaymongoClient;
 declare const PaymongoClient: ClientFunction;

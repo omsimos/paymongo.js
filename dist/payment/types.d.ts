@@ -51,6 +51,10 @@ export interface PaymentSource {
 export interface RetrievePaymentProps {
     paymentId: string;
 }
+export interface ListPaymentResponse {
+    has_more: boolean;
+    data: PaymentResponse[];
+}
 export declare type MetaData = {
     [key: string]: string;
 };

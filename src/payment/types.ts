@@ -63,6 +63,11 @@ export interface RetrievePaymentProps {
   paymentId: string;
 }
 
+export interface ListPaymentResponse {
+  has_more: boolean;
+  data: PaymentResponse[];
+}
+
 // general types
 export type MetaData = {
   [key: string]: string;
