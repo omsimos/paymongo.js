@@ -56,7 +56,9 @@ export const createSource = async ({
   if (billing) data.attributes.billing = billing;
 
   try {
-    const response = await api.post<PaymentSourceResponse>("/sources", data);
+    const response = await api.post<PaymentSourceResponse>("/sources", {
+      data,
+    });
     return response.data;
   } catch (err) {
     const error: any = err;

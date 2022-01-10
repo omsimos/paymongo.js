@@ -13,6 +13,7 @@ import {
   updateWebhook,
 } from "./payment/webhook";
 import { createSource, retrieveSource } from "./payment/source";
+import { createPayment } from "./payment";
 import { store } from "./store";
 
 export * from "./payment/types";
@@ -32,6 +33,11 @@ export interface PaymongoClient {
   listWebhooks: typeof listWebhooks;
   retrieveWebhook: typeof retrieveWebhook;
   updateWebhook: typeof updateWebhook;
+  // source
+  createSource: typeof createSource;
+  retrieveSource: typeof retrieveSource;
+  // payment
+  createPayment: typeof createPayment;
 }
 
 export type ClientFunction = (secretKey: string) => PaymongoClient;
@@ -53,6 +59,7 @@ const PaymongoClient: ClientFunction = (secretKey: string) => {
     updateWebhook,
     createSource,
     retrieveSource,
+    createPayment,
   };
 };
 

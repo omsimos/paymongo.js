@@ -72,9 +72,26 @@ export const webhookSample = async () => {
   console.log("all", await client.listWebhooks());
 };
 
+export const createSourceSample = async () => {
+  const source = await client.createSource({
+    type: "gcash",
+    currency: "PHP",
+    amount: 10000,
+    redirect: {
+      success: "http://localhost:3000/payments/success",
+      failed: "http://localhost:3000/payments/error",
+    },
+  });
+
+  console.log("source:", source);
+  console.log("redirect:", source.data.attributes.redirect);
+  console.log("source_id: ", source.data.id);
+};
+
 const main = async () => {
   // comment out the line you want to test
-  await webhookSample();
+  // await webhookSample();
+  await createSourceSample();
 };
 
 main().catch(console.error);
