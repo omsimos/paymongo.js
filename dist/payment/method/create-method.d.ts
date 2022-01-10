@@ -14,10 +14,13 @@ import { CreatePaymentMethodProps, PaymentMethodResponse } from "./types";
  * const main = async () => {
  *  const client = PaymongoClient("sk_test_key");
  *  const data = await client.createPaymentMethod({
- *    amount: 10000,
- *    metadata: {
- *      order_id: "abc123",
+ *    details: {
+ *      card_number: "4343434343434345",
+ *      exp_month: 3,
+ *      exp_year: 2023,
+ *      cvc: "321",
  *    },
+ *    type: "card",
  *  });
  *  return data
  * }

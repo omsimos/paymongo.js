@@ -1008,10 +1008,13 @@ var retrievePaymentIntent = /*#__PURE__*/function () {
  * const main = async () => {
  *  const client = PaymongoClient("sk_test_key");
  *  const data = await client.createPaymentMethod({
- *    amount: 10000,
- *    metadata: {
- *      order_id: "abc123",
+ *    details: {
+ *      card_number: "4343434343434345",
+ *      exp_month: 3,
+ *      exp_year: 2023,
+ *      cvc: "321",
  *    },
+ *    type: "card",
  *  });
  *  return data
  * }
@@ -1062,6 +1065,25 @@ var createPaymentMethod = /*#__PURE__*/function () {
     return _ref2.apply(this, arguments);
   };
 }();
+
+/**
+ * @module retrievePaymentMethod
+ * @property {string} id - The id of the payment intent.
+ * @returns {PaymentMethodResponse} - The payment intent data.
+ *
+ * @example
+ * ```js
+ * import PaymongoClient from "paymongo.js";
+ *
+ * const main = async () => {
+ *  const client = PaymongoClient("sk_test_key");
+ *  data = await client.retrievePaymentMethod({
+ *    id: "pm_key",
+ *  });
+ *  return data
+ * }
+ * ```
+ */
 
 var retrievePaymentMethod = /*#__PURE__*/function () {
   var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref) {
