@@ -53,7 +53,7 @@
     "zustand": "^3.6.8"
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix",
-    "*.{js,css,md}": "prettier --write"
+    "*.{ts,d.ts}": "eslint --cache --fix --no-ignore",
+    "*.{ts,d.ts,md,json}": "prettier --write"
   }
 }
