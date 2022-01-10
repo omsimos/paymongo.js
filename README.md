@@ -1,8 +1,14 @@
 # paymongo.js
 
+![CI](https://github.com/princejoogie/paymongo.js/actions/workflows/main.yml/badge.svg)
+![CJS](https://img.badgesize.io/princejoogie/paymongo.js/main/dist/paymongo.js.cjs.production.min.js?label=CJS)
+![ESM](https://img.badgesize.io/princejoogie/paymongo.js/main/dist/paymongo.js.esm.js?label=ESM)
+
 A lightweight, fully-featured, modular, typescript-compatible javascript library for Paymongo.
 
 ## Installation
+
+[![NPM](https://nodei.co/npm/paymongo.js.png)](https://npmjs.org/package/paymongo.js)
 
 ```bash
 npm install paymongo.js # or yarn add paymongo.js
