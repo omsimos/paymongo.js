@@ -15,6 +15,32 @@ import PaymongoClient from "paymongo.js";
 export const client = PaymongoClient("sk_key");
 ```
 
+### Payment Methods
+
+See [PaymentMethod Resource](https://developers.paymongo.com/reference/the-payment-method-object) reference.
+
+- [**Create Payment Method**](https://developers.paymongo.com/reference/create-a-paymentmethod)
+
+  ```js
+  const createResponse = await client.createPaymentMethod({
+    details: {
+      card_number: "4343434343434345",
+      exp_month: 3,
+      exp_year: 2023,
+      cvc: "321",
+    },
+    type: "card",
+  });
+  ```
+
+- [**Retrieve Payment Method**](https://developers.paymongo.com/reference/create-a-paymentmethod)
+
+  ```js
+  const retrieveResponse = await client.retrievePaymentMethod({
+    methodId: "some_method_id",
+  });
+  ```
+
 ### Payment Intents
 
 See [PaymentIntent Resource](https://developers.paymongo.com/reference/the-payment-intent-object) reference.
@@ -43,32 +69,6 @@ See [PaymentIntent Resource](https://developers.paymongo.com/reference/the-payme
   ```js
   const attachResponse = await client.attachPaymentIntent({
     intentId: "some_intent_id",
-    methodId: "some_method_id",
-  });
-  ```
-
-### Payment Methods
-
-See [PaymentMethod Resource](https://developers.paymongo.com/reference/the-payment-method-object) reference.
-
-- [**Create Payment Method**](https://developers.paymongo.com/reference/create-a-paymentmethod)
-
-  ```js
-  const createResponse = await client.createPaymentMethod({
-    details: {
-      card_number: "4343434343434345",
-      exp_month: 3,
-      exp_year: 2023,
-      cvc: "321",
-    },
-    type: "card",
-  });
-  ```
-
-- [**Retrieve Payment Method**](https://developers.paymongo.com/reference/create-a-paymentmethod)
-
-  ```js
-  const retrieveResponse = await client.retrievePaymentMethod({
     methodId: "some_method_id",
   });
   ```

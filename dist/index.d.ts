@@ -1,7 +1,8 @@
-import { retrievePaymentIntent, createPaymentIntent } from "./payment/intent";
-import { retrievePaymentMethod, createPaymentMethod } from "./payment/method";
+import { attachPaymentIntent, createPaymentIntent, retrievePaymentIntent } from "./payment/intent";
+import { createPaymentMethod, retrievePaymentMethod } from "./payment/method";
 export * from "./payment/types";
 export interface PaymongoClient {
+    attachPaymentIntent: typeof attachPaymentIntent;
     createPaymentIntent: typeof createPaymentIntent;
     retrievePaymentIntent: typeof retrievePaymentIntent;
     createPaymentMethod: typeof createPaymentMethod;

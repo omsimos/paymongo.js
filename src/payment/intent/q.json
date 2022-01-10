@@ -1,0 +1,65 @@
+{
+  "data": {
+    "id": "pi_qocS57N9DSz3UvDa9Fjj4fYY",
+    "type": "payment_intent",
+    "attributes": {
+      "amount": 10000,
+      "currency": "PHP",
+      "description": null,
+      "statement_descriptor": "Groundwork Philippines",
+      "status": "succeeded",
+      "livemode": false,
+      "client_key": "pi_qocS57N9DSz3UvDa9Fjj4fYY_client_riCdxBu9ADqhcJqnUo5SG1DV",
+      "created_at": 1641734984,
+      "updated_at": 1641792871,
+      "last_payment_error": null,
+      "payment_method_allowed": ["paymaya", "card"],
+      "payments": [
+        {
+          "id": "pay_vp9AvQgMekBafP8ZU22EtjXA",
+          "type": "payment",
+          "attributes": {
+            "access_url": null,
+            "amount": 10000,
+            "balance_transaction_id": "bal_txn_5nJ9cPezemdWLk9rVT5nLc6o",
+            "billing": null,
+            "currency": "PHP",
+            "description": null,
+            "disputed": false,
+            "external_reference_number": null,
+            "fee": 1850,
+            "foreign_fee": 100,
+            "livemode": false,
+            "net_amount": 8050,
+            "origin": "api",
+            "payment_intent_id": "pi_qocS57N9DSz3UvDa9Fjj4fYY",
+            "payout": null,
+            "source": {
+              "id": "card_CA3e1458x9VUt32xTgF8Xx6X",
+              "type": "card",
+              "brand": "visa",
+              "country": "US",
+              "last4": "4345"
+            },
+            "statement_descriptor": "Groundwork Philippines",
+            "status": "paid",
+            "tax_amount": null,
+            "refunds": [],
+            "taxes": [],
+            "available_at": 1642064400,
+            "created_at": 1641792871,
+            "paid_at": 1641792871,
+            "updated_at": 1641792871
+          }
+        }
+      ],
+      "next_action": null,
+      "payment_method_options": {
+        "card": {
+          "request_three_d_secure": "any"
+        }
+      },
+      "metadata": null
+    }
+  }
+}
