@@ -10,11 +10,9 @@ import { RetrieveSourceProps, PaymentSourceResponse } from "./types";
  *
  * const main = async () => {
  *  const client = PaymongoClient("pk_test_key");
- *  data = await client.retrieveSource({
- *    sourceId: "source_id",
- *  });
+ *  data = await client.retrieveSource("source_id");
  *  return data
  * }
  * ```
  */
-export declare const retrieveSource: ({ sourceId, }: RetrieveSourceProps) => Promise<PaymentSourceResponse>;
+export declare const retrieveSource: (sourceId: RetrieveSourceProps) => Promise<PaymentSourceResponse>;

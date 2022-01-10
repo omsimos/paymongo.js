@@ -22,14 +22,14 @@ import PaymongoClient from "paymongo.js";
 export const client = PaymongoClient("sk_key");
 ```
 
-### Payment Methods
+### Payment Method
 
 See [PaymentMethod Resource](https://developers.paymongo.com/reference/the-payment-method-object) reference.
 
 - [**Create a Method**](https://developers.paymongo.com/reference/create-a-paymentmethod)
 
   ```js
-  const createResponse = await client.createPaymentMethod({
+  const createResponse = await client.method.create({
     details: {
       card_number: "4343434343434345",
       exp_month: 3,
@@ -43,19 +43,19 @@ See [PaymentMethod Resource](https://developers.paymongo.com/reference/the-payme
 - [**Retrieve a Method**](https://developers.paymongo.com/reference/create-a-paymentmethod)
 
   ```js
-  const retrieveResponse = await client.retrievePaymentMethod({
+  const retrieveResponse = await client.method.retrieve({
     methodId: "some_method_id",
   });
   ```
 
-### Payment Intents
+### Payment Intent
 
 See [PaymentIntent Resource](https://developers.paymongo.com/reference/the-payment-intent-object) reference.
 
 - [**Create a Intent**](https://developers.paymongo.com/reference/create-a-paymentintent)
 
   ```js
-  const createResponse = await client.createPaymentIntent({
+  const createResponse = await client.intent.create({
     amount: 10000,
     metadata: {
       order_id: "some_order_id",
@@ -66,7 +66,7 @@ See [PaymentIntent Resource](https://developers.paymongo.com/reference/the-payme
 - [**Retrieve a PaymentIntent**](https://developers.paymongo.com/reference/retrieve-a-paymentintent)
 
   ```js
-  const retrieveResponse = await client.retrievePaymentIntent({
+  const retrieveResponse = await client.intent.retrieve({
     intentId: "some_intent_id",
   });
   ```
@@ -74,20 +74,50 @@ See [PaymentIntent Resource](https://developers.paymongo.com/reference/the-payme
 - [**Attach to PaymentIntent**](https://developers.paymongo.com/reference/attach-to-paymentintent)
 
   ```js
-  const attachResponse = await client.attachPaymentIntent({
+  const attachResponse = await client.intent.attach({
     intentId: "some_intent_id",
     methodId: "some_method_id",
   });
   ```
 
-### Payment Webhooks
+### Sources
 
-See [Webhook Resource](https://developers.paymongo.com/reference/webhook-resource)
+See [Source Resource](https://developers.paymongo.com/reference/the-sources-object) reference.
+
+- [**Create a Source**](https://developers.paymongo.com/reference/create-a-source)
+
+  ```js
+  const createResponse = await client.source.create({
+    type: "gcash", // gcash | grab_pay
+    currency: "PHP",
+    amount: 10000,
+    redirect: {
+      success: "https://example.com/payments/success",
+      failed: "https://example.com/payments/error",
+    },
+  });
+  ```
+
+- [**Retrieve a Source**](https://developers.paymongo.com/reference/retrieve-a-source)
+
+  ```js
+  const retrieveResponse = await client.source.retrieve("some_source_id");
+  ```
+
+### Payments
+
+See [Payment Resource](https://developers.paymongo.com/reference/payment-source) reference.
+
+- [**Create a Payment**](https://developers.paymongo.com/reference/create-a-payment)
+
+### Webhooks
+
+See [Webhook Resource](https://developers.paymongo.com/reference/webhook-resource) reference.
 
 - [**Create a Webhook**](https://developers.paymongo.com/reference/create-a-webhook)
 
   ```js
-  const webhook = await client.createWebhook({
+  const webhook = await client.webhook.create({
     events: ["payment.failed", "payment.paid", "source.chargeable"],
     url: "https://example.com/webhook",
   });
@@ -96,7 +126,7 @@ See [Webhook Resource](https://developers.paymongo.com/reference/webhook-resourc
 - [**Update a Webhook**](https://developers.paymongo.com/reference/update-a-webhook)
 
   ```js
-  const webhook = await client.updateWebhook({
+  const webhook = await client.webhook.update({
     webhookId: "some_webhook_id",
     events: ["payment.failed"],
   });
@@ -105,32 +135,32 @@ See [Webhook Resource](https://developers.paymongo.com/reference/webhook-resourc
 - [**List all Webhooks**](https://developers.paymongo.com/reference/list-all-webhooks)
 
   ```js
-  const webhooks = await client.listWebhooks();
+  const webhooks = await client.webhook.list();
   ```
 
 - [**Retrieve a Webhook**](https://developers.paymongo.com/reference/retrieve-a-webhook)
 
   ```js
-  const webhook = await client.retrieveWebhook("some_webhook_id");
+  const webhook = await client.webhook.retrieve("some_webhook_id");
   ```
 
 - [**Enable a Webhook**](https://developers.paymongo.com/reference/enable-a-webhook)
 
   ```js
-  const webhook = await client.enableWebhook("some_webhook_id");
+  const webhook = await client.webhook.enable("some_webhook_id");
   ```
 
 - [**Disable a Webhook**](https://developers.paymongo.com/reference/disable-a-webhook)
 
   ```js
-  const webhook = await client.disableWebhook("some_webhook_id");
+  const webhook = await client.webhook.disable("some_webhook_id");
   ```
 
 ---
 
 ## Contributing
 
-todo
+See [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ---
 
@@ -210,4 +240,4 @@ We recommend using [np](https://github.com/sindresorhus/np).
 
 ---
 
-Prince Carlo Juguilon
+Made by [**Prince Carlo Juguilon**](https://princecaarlo.tech/)

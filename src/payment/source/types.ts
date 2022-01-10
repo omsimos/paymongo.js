@@ -35,6 +35,4 @@ export interface PaymentSourceAttributes {
   updated_at: number;
 }
 
-export interface RetrieveSourceProps {
-  sourceId: string;
-}
+export type RetrieveSourceProps = string;
