@@ -1,4 +1,4 @@
-import { RetrievePaymentMethodProps, PaymentMethodResponse } from "./types";
+import { PaymentMethodResponse } from "./types";
 /**
  * @module retrievePaymentMethod
  * @property {string} id - The id of the payment method.
@@ -10,11 +10,9 @@ import { RetrievePaymentMethodProps, PaymentMethodResponse } from "./types";
  *
  * const main = async () => {
  *  const client = PaymongoClient("sk_test_key");
- *  data = await client.retrievePaymentMethod({
- *    id: "pm_key",
- *  });
+ *  data = await client.retrievePaymentMethod("pm_key");
  *  return data
  * }
  * ```
  */
-export declare const retrievePaymentMethod: ({ methodId, }: RetrievePaymentMethodProps) => Promise<PaymentMethodResponse>;
+export declare const retrievePaymentMethod: (methodId: string) => Promise<PaymentMethodResponse>;

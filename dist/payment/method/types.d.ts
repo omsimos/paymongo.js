@@ -1,8 +1,8 @@
 import { MetaData } from "../types";
 export interface PMDetails {
-    card_number: string;
-    exp_month: number;
-    exp_year: number;
+    cardNumber: string;
+    expMonth: number;
+    expYear: number;
     cvc: string;
 }
 export interface PMAddress {
@@ -27,12 +27,6 @@ export interface CreatePaymentMethodProps {
     type: string;
     billing?: PMBilling;
     metadata?: MetaData;
-}
-/**
- * @see https://developers.paymongo.com/reference/retrieve-a-paymentmethod
- */
-export interface RetrievePaymentMethodProps {
-    methodId: string;
 }
 export interface PMDetailsResponse {
     exp_month: number;

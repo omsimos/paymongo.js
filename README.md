@@ -44,9 +44,7 @@ See [PaymentMethod Resource](https://developers.paymongo.com/reference/the-payme
 - [**Retrieve a Method**](https://developers.paymongo.com/reference/create-a-paymentmethod)
 
   ```js
-  const retrieveResponse = await client.method.retrieve({
-    methodId: "some_method_id",
-  });
+  const retrieveResponse = await client.method.retrieve("some_method_id");
   ```
 
 ### Payment Intent
