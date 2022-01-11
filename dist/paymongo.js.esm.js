@@ -1076,9 +1076,9 @@ var retrievePaymentIntent = /*#__PURE__*/function () {
  *  const client = PaymongoClient("sk_test_key");
  *  const data = await client.createPaymentMethod({
  *    details: {
- *      card_number: "4343434343434345",
- *      exp_month: 3,
- *      exp_year: 2023,
+ *      cardNumber: "4343434343434345",
+ *      expMonth: 3,
+ *      expYear: 2023,
  *      cvc: "321",
  *    },
  *    type: "card",
@@ -1098,7 +1098,12 @@ var createPaymentMethod = /*#__PURE__*/function () {
             details = _ref.details, type = _ref.type, billing = _ref.billing, metadata = _ref.metadata;
             data = {
               attributes: {
-                details: details,
+                details: {
+                  card_number: details.cardNumber,
+                  exp_month: details.expMonth,
+                  exp_year: details.expYear,
+                  cvc: details.cvc
+                },
                 type: type
               }
             };
@@ -1144,46 +1149,43 @@ var createPaymentMethod = /*#__PURE__*/function () {
  *
  * const main = async () => {
  *  const client = PaymongoClient("sk_test_key");
- *  data = await client.retrievePaymentMethod({
- *    id: "pm_key",
- *  });
+ *  data = await client.retrievePaymentMethod("pm_key");
  *  return data
  * }
  * ```
  */
 
 var retrievePaymentMethod = /*#__PURE__*/function () {
-  var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref) {
-    var methodId, res, error;
+  var _ref = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(methodId) {
+    var res, error;
     return runtime_1.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            methodId = _ref.methodId;
-            _context.prev = 1;
-            _context.next = 4;
+            _context.prev = 0;
+            _context.next = 3;
             return axiosInstance.get("/payment_methods/" + methodId);
 
-          case 4:
+          case 3:
             res = _context.sent;
             return _context.abrupt("return", res.data);
 
-          case 8:
-            _context.prev = 8;
-            _context.t0 = _context["catch"](1);
+          case 7:
+            _context.prev = 7;
+            _context.t0 = _context["catch"](0);
             error = _context.t0;
             return _context.abrupt("return", error.response.data);
 
-          case 12:
+          case 11:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[1, 8]]);
+    }, _callee, null, [[0, 7]]);
   }));
 
   return function retrievePaymentMethod(_x) {
-    return _ref2.apply(this, arguments);
+    return _ref.apply(this, arguments);
   };
 }();
 

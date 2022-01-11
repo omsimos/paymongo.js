@@ -15,9 +15,9 @@ import { CreatePaymentMethodProps, PaymentMethodResponse } from "./types";
  *  const client = PaymongoClient("sk_test_key");
  *  const data = await client.createPaymentMethod({
  *    details: {
- *      card_number: "4343434343434345",
- *      exp_month: 3,
- *      exp_year: 2023,
+ *      cardNumber: "4343434343434345",
+ *      expMonth: 3,
+ *      expYear: 2023,
  *      cvc: "321",
  *    },
  *    type: "card",
