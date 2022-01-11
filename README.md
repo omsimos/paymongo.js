@@ -185,6 +185,14 @@ See [Webhook Resource](https://developers.paymongo.com/reference/webhook-resourc
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md)
 
+Like the project? would appreciate a coffee ☕
+
+[![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/princejoogie)
+
+### Contributor list
+
+[![Contributors](https://contrib.rocks/image?repo=princejoogie/paymongo.js)](https://github.com/princejoogie/paymongo.js/graphs/contributors)
+
 ---
 
 ## Running your own instance
