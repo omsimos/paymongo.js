@@ -17,11 +17,6 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
-      - name: Get secrets
-        env:
-          PM_SECRET_KEY: ${{ secrets.PM_SECRET_KEY }}
-          PM_WEBHOOK_ID: ${{ secrets.PM_WEBHOOK_ID }}
-
       - name: Checkout repo
         uses: actions/checkout@v2
 
@@ -37,7 +32,10 @@ jobs:
         run: yarn lint
 
       - name: Test
-        run: echo 'SK $PM_SECRET_KEY, WID $PM_WEBHOOK_ID' && yarn test -- --clearCache && yarn test --ci --coverage --maxWorkers=2
+        env:
+          PM_SECRET_KEY: ${{ secrets.PM_SECRET_KEY }}
+          PM_WEBHOOK_ID: ${{ secrets.PM_WEBHOOK_ID }}
+        run: echo "SK $PM_SECRET_KEY, WID $PM_WEBHOOK_ID" && yarn test -- --clearCache && yarn test --ci --coverage --maxWorkers=2
 
       - name: Build
         run: yarn build
