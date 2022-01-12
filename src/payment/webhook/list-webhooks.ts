@@ -7,6 +7,6 @@ export const listWebhooks = async (): Promise<PaymentWebhookResponse[]> => {
     return response.data;
   } catch (err) {
     const error: any = err;
-    return error.response.data;
+    throw error.response.data;
   }
 };

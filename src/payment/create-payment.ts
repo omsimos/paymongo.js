@@ -59,6 +59,6 @@ export const createPayment = async ({
     return res.data;
   } catch (err) {
     const error: any = err;
-    return error.response.data;
+    throw error.response.data;
   }
 };
