@@ -1,11 +1,16 @@
 import PaymongoClient, { PaymentWebhookResponse } from "../src";
-import { SECRET_KEY, WEBHOOK_ID } from "./keys";
 
 describe("PaymentWebhook", () => {
+  const OLD_ENV = process.env;
   let client: ReturnType<typeof PaymongoClient>;
   let webhook: PaymentWebhookResponse;
+  let SECRET_KEY = "";
+  let WEBHOOK_ID = "";
 
   beforeAll(async () => {
+    process.env = { ...OLD_ENV };
+    SECRET_KEY = process.env.PM_SECRET_KEY as string;
+    WEBHOOK_ID = process.env.PM_WEBHOOK_ID as string;
     client = PaymongoClient(SECRET_KEY);
     webhook = await client.webhook.retrieve(WEBHOOK_ID);
     await client.webhook.enable(WEBHOOK_ID);
@@ -16,6 +21,7 @@ describe("PaymentWebhook", () => {
   });
 
   afterAll(async () => {
+    process.env = OLD_ENV;
     await client.webhook.update({
       webhookId: WEBHOOK_ID,
       events: ["payment.failed", "payment.paid", "source.chargeable"],
