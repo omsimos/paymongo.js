@@ -1,6 +1,7 @@
 export * from "./intent/types";
 export * from "./method/types";
 export * from "./webhook/types";
+export * from "./source/types";
 export interface PaymentProps {
     amount: number;
     source: {
