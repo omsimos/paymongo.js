@@ -1,12 +1,14 @@
 import PaymongoClient, { PaymentMethodResponse } from "../src";
 
-const SECRET_KEY = process.env.PM_SECRET_KEY as string;
-
 describe("PaymentMethod", () => {
+  const OLD_ENV = process.env;
   let client: ReturnType<typeof PaymongoClient>;
   let method: PaymentMethodResponse;
+  let SECRET_KEY = "";
 
   beforeAll(async () => {
+    process.env = { ...OLD_ENV };
+    SECRET_KEY = process.env.PM_SECRET_KEY as string;
     client = PaymongoClient(SECRET_KEY);
     method = await client.method.create({
       details: {
@@ -17,6 +19,10 @@ describe("PaymentMethod", () => {
       },
       type: "card",
     });
+  });
+
+  afterAll(() => {
+    process.env = OLD_ENV;
   });
 
   describe("can create a payment method", () => {
