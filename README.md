@@ -3,10 +3,10 @@
 ![CI](https://github.com/princejoogie/paymongo.js/actions/workflows/main.yml/badge.svg)
 ![CJS](https://img.badgesize.io/princejoogie/paymongo.js/main/dist/paymongo.js.cjs.production.min.js?label=CJS)
 ![ESM](https://img.badgesize.io/princejoogie/paymongo.js/main/dist/paymongo.js.esm.js?label=ESM)
-![License](https://img.shields.io/github/license/princejoogie/paymongo.js.svg)
+![License](https://img.shields.io/badge/license-MIT-brightgreen?style=flat)
 ![Version](https://img.shields.io/github/v/release/princejoogie/paymongo.js?color=%2349C31B&include_prereleases&label=version)
 
-A lightweight, fully-featured, modular, typescript-compatible javascript library for Paymongo.
+A lightweight, fully-featured, modular, typescript-compatible javascript library for [PayMongo.](https://www.paymongo.com/)
 
 ## Installation
 
@@ -195,7 +195,7 @@ Like the project? would appreciate a coffee ☕
 
 ## Running your own instance
 
-Clone the repository
+Clone the repository:
 
 ```bash
 git clone https://github.com/princejoogie/paymongo.js.git
