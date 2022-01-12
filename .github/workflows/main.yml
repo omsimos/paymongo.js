@@ -17,6 +17,11 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
+      - name: Get secrets
+        env:
+          PM_SECRET_KEY: ${{ secrets.PM_SECRET_KEY }}
+          PM_WEBHOOK_ID: ${{ secrets.PM_WEBHOOK_ID }}
+
       - name: Checkout repo
         uses: actions/checkout@v2
 
