@@ -1,7 +1,7 @@
 import PaymongoClient, { PaymentSourceResponse } from "../src";
 
-const successUrl = "http://localhost:3000/gcash/success";
-const failedUrl = "http://localhost:3000/gcash/failed";
+const successUrl = "http://example.com/gcash/success";
+const failedUrl = "http://example.com/gcash/failed";
 
 describe("PaymentSource", () => {
   const OLD_ENV = process.env;
