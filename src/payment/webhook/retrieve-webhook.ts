@@ -27,6 +27,6 @@ export const retrieveWebhook = async (
     return response.data;
   } catch (err) {
     const error: any = err;
-    return error.response.data;
+    throw error.response.data;
   }
 };

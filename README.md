@@ -37,7 +37,7 @@ See [PaymentMethod Resource](https://developers.paymongo.com/reference/the-payme
       expYear: 2023,
       cvc: "321",
     },
-    type: "card",
+    type: "card", // card | paymaya
   });
   ```
 

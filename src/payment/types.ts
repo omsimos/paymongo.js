@@ -7,6 +7,9 @@ export * from "./method/types";
 // webhook
 export * from "./webhook/types";
 
+// source
+export * from "./source/types";
+
 // payments
 export interface PaymentProps {
   amount: number;
