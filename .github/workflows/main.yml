@@ -32,7 +32,7 @@ jobs:
         run: yarn lint
 
       - name: Test
-        run: yarn test -- --clearCache && yarn test --ci --coverage --maxWorkers=2
+        run: echo 'SK $PM_SECRET_KEY, WID $PM_WEBHOOK_ID' && yarn test -- --clearCache && yarn test --ci --coverage --maxWorkers=2
 
       - name: Build
         run: yarn build
