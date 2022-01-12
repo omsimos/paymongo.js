@@ -1,5 +1,7 @@
 import PaymongoClient, { PaymentWebhookResponse } from "../src";
-import { SECRET_KEY, WEBHOOK_ID } from "./keys";
+
+const SECRET_KEY = process.env.PM_SECRET_KEY as string;
+const WEBHOOK_ID = process.env.PM_WEBHOOK_ID as string;
 
 describe("PaymentWebhook", () => {
   let client: ReturnType<typeof PaymongoClient>;

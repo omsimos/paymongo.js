@@ -1,5 +1,6 @@
 import PaymongoClient, { PaymentIntentResponse } from "../src";
-import { SECRET_KEY } from "./keys";
+
+const SECRET_KEY = process.env.PM_SECRET_KEY as string;
 
 describe("PaymentIntent", () => {
   let client: ReturnType<typeof PaymongoClient>;
