@@ -9,7 +9,13 @@ import {
   updateWebhook,
 } from "./payment/webhook";
 import { createSource, retrieveSource } from "./payment/source";
-import { createLink, retrieveLink } from "./payment/link";
+import {
+  archiveLink,
+  createLink,
+  retrieveFromRefLink,
+  retrieveLink,
+  unarchiveLink,
+} from "./payment/link";
 import { createPayment, retrievePayment, listPayments } from "./payment";
 import { store } from "./store";
 
@@ -38,8 +44,11 @@ export interface PaymongoClient {
     retrieve: typeof retrieveSource;
   };
   link: {
+    archive: typeof archiveLink;
     create: typeof createLink;
+    retrieveFromRef: typeof retrieveFromRefLink;
     retrieve: typeof retrieveLink;
+    unarchive: typeof unarchiveLink;
   };
   payment: {
     create: typeof createPayment;
@@ -92,8 +101,11 @@ const PaymongoClient: ClientFunction = (secretKey: string) => {
       retrieve: retrieveSource,
     },
     link: {
+      archive: archiveLink,
       create: createLink,
+      retrieveFromRef: retrieveFromRefLink,
       retrieve: retrieveLink,
+      unarchive: unarchiveLink,
     },
     payment: {
       create: createPayment,

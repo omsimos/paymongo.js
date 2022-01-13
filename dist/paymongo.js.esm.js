@@ -1655,6 +1655,57 @@ var retrieveSource = /*#__PURE__*/function () {
 }();
 
 /**
+ * @module archiveLink
+ * @property {string} linkId - ID of the link to archive.
+ * @returns {PaymentLinkResponse} - The payment intent data.
+ *
+ * @example
+ * ```js
+ * import PaymongoClient from "paymongo.js";
+ *
+ * const main = async () => {
+ *  const client = PaymongoClient("sk_test_key");
+ *  data = await client.link.archive("link_id");
+ *  return data
+ * }
+ * ```
+ */
+
+var archiveLink = /*#__PURE__*/function () {
+  var _ref = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(linkId) {
+    var res, error;
+    return runtime_1.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            _context.next = 3;
+            return axiosInstance.post("/links/" + linkId + "/archive");
+
+          case 3:
+            res = _context.sent;
+            return _context.abrupt("return", res.data);
+
+          case 7:
+            _context.prev = 7;
+            _context.t0 = _context["catch"](0);
+            error = _context.t0;
+            return _context.abrupt("return", error.response.data);
+
+          case 11:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[0, 7]]);
+  }));
+
+  return function archiveLink(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/**
  * @module createLink
  * @property {number} amount - The expected amount that the link should receive. A positive integer with a minimum amount of 100. 100 is the smallest unit in cents. If you want the link to receive an amount of 1.00, the value that you should pass is 100. If you want the link to receive an amount of 1500.50, the value that you should pass is 150050.
  * @property {string} description - Describes the purpose of the link. The value is also displayed when you access the link from a browser.
@@ -1721,6 +1772,57 @@ var createLink = /*#__PURE__*/function () {
 }();
 
 /**
+ * @module retrieveFromRefLink
+ * @property {string} refId - The unique identifier of the PayMongo link checkout URL.
+ * @returns {PaymentLinkResponse} - The payment intent data.
+ *
+ * @example
+ * ```js
+ * import PaymongoClient from "paymongo.js";
+ *
+ * const main = async () => {
+ *  const client = PaymongoClient("sk_test_key");
+ *  data = await client.link.retrieveFromRef("ref_id");
+ *  return data
+ * }
+ * ```
+ */
+
+var retrieveFromRefLink = /*#__PURE__*/function () {
+  var _ref = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(refId) {
+    var res, error;
+    return runtime_1.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            _context.next = 3;
+            return axiosInstance.get("/links?reference_number=" + refId);
+
+          case 3:
+            res = _context.sent;
+            return _context.abrupt("return", res.data);
+
+          case 7:
+            _context.prev = 7;
+            _context.t0 = _context["catch"](0);
+            error = _context.t0;
+            return _context.abrupt("return", error.response.data);
+
+          case 11:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[0, 7]]);
+  }));
+
+  return function retrieveFromRefLink(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/**
  * @module retrieveLink
  * @property {string} linkId - The id of the payment link.
  * @returns {PaymentLinkResponse} - The payment intent data.
@@ -1767,6 +1869,57 @@ var retrieveLink = /*#__PURE__*/function () {
   }));
 
   return function retrieveLink(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/**
+ * @module unarchiveLink
+ * @property {string} linkId - ID of the link to archive.
+ * @returns {PaymentLinkResponse} - The payment intent data.
+ *
+ * @example
+ * ```js
+ * import PaymongoClient from "paymongo.js";
+ *
+ * const main = async () => {
+ *  const client = PaymongoClient("sk_test_key");
+ *  data = await client.link.unarchive("link_id");
+ *  return data
+ * }
+ * ```
+ */
+
+var unarchiveLink = /*#__PURE__*/function () {
+  var _ref = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(linkId) {
+    var res, error;
+    return runtime_1.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            _context.next = 3;
+            return axiosInstance.post("/links/" + linkId + "/unarchive");
+
+          case 3:
+            res = _context.sent;
+            return _context.abrupt("return", res.data);
+
+          case 7:
+            _context.prev = 7;
+            _context.t0 = _context["catch"](0);
+            error = _context.t0;
+            return _context.abrupt("return", error.response.data);
+
+          case 11:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[0, 7]]);
+  }));
+
+  return function unarchiveLink(_x) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -2001,8 +2154,11 @@ var PaymongoClient = function PaymongoClient(secretKey) {
       retrieve: retrieveSource
     },
     link: {
+      archive: archiveLink,
       create: createLink,
-      retrieve: retrieveLink
+      retrieveFromRef: retrieveFromRefLink,
+      retrieve: retrieveLink,
+      unarchive: unarchiveLink
     },
     payment: {
       create: createPayment,
