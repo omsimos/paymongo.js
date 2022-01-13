@@ -17,7 +17,7 @@ import { PaymentMethodResponse } from "./types";
  * }
  * ```
  */
-export const retrievePaymentMethod = async (
+export const retrieveMethod = async (
   methodId: string
 ): Promise<PaymentMethodResponse> => {
   try {

@@ -1,18 +1,19 @@
-import { attachPaymentIntent, createPaymentIntent, retrievePaymentIntent } from "./payment/intent";
-import { createPaymentMethod, retrievePaymentMethod } from "./payment/method";
+import { attachIntent, createIntent, retrieveIntent } from "./payment/intent";
+import { createMethod, retrieveMethod } from "./payment/method";
 import { createWebhook, disableWebhook, enableWebhook, listWebhooks, retrieveWebhook, updateWebhook } from "./payment/webhook";
 import { createSource, retrieveSource } from "./payment/source";
+import { createLink, retrieveLink } from "./payment/link";
 import { createPayment, retrievePayment, listPayments } from "./payment";
 export * from "./payment/types";
 export interface PaymongoClient {
     intent: {
-        attach: typeof attachPaymentIntent;
-        create: typeof createPaymentIntent;
-        retrieve: typeof retrievePaymentIntent;
+        attach: typeof attachIntent;
+        create: typeof createIntent;
+        retrieve: typeof retrieveIntent;
     };
     method: {
-        create: typeof createPaymentMethod;
-        retrieve: typeof retrievePaymentMethod;
+        create: typeof createMethod;
+        retrieve: typeof retrieveMethod;
     };
     webhook: {
         create: typeof createWebhook;
@@ -25,6 +26,10 @@ export interface PaymongoClient {
     source: {
         create: typeof createSource;
         retrieve: typeof retrieveSource;
+    };
+    link: {
+        create: typeof createLink;
+        retrieve: typeof retrieveLink;
     };
     payment: {
         create: typeof createPayment;

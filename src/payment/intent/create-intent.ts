@@ -9,7 +9,7 @@ const defaultProps: CreatePaymentIntentProps = {
 };
 
 /**
- * @module createPaymentIntent
+ * @module createIntent
  * @property {number} amount - amount of the payment intent in cents (PHP100 = 100000).
  * @property {PaymentType} paymentMethodAllowed - The payment method allowed.
  * @property {string} request3DS - any | automatic
@@ -35,7 +35,7 @@ const defaultProps: CreatePaymentIntentProps = {
  * }
  * ```
  */
-export const createPaymentIntent = async ({
+export const createIntent = async ({
   amount = defaultProps.amount,
   currency = defaultProps.currency,
   paymentMethodAllowed = defaultProps.paymentMethodAllowed,

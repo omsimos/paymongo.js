@@ -2,7 +2,7 @@ import api from "../../utils/api-base";
 import { AttachPaymentIntentProps, AttachPaymentIntentResponse } from "./types";
 
 /**
- * @module attachPaymentIntent
+ * @module attachIntent
  * @property {string} intentId - The id of the payment intent.
  * @property {string} methodId - The is of the payment method.
  * @property {string} clientKey - The client key of the payment intent.
@@ -23,7 +23,7 @@ import { AttachPaymentIntentProps, AttachPaymentIntentResponse } from "./types";
  * }
  * ```
  */
-export const attachPaymentIntent = async ({
+export const attachIntent = async ({
   intentId,
   methodId,
   clientKey,

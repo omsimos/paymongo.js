@@ -2,7 +2,7 @@ import api from "../../utils/api-base";
 import { PaymentIntentResponse, RetrievePaymentIntentProps } from "./types";
 
 /**
- * @module retrievePaymentIntent
+ * @module retrieveIntent
  * @property {string} id - The id of the payment intent.
  * @property {string} clientKey - The client key of the payment intent.
  * @returns {PaymentIntentResponse} - The payment intent data.
@@ -20,7 +20,7 @@ import { PaymentIntentResponse, RetrievePaymentIntentProps } from "./types";
  * }
  * ```
  */
-export const retrievePaymentIntent = async ({
+export const retrieveIntent = async ({
   intentId,
   clientKey,
 }: RetrievePaymentIntentProps): Promise<PaymentIntentResponse> => {

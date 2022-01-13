@@ -15,4 +15,4 @@ import { PaymentMethodResponse } from "./types";
  * }
  * ```
  */
-export declare const retrievePaymentMethod: (methodId: string) => Promise<PaymentMethodResponse>;
+export declare const retrieveMethod: (methodId: string) => Promise<PaymentMethodResponse>;

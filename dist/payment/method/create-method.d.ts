@@ -26,4 +26,4 @@ import { CreatePaymentMethodProps, PaymentMethodResponse } from "./types";
  * }
  * ```
  */
-export declare const createPaymentMethod: ({ details, type, billing, metadata, }: CreatePaymentMethodProps) => Promise<PaymentMethodResponse>;
+export declare const createMethod: ({ details, type, billing, metadata, }: CreatePaymentMethodProps) => Promise<PaymentMethodResponse>;

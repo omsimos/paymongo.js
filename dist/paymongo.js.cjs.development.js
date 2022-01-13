@@ -856,7 +856,7 @@ store.subscribe(function (state) {
 });
 
 /**
- * @module attachPaymentIntent
+ * @module attachIntent
  * @property {string} intentId - The id of the payment intent.
  * @property {string} methodId - The is of the payment method.
  * @property {string} clientKey - The client key of the payment intent.
@@ -878,7 +878,7 @@ store.subscribe(function (state) {
  * ```
  */
 
-var attachPaymentIntent = /*#__PURE__*/function () {
+var attachIntent = /*#__PURE__*/function () {
   var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref) {
     var intentId, methodId, clientKey, returnUrl, data, res, error;
     return runtime_1.wrap(function _callee$(_context) {
@@ -917,7 +917,7 @@ var attachPaymentIntent = /*#__PURE__*/function () {
     }, _callee, null, [[4, 11]]);
   }));
 
-  return function attachPaymentIntent(_x) {
+  return function attachIntent(_x) {
     return _ref2.apply(this, arguments);
   };
 }();
@@ -929,7 +929,7 @@ var defaultProps = {
   request3DS: "any"
 };
 /**
- * @module createPaymentIntent
+ * @module createIntent
  * @property {number} amount - amount of the payment intent in cents (PHP100 = 100000).
  * @property {PaymentType} paymentMethodAllowed - The payment method allowed.
  * @property {string} request3DS - any | automatic
@@ -956,7 +956,7 @@ var defaultProps = {
  * ```
  */
 
-var createPaymentIntent = /*#__PURE__*/function () {
+var createIntent = /*#__PURE__*/function () {
   var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref) {
     var _ref$amount, amount, _ref$currency, currency, _ref$paymentMethodAll, paymentMethodAllowed, _ref$request3DS, request3DS, description, statementDescriptor, metadata, data, res, error;
 
@@ -1004,13 +1004,13 @@ var createPaymentIntent = /*#__PURE__*/function () {
     }, _callee, null, [[5, 12]]);
   }));
 
-  return function createPaymentIntent(_x) {
+  return function createIntent(_x) {
     return _ref2.apply(this, arguments);
   };
 }();
 
 /**
- * @module retrievePaymentIntent
+ * @module retrieveIntent
  * @property {string} id - The id of the payment intent.
  * @property {string} clientKey - The client key of the payment intent.
  * @returns {PaymentIntentResponse} - The payment intent data.
@@ -1029,7 +1029,7 @@ var createPaymentIntent = /*#__PURE__*/function () {
  * ```
  */
 
-var retrievePaymentIntent = /*#__PURE__*/function () {
+var retrieveIntent = /*#__PURE__*/function () {
   var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref) {
     var intentId, clientKey, url, res, error;
     return runtime_1.wrap(function _callee$(_context) {
@@ -1061,7 +1061,7 @@ var retrievePaymentIntent = /*#__PURE__*/function () {
     }, _callee, null, [[1, 10]]);
   }));
 
-  return function retrievePaymentIntent(_x) {
+  return function retrieveIntent(_x) {
     return _ref2.apply(this, arguments);
   };
 }();
@@ -1094,7 +1094,7 @@ var retrievePaymentIntent = /*#__PURE__*/function () {
  * ```
  */
 
-var createPaymentMethod = /*#__PURE__*/function () {
+var createMethod = /*#__PURE__*/function () {
   var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref) {
     var details, type, billing, metadata, data, res, error;
     return runtime_1.wrap(function _callee$(_context) {
@@ -1139,7 +1139,7 @@ var createPaymentMethod = /*#__PURE__*/function () {
     }, _callee, null, [[4, 11]]);
   }));
 
-  return function createPaymentMethod(_x) {
+  return function createMethod(_x) {
     return _ref2.apply(this, arguments);
   };
 }();
@@ -1161,7 +1161,7 @@ var createPaymentMethod = /*#__PURE__*/function () {
  * ```
  */
 
-var retrievePaymentMethod = /*#__PURE__*/function () {
+var retrieveMethod = /*#__PURE__*/function () {
   var _ref = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(methodId) {
     var res, error;
     return runtime_1.wrap(function _callee$(_context) {
@@ -1190,7 +1190,7 @@ var retrievePaymentMethod = /*#__PURE__*/function () {
     }, _callee, null, [[0, 7]]);
   }));
 
-  return function retrievePaymentMethod(_x) {
+  return function retrieveMethod(_x) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -1644,6 +1644,123 @@ var retrieveSource = /*#__PURE__*/function () {
   };
 }();
 
+/**
+ * @module createLink
+ * @property {number} amount - The expected amount that the link should receive. A positive integer with a minimum amount of 100. 100 is the smallest unit in cents. If you want the link to receive an amount of 1.00, the value that you should pass is 100. If you want the link to receive an amount of 1500.50, the value that you should pass is 150050.
+ * @property {string} description - Describes the purpose of the link. The value is also displayed when you access the link from a browser.
+ * @property {string} remarks - (optional) Additional information about the link but for internal use. The value is not displayed if a customer accessed the PayMongo link from the browser.
+ * @returns {PaymentLinkResponse} - The payment intent data.
+ *
+ * @example
+ * ```js
+ * import PaymongoClient from "paymongo.js";
+ *
+ * const main = async () => {
+ *  const client = PaymongoClient("sk_test_key");
+ *  const data = await client.link.create({
+ *    amount: 10000,
+ *    description: "Payment for order 123",
+ *  });
+ *  return data
+ * }
+ * ```
+ */
+
+var createLink = /*#__PURE__*/function () {
+  var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref) {
+    var amount, description, remarks, data, res, error;
+    return runtime_1.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            amount = _ref.amount, description = _ref.description, remarks = _ref.remarks;
+            data = {
+              attributes: {
+                amount: amount,
+                description: description
+              }
+            };
+            if (remarks) data.attributes.remarks = remarks;
+            _context.prev = 3;
+            _context.next = 6;
+            return axiosInstance.post("/links", {
+              data: data
+            });
+
+          case 6:
+            res = _context.sent;
+            return _context.abrupt("return", res.data);
+
+          case 10:
+            _context.prev = 10;
+            _context.t0 = _context["catch"](3);
+            error = _context.t0;
+            return _context.abrupt("return", error.response.data);
+
+          case 14:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[3, 10]]);
+  }));
+
+  return function createLink(_x) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+/**
+ * @module retrieveLink
+ * @property {string} linkId - The id of the payment link.
+ * @returns {PaymentLinkResponse} - The payment intent data.
+ *
+ * @example
+ * ```js
+ * import PaymongoClient from "paymongo.js";
+ *
+ * const main = async () => {
+ *  const client = PaymongoClient("sk_test_key");
+ *  data = await client.link.retrieve("link_id");
+ *  return data
+ * }
+ * ```
+ */
+
+var retrieveLink = /*#__PURE__*/function () {
+  var _ref = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(linkId) {
+    var res, error;
+    return runtime_1.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            _context.next = 3;
+            return axiosInstance.get("/links/" + linkId);
+
+          case 3:
+            res = _context.sent;
+            return _context.abrupt("return", res.data);
+
+          case 7:
+            _context.prev = 7;
+            _context.t0 = _context["catch"](0);
+            error = _context.t0;
+            return _context.abrupt("return", error.response.data);
+
+          case 11:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[0, 7]]);
+  }));
+
+  return function retrieveLink(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
 var defaultProps$2 = {
   amount: 0,
   currency: "PHP"
@@ -1818,13 +1935,13 @@ var PaymongoClient = function PaymongoClient(secretKey) {
   });
   return {
     intent: {
-      attach: attachPaymentIntent,
-      create: createPaymentIntent,
-      retrieve: retrievePaymentIntent
+      attach: attachIntent,
+      create: createIntent,
+      retrieve: retrieveIntent
     },
     method: {
-      create: createPaymentMethod,
-      retrieve: retrievePaymentMethod
+      create: createMethod,
+      retrieve: retrieveMethod
     },
     webhook: {
       create: createWebhook,
@@ -1837,6 +1954,10 @@ var PaymongoClient = function PaymongoClient(secretKey) {
     source: {
       create: createSource,
       retrieve: retrieveSource
+    },
+    link: {
+      create: createLink,
+      retrieve: retrieveLink
     },
     payment: {
       create: createPayment,

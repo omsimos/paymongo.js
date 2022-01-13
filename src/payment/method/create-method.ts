@@ -28,7 +28,7 @@ import { CreatePaymentMethodProps, PaymentMethodResponse } from "./types";
  * }
  * ```
  */
-export const createPaymentMethod = async ({
+export const createMethod = async ({
   details,
   type,
   billing,

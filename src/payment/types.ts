@@ -10,6 +10,9 @@ export * from "./webhook/types";
 // source
 export * from "./source/types";
 
+// links
+export * from "./link/types";
+
 // payments
 export interface PaymentProps {
   amount: number;

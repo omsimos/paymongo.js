@@ -1,6 +1,6 @@
 import { AttachPaymentIntentProps, AttachPaymentIntentResponse } from "./types";
 /**
- * @module attachPaymentIntent
+ * @module attachIntent
  * @property {string} intentId - The id of the payment intent.
  * @property {string} methodId - The is of the payment method.
  * @property {string} clientKey - The client key of the payment intent.
@@ -21,4 +21,4 @@ import { AttachPaymentIntentProps, AttachPaymentIntentResponse } from "./types";
  * }
  * ```
  */
-export declare const attachPaymentIntent: ({ intentId, methodId, clientKey, returnUrl, }: AttachPaymentIntentProps) => Promise<AttachPaymentIntentResponse>;
+export declare const attachIntent: ({ intentId, methodId, clientKey, returnUrl, }: AttachPaymentIntentProps) => Promise<AttachPaymentIntentResponse>;

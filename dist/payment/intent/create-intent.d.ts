@@ -1,6 +1,6 @@
 import { PaymentIntentResponse, CreatePaymentIntentProps } from "./types";
 /**
- * @module createPaymentIntent
+ * @module createIntent
  * @property {number} amount - amount of the payment intent in cents (PHP100 = 100000).
  * @property {PaymentType} paymentMethodAllowed - The payment method allowed.
  * @property {string} request3DS - any | automatic
@@ -26,4 +26,4 @@ import { PaymentIntentResponse, CreatePaymentIntentProps } from "./types";
  * }
  * ```
  */
-export declare const createPaymentIntent: ({ amount, currency, paymentMethodAllowed, request3DS, description, statementDescriptor, metadata, }: CreatePaymentIntentProps) => Promise<PaymentIntentResponse>;
+export declare const createIntent: ({ amount, currency, paymentMethodAllowed, request3DS, description, statementDescriptor, metadata, }: CreatePaymentIntentProps) => Promise<PaymentIntentResponse>;
