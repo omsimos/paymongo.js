@@ -1,8 +1,8 @@
-import { PaymentLinkResponse } from "./types";
+import { RetrieveFromRefResponse } from "./types";
 /**
  * @module retrieveFromRefLink
  * @property {string} refId - The unique identifier of the PayMongo link checkout URL.
- * @returns {PaymentLinkResponse} - The payment intent data.
+ * @returns {RetrieveFromRefResponse} - The payment intent data.
  *
  * @example
  * ```js
@@ -15,4 +15,4 @@ import { PaymentLinkResponse } from "./types";
  * }
  * ```
  */
-export declare const retrieveFromRefLink: (refId: string) => Promise<PaymentLinkResponse>;
+export declare const retrieveFromRefLink: (refId: string) => Promise<RetrieveFromRefResponse>;

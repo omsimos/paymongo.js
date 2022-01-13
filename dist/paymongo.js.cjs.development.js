@@ -1696,7 +1696,7 @@ var archiveLink = /*#__PURE__*/function () {
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
             error = _context.t0;
-            return _context.abrupt("return", error.response.data);
+            throw error.response.data;
 
           case 11:
           case "end":
@@ -1762,7 +1762,7 @@ var createLink = /*#__PURE__*/function () {
             _context.prev = 10;
             _context.t0 = _context["catch"](3);
             error = _context.t0;
-            return _context.abrupt("return", error.response.data);
+            throw error.response.data;
 
           case 14:
           case "end":
@@ -1780,7 +1780,7 @@ var createLink = /*#__PURE__*/function () {
 /**
  * @module retrieveFromRefLink
  * @property {string} refId - The unique identifier of the PayMongo link checkout URL.
- * @returns {PaymentLinkResponse} - The payment intent data.
+ * @returns {RetrieveFromRefResponse} - The payment intent data.
  *
  * @example
  * ```js
@@ -1813,7 +1813,7 @@ var retrieveFromRefLink = /*#__PURE__*/function () {
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
             error = _context.t0;
-            return _context.abrupt("return", error.response.data);
+            throw error.response.data;
 
           case 11:
           case "end":
@@ -1864,7 +1864,7 @@ var retrieveLink = /*#__PURE__*/function () {
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
             error = _context.t0;
-            return _context.abrupt("return", error.response.data);
+            throw error.response.data;
 
           case 11:
           case "end":
@@ -1915,7 +1915,7 @@ var unarchiveLink = /*#__PURE__*/function () {
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
             error = _context.t0;
-            return _context.abrupt("return", error.response.data);
+            throw error.response.data;
 
           case 11:
           case "end":

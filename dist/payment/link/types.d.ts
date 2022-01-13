@@ -28,3 +28,7 @@ export interface PaymentLinkData {
 export interface PaymentLinkResponse {
     data: PaymentLinkData;
 }
+export interface RetrieveFromRefResponse {
+    has_more: boolean;
+    data: PaymentLinkData[];
+}
