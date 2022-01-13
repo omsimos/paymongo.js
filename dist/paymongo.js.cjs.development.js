@@ -907,7 +907,7 @@ var attachPaymentIntent = /*#__PURE__*/function () {
             _context.prev = 11;
             _context.t0 = _context["catch"](4);
             error = _context.t0;
-            return _context.abrupt("return", error.response.data);
+            throw error.response.data;
 
           case 15:
           case "end":
@@ -994,7 +994,7 @@ var createPaymentIntent = /*#__PURE__*/function () {
             _context.prev = 12;
             _context.t0 = _context["catch"](5);
             error = _context.t0;
-            return _context.abrupt("return", error.response.data);
+            throw error.response.data;
 
           case 16:
           case "end":
@@ -1051,7 +1051,7 @@ var retrievePaymentIntent = /*#__PURE__*/function () {
             _context.prev = 10;
             _context.t0 = _context["catch"](1);
             error = _context.t0;
-            return _context.abrupt("return", error.response.data);
+            throw error.response.data;
 
           case 14:
           case "end":
@@ -1129,7 +1129,7 @@ var createPaymentMethod = /*#__PURE__*/function () {
             _context.prev = 11;
             _context.t0 = _context["catch"](4);
             error = _context.t0;
-            return _context.abrupt("return", error.response.data);
+            throw error.response.data;
 
           case 15:
           case "end":
@@ -1180,7 +1180,7 @@ var retrievePaymentMethod = /*#__PURE__*/function () {
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
             error = _context.t0;
-            return _context.abrupt("return", error.response.data);
+            throw error.response.data;
 
           case 11:
           case "end":
@@ -1244,7 +1244,7 @@ var createWebhook = /*#__PURE__*/function () {
             _context.prev = 9;
             _context.t0 = _context["catch"](2);
             error = _context.t0;
-            return _context.abrupt("return", error.response.data);
+            throw error.response.data;
 
           case 13:
           case "end":
@@ -1295,7 +1295,7 @@ var disableWebhook = /*#__PURE__*/function () {
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
             error = _context.t0;
-            return _context.abrupt("return", error.response.data);
+            throw error.response.data;
 
           case 11:
           case "end":
@@ -1346,7 +1346,7 @@ var enableWebhook = /*#__PURE__*/function () {
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
             error = _context.t0;
-            return _context.abrupt("return", error.response.data);
+            throw error.response.data;
 
           case 11:
           case "end":
@@ -1380,7 +1380,7 @@ var listWebhooks = /*#__PURE__*/function () {
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
             error = _context.t0;
-            return _context.abrupt("return", error.response.data);
+            throw error.response.data;
 
           case 11:
           case "end":
@@ -1431,7 +1431,7 @@ var retrieveWebhook = /*#__PURE__*/function () {
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
             error = _context.t0;
-            return _context.abrupt("return", error.response.data);
+            throw error.response.data;
 
           case 11:
           case "end":
@@ -1496,7 +1496,7 @@ var updateWebhook = /*#__PURE__*/function () {
             _context.prev = 9;
             _context.t0 = _context["catch"](2);
             error = _context.t0;
-            return _context.abrupt("return", error.response.data);
+            throw error.response.data;
 
           case 13:
           case "end":
@@ -1578,7 +1578,7 @@ var createSource = /*#__PURE__*/function () {
             _context.prev = 10;
             _context.t0 = _context["catch"](3);
             error = _context.t0;
-            return _context.abrupt("return", error.response.data);
+            throw error.response.data;
 
           case 14:
           case "end":
@@ -1629,7 +1629,7 @@ var retrieveSource = /*#__PURE__*/function () {
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
             error = _context.t0;
-            return _context.abrupt("return", error.response.data);
+            throw error.response.data;
 
           case 11:
           case "end":
@@ -1710,7 +1710,7 @@ var createPayment = /*#__PURE__*/function () {
             _context.prev = 11;
             _context.t0 = _context["catch"](4);
             error = _context.t0;
-            return _context.abrupt("return", error.response.data);
+            throw error.response.data;
 
           case 15:
           case "end":
@@ -1761,7 +1761,7 @@ var retrievePayment = /*#__PURE__*/function () {
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
             error = _context.t0;
-            return _context.abrupt("return", error.response.data);
+            throw error.response.data;
 
           case 11:
           case "end":
@@ -1795,7 +1795,7 @@ var listPayments = /*#__PURE__*/function () {
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
             error = _context.t0;
-            return _context.abrupt("return", error.response.data);
+            throw error.response.data;
 
           case 11:
           case "end":
