@@ -113,7 +113,7 @@ See [Payment Resource](https://developers.paymongo.com/reference/payment-source)
   const p = await client.payment.create({
     amount: 10000,
     source: {
-      id: "some_source_id"
+      id: "some_source_id",
       type: "source",
     },
   });

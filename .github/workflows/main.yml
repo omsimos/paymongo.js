@@ -35,7 +35,8 @@ jobs:
         env:
           PM_SECRET_KEY: ${{ secrets.PM_SECRET_KEY }}
           PM_WEBHOOK_ID: ${{ secrets.PM_WEBHOOK_ID }}
-        run: echo "SK $PM_SECRET_KEY, WID $PM_WEBHOOK_ID" && yarn test -- --clearCache && yarn test --ci --coverage --maxWorkers=2
+          PM_PAYMENT_ID: ${{ secrets.PM_PAYMENT_ID }}
+        run: echo "SK $PM_SECRET_KEY, WID $PM_WEBHOOK_ID", PID $PM_PAYMENT_ID && yarn test -- --clearCache && yarn test --ci --coverage --maxWorkers=2
 
       - name: Build
         run: yarn build
