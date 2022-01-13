@@ -49,11 +49,8 @@ describe("PaymentSource", () => {
       expect(source.data.attributes.status).toBe("pending");
     });
 
-    it("has correct success redirect", () => {
+    it("has correct redirects", () => {
       expect(source.data.attributes.redirect.success).toBe(successUrl);
-    });
-
-    it("has correct failed redirect", () => {
       expect(source.data.attributes.redirect.failed).toBe(failedUrl);
     });
   });
@@ -85,8 +82,9 @@ describe("PaymentSource", () => {
       expect(retrieved.data.attributes.status).toBe("pending");
     });
 
-    it("has correct success redirect", () => {
+    it("has correct redirects", () => {
       expect(retrieved.data.attributes.redirect.success).toBe(successUrl);
+      expect(retrieved.data.attributes.redirect.failed).toBe(failedUrl);
     });
 
     it("has correct failed redirect", () => {
