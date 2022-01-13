@@ -23,6 +23,47 @@ import PaymongoClient from "paymongo.js";
 export const client = PaymongoClient("sk_key");
 ```
 
+### (**_BETA_**) Links
+
+To use this feature, instal with
+
+```bash
+npm install paymongo.js@next # or yarn add paymongo.js@next
+```
+
+- **Create a Link**
+
+  ```js
+  const link = await client.link.create({
+    amount: 10000,
+    description: "Test payment link",
+  });
+  ```
+
+- \*\*Retrieve a Link
+
+  ```js
+  const link = await client.link.retrieve("some_link_id");
+  ```
+
+- **Retrieve from Reference number**
+
+  ```js
+  const link = await client.link.retrieveFromRef("some_ref_id");
+  ```
+
+- **Archive a Link**
+
+  ```js
+  const link = await client.link.archive("some_link_id");
+  ```
+
+- **Unarchive a Link**
+
+  ```js
+  const link = await client.link.unarchive("some_link_id");
+  ```
+
 ### Payment Method
 
 See [PaymentMethod Resource](https://developers.paymongo.com/reference/the-payment-method-object) reference.
