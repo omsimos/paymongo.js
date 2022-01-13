@@ -15,7 +15,7 @@
     "build": "tsdx build",
     "test": "tsdx test",
     "lint": "eslint --fix src/**/*.{js,ts}",
-    "prepare": "tsdx build && husky install",
+    "prepare": "husky install",
     "size": "size-limit",
     "release": "np"
   },
