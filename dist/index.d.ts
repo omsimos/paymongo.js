@@ -38,5 +38,21 @@ export interface PaymongoClient {
     };
 }
 export declare type ClientFunction = (secretKey: string) => PaymongoClient;
+/**
+ * @module PaymongoClient
+ * @param secretKey - The secret key of your Paymongo account.
+ * @returns {PaymongoClient} - The Paymongo client.
+ *
+ * @example
+ * ```js
+ * import PaymongoClient from "paymongo.js";
+ *
+ * const main = async () => {
+ *  const client = PaymongoClient("sk_test_key");
+ *  return client;
+ * }
+ * ```
+ * @returns
+ */
 declare const PaymongoClient: ClientFunction;
 export default PaymongoClient;

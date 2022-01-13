@@ -24,15 +24,15 @@ export interface AttachPaymentIntentProps {
 }
 
 // response
-export interface PICardResponse {
+export interface PaymentIntentCardResponse {
   request_three_d_secure: string;
 }
 
-export interface PIPaymentMethodOptionsResponse {
-  card: PICardResponse;
+export interface PaymentIntentPaymentMethodOptionsResponse {
+  card: PaymentIntentCardResponse;
 }
 
-export interface PIAttributesResponse {
+export interface PaymentIntentAttributesResponse {
   amount: number;
   currency: string;
   description?: string;
@@ -46,18 +46,18 @@ export interface PIAttributesResponse {
   payment_method_allowed: PaymentType[];
   payments: any[];
   next_action?: any;
-  payment_method_options?: PIPaymentMethodOptionsResponse;
+  payment_method_options?: PaymentIntentPaymentMethodOptionsResponse;
   metadata?: MetaData;
 }
 
-export interface PIData {
+export interface PaymentIntentData {
   id: string;
   type: string;
-  attributes: PIAttributesResponse;
+  attributes: PaymentIntentAttributesResponse;
 }
 
 export interface PaymentIntentResponse {
-  data: PIData;
+  data: PaymentIntentData;
 }
 
 export interface AttachSource {

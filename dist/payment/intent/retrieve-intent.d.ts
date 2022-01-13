@@ -1,8 +1,8 @@
 import { PaymentIntentResponse, RetrievePaymentIntentProps } from "./types";
 /**
  * @module retrieveIntent
- * @property {string} id - The id of the payment intent.
- * @property {string} clientKey - The client key of the payment intent.
+ * @property {string} id - Id of the PaymentIntent.
+ * @property {string} clientKey - Client key of the PaymentIntent if the key used is a public key.
  * @returns {PaymentIntentResponse} - The payment intent data.
  *
  * @example
