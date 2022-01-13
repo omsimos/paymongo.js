@@ -13,7 +13,7 @@ import { PaymentIntentResponse, RetrievePaymentIntentProps } from "./types";
  *
  * const main = async () => {
  *  const client = PaymongoClient("sk_test_key");
- *  data = await client.retrievePaymentIntent({
+ *  data = await client.intent.retrieve({
  *    id: "pi_key",
  *  });
  *  return data
