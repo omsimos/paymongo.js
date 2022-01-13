@@ -13,12 +13,6 @@ describe("PaymentLink", () => {
     LINK_ID = process.env.PM_LINK_ID as string;
     LINK_REF = process.env.PM_LINK_REF as string;
     client = PaymongoClient(SECRET_KEY);
-
-    try {
-      await client.link.unarchive(LINK_ID);
-    } catch {
-      // do nothing
-    }
   });
 
   afterAll(() => {
@@ -73,13 +67,5 @@ describe("PaymentLink", () => {
       expect(retrieved.attributes.livemode).toBe(false);
       expect(retrieved.attributes.reference_number).toBe("D5f52ak");
     });
-  });
-
-  it("can archive and unarchive", async () => {
-    const linkOne = await client.link.archive(LINK_ID);
-    expect(linkOne.data.attributes.archived).toBe(true);
-
-    const linkTwo = await client.link.unarchive(LINK_ID);
-    expect(linkTwo.data.attributes.archived).toBe(false);
   });
 });
