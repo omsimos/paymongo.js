@@ -1197,17 +1197,16 @@ var retrieveMethod = /*#__PURE__*/function () {
 
 /**
  * @module createWebhook
- * @property {string} url - The webhook url
- * @property {string[]} events - The webhook events ("source.chargeable" | "payment.paid" | "payment.failed")
- * @returns {PaymentWebhookResponse} - The payment webhook data.
- *
+ * @property {string} url - The destination URL of the events that happened from your account. Please make sure that the URL is publicly accessible in order for you to receive the event.
+ * @property {string[]} events - The list of events to be sent to this webhook. Possible values in the meantime are source.chargeable, payment.paid and payment.failed.
+ * @returns {PaymentWebhookResponse} - The payment webhook data.  *
  * @example
  * ```js
  * import PaymongoClient from "paymongo.js";
  *
  * const main = async () => {
  *  const client = PaymongoClient("sk_test_key");
- *  const webhook = await client.createWebhook({
+ *  const webhook = await client.webhook.create({
  *    events: ["payment.failed", "payment.paid", "source.chargeable"],
  *    url: "https://example.com/webhook",
  *  });
@@ -1270,7 +1269,7 @@ var createWebhook = /*#__PURE__*/function () {
  *
  * const main = async () => {
  *  const client = PaymongoClient("sk_test_key");
- *  const webhook = await client.disableWebhook("webhook_id");
+ *  const webhook = await client.webhook.disable("webhook_id");
  *  return webhook;
  * }
  * ```
@@ -1321,7 +1320,7 @@ var disableWebhook = /*#__PURE__*/function () {
  *
  * const main = async () => {
  *  const client = PaymongoClient("sk_test_key");
- *  const webhook = await client.enableWebhook("webhook_id");
+ *  const webhook = await client.webhook.enable("webhook_id");
  *  return webhook;
  * }
  * ```
@@ -1360,6 +1359,22 @@ var enableWebhook = /*#__PURE__*/function () {
     return _ref.apply(this, arguments);
   };
 }();
+
+/**
+ * @module listWebhook
+ * @returns {PaymentWebhookResponse[]} - The list of payment webhooks.
+ *
+ * @example
+ * ```js
+ * import PaymongoClient from "paymongo.js";
+ *
+ * const main = async () => {
+ *  const client = PaymongoClient("sk_test_key");
+ *  const webhooks = await client.webhook.list();
+ *  return webhooks;
+ * }
+ * ```
+ */
 
 var listWebhooks = /*#__PURE__*/function () {
   var _ref = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee() {
@@ -1406,7 +1421,7 @@ var listWebhooks = /*#__PURE__*/function () {
  *
  * const main = async () => {
  *  const client = PaymongoClient("sk_test_key");
- *  const webhook = await client.retrieveWebhook("webhook_id");
+ *  const webhook = await client.webhook.retrieve("webhook_id");
  *  return webhook;
  * }
  * ```
@@ -1459,7 +1474,8 @@ var retrieveWebhook = /*#__PURE__*/function () {
  *
  * const main = async () => {
  *  const client = PaymongoClient("sk_test_key");
- *  const webhook = await client.createWebhook({
+ *  const webhook = await client.webhook.update({
+ *    webhookId: "webhook_id",
  *    events: ["payment.failed", "payment.paid", "source.chargeable"],
  *    url: "https://example.com/webhook",
  *  });

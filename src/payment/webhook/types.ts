@@ -9,7 +9,7 @@ export interface UpdateWebhookProps extends Partial<CreateWebhookProps> {
   webhookId: string;
 }
 
-export interface WHAttributes {
+export interface WebhookAttributes {
   livemode: boolean;
   secret_key: string;
   status: string;
@@ -19,12 +19,12 @@ export interface WHAttributes {
   updated_at: number;
 }
 
-export interface WHData {
+export interface WebhookData {
   id: string;
   type: string;
-  attributes: WHAttributes;
+  attributes: WebhookAttributes;
 }
 
 export interface PaymentWebhookResponse {
-  data: WHData;
+  data: WebhookData;
 }

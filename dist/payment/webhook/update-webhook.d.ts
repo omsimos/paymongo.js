@@ -12,7 +12,8 @@ import { UpdateWebhookProps, PaymentWebhookResponse } from "./types";
  *
  * const main = async () => {
  *  const client = PaymongoClient("sk_test_key");
- *  const webhook = await client.createWebhook({
+ *  const webhook = await client.webhook.update({
+ *    webhookId: "webhook_id",
  *    events: ["payment.failed", "payment.paid", "source.chargeable"],
  *    url: "https://example.com/webhook",
  *  });
