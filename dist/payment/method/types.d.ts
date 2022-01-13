@@ -1,4 +1,4 @@
-import { MetaData } from "../types";
+import { MetaData, BillingType } from "../types";
 export interface PaymentMethodDetails {
     cardNumber: string;
     expMonth: number;
@@ -13,16 +13,10 @@ export interface PaymentMethodAddress {
     postal_code: string;
     country: string;
 }
-export interface PaymentMethodBilling {
-    address: PaymentMethodAddress;
-    name: string;
-    email: string;
-    phone: string;
-}
 export interface CreatePaymentMethodProps {
     details: PaymentMethodDetails;
     type: string;
-    billing?: PaymentMethodBilling;
+    billing?: BillingType;
     metadata?: MetaData;
 }
 export interface PaymentMethodDetailsResponse {

@@ -1,4 +1,4 @@
-import { MetaData } from "../types";
+import { MetaData, BillingType } from "../types";
 
 // props
 export interface PaymentMethodDetails {
@@ -17,17 +17,10 @@ export interface PaymentMethodAddress {
   country: string;
 }
 
-export interface PaymentMethodBilling {
-  address: PaymentMethodAddress;
-  name: string;
-  email: string;
-  phone: string;
-}
-
 export interface CreatePaymentMethodProps {
   details: PaymentMethodDetails;
   type: string;
-  billing?: PaymentMethodBilling;
+  billing?: BillingType;
   metadata?: MetaData;
 }
 
