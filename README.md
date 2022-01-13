@@ -25,7 +25,7 @@ export const client = PaymongoClient("sk_key");
 
 ### (**_BETA_**) Links
 
-To use this feature, instal with
+To use this feature, install with
 
 ```bash
 npm install paymongo.js@next # or yarn add paymongo.js@next
