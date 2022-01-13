@@ -40,7 +40,7 @@ npm install paymongo.js@next # or yarn add paymongo.js@next
   });
   ```
 
-- \*\*Retrieve a Link
+- **Retrieve a Link**
 
   ```js
   const link = await client.link.retrieve("some_link_id");
