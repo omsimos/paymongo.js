@@ -1,11 +1,11 @@
-import { MetaData } from "../types";
-export interface PMDetails {
+import { MetaData, BillingType } from "../types";
+export interface PaymentMethodDetails {
     cardNumber: string;
     expMonth: number;
     expYear: number;
     cvc: string;
 }
-export interface PMAddress {
+export interface PaymentMethodAddress {
     line1: string;
     line2: string;
     city: string;
@@ -13,40 +13,31 @@ export interface PMAddress {
     postal_code: string;
     country: string;
 }
-export interface PMBilling {
-    address: PMAddress;
-    name: string;
-    email: string;
-    phone: string;
-}
-/**
- * @see https://developers.paymongo.com/reference/create-a-paymentmethod
- */
 export interface CreatePaymentMethodProps {
-    details: PMDetails;
+    details: PaymentMethodDetails;
     type: string;
-    billing?: PMBilling;
+    billing?: BillingType;
     metadata?: MetaData;
 }
-export interface PMDetailsResponse {
+export interface PaymentMethodDetailsResponse {
     exp_month: number;
     exp_year: number;
     last4: string;
 }
-export interface PMAttributesResponse {
+export interface PaymentMethodAttributesResponse {
     livemode: boolean;
     type: string;
     billing?: any;
     created_at: number;
     updated_at: number;
-    details: PMDetailsResponse;
+    details: PaymentMethodDetailsResponse;
     metadata?: any;
 }
-export interface PMDataResponse {
+export interface PaymentMethodDataResponse {
     id: string;
     type: string;
-    attributes: PMAttributesResponse;
+    attributes: PaymentMethodAttributesResponse;
 }
 export interface PaymentMethodResponse {
-    data: PMDataResponse;
+    data: PaymentMethodDataResponse;
 }

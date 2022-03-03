@@ -12,12 +12,12 @@ import { PaymentMethodResponse } from "./types";
  *
  * const main = async () => {
  *  const client = PaymongoClient("sk_test_key");
- *  data = await client.retrievePaymentMethod("pm_key");
+ *  data = await client.method.retrieve("pm_key");
  *  return data
  * }
  * ```
  */
-export const retrievePaymentMethod = async (
+export const retrieveMethod = async (
   methodId: string
 ): Promise<PaymentMethodResponse> => {
   try {

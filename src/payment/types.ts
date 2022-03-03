@@ -10,6 +10,9 @@ export * from "./webhook/types";
 // source
 export * from "./source/types";
 
+// links
+export * from "./link/types";
+
 // payments
 export interface PaymentProps {
   amount: number;
@@ -89,6 +92,12 @@ export type WebhookEvent =
   | "payment.paid"
   | "payment.failed";
 
+/**
+ * @property {string} name - Name of the billing information
+ * @property {string} phone - Phone number of the billing information
+ * @property {string} email - E-mail address of the billing information
+ * @property {string} address - Address of the billing information
+ */
 export type BillingType = {
   name?: string;
   phone?: string;

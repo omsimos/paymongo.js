@@ -12,7 +12,7 @@ import { PaymentSourceResponse } from "./types";
  *
  * const main = async () => {
  *  const client = PaymongoClient("pk_test_key");
- *  data = await client.retrieveSource("source_id");
+ *  data = await client.source.retrieve("source_id");
  *  return data
  * }
  * ```

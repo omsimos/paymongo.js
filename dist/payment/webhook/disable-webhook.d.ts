@@ -10,7 +10,7 @@ import { PaymentWebhookResponse } from "./types";
  *
  * const main = async () => {
  *  const client = PaymongoClient("sk_test_key");
- *  const webhook = await client.disableWebhook("webhook_id");
+ *  const webhook = await client.webhook.disable("webhook_id");
  *  return webhook;
  * }
  * ```

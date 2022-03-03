@@ -2,6 +2,7 @@ export * from "./intent/types";
 export * from "./method/types";
 export * from "./webhook/types";
 export * from "./source/types";
+export * from "./link/types";
 export interface PaymentProps {
     amount: number;
     source: {
@@ -67,6 +68,12 @@ export declare type RedirectType = {
 };
 export declare type StatusType = "pending" | "paid" | string;
 export declare type WebhookEvent = "source.chargeable" | "payment.paid" | "payment.failed";
+/**
+ * @property {string} name - Name of the billing information
+ * @property {string} phone - Phone number of the billing information
+ * @property {string} email - E-mail address of the billing information
+ * @property {string} address - Address of the billing information
+ */
 export declare type BillingType = {
     name?: string;
     phone?: string;

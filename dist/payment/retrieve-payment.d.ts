@@ -10,7 +10,7 @@ import { PaymentResponse } from "./types";
  *
  * const main = async () => {
  *  const client = PaymongoClient("pk_test_key");
- *  data = await client.retrievePayment("payment_id");
+ *  data = await client.payment.retrieve("payment_id");
  *  return data
  * }
  * ```
