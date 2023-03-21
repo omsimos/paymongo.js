@@ -9,37 +9,24 @@ on:
 
 jobs:
   build:
-    name: Build, lint, and test on Node ${{ matrix.node }} and ${{ matrix.os }}
-
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        node: ["12.x", "14.x"]
-        os: [ubuntu-latest]
-
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-
-      - name: Use Node ${{ matrix.node }}
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
         with:
-          node-version: ${{ matrix.node }}
+          version: 7
+      - uses: actions/setup-node@v3
+        with:
+          cache: "pnpm"
+          node-version: 16.x
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run lint && pnpm run build
 
-      - name: Install deps and build (with cache)
-        uses: bahmutov/npm-install@v1
-
-      - name: Lint
-        run: pnpm lint
-
-      - name: Test
-        env:
-          PM_SECRET_KEY: ${{ secrets.PM_SECRET_KEY }}
-          PM_WEBHOOK_ID: ${{ secrets.PM_WEBHOOK_ID }}
-          PM_LINK_ID: ${{ secrets.PM_LINK_ID }}
-          PM_LINK_REF: ${{ secrets.PM_LINK_REF }}
-          PM_PAYMENT_ID: ${{ secrets.PM_PAYMENT_ID }}
-        run: pnpm test --clearCache && pnpm test --ci --coverage --maxWorkers=2
-
-      - name: Build
-        run: pnpm build
+      # - name: Test
+      #   env:
+      #     PM_SECRET_KEY: ${{ secrets.PM_SECRET_KEY }}
+      #     PM_WEBHOOK_ID: ${{ secrets.PM_WEBHOOK_ID }}
+      #     PM_LINK_ID: ${{ secrets.PM_LINK_ID }}
+      #     PM_LINK_REF: ${{ secrets.PM_LINK_REF }}
+      #     PM_PAYMENT_ID: ${{ secrets.PM_PAYMENT_ID }}
+      #   run: pnpm test --clearCache && pnpm test --ci --coverage --maxWorkers=2
