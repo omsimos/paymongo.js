@@ -1,5 +1,5 @@
 {
-  "version": "1.2.1-0",
+  "version": "1.2.2",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -11,15 +11,16 @@
     "url": "https://github.com/princejoogie/paymongo.js.git"
   },
   "scripts": {
-    "dev": "tsup src/index.ts",
     "build": "tsup src/index.ts --dts --format cjs,esm",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "lint": "eslint --fix src/**/*.{js,ts}"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.26.0",
     "@typescript-eslint/eslint-plugin": "^5.9.0",
     "@typescript-eslint/parser": "^5.9.0",
+    "@vitest/coverage-c8": "^0.29.7",
     "dotenv": "^16.0.3",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
@@ -30,8 +31,8 @@
     "vitest": "^0.29.7"
   },
   "dependencies": {
-    "zod": "^3.21.4",
-    "axios": "^1.3.4"
+    "axios": "^1.3.4",
+    "zod": "^3.21.4"
   },
   "publishConfig": {
     "access": "public"

@@ -1,11 +1,8 @@
 name: CI
-
 on:
   push:
     branches:
-      - main
-      - next
-      - dev
+      - "**"
 
 jobs:
   build:
@@ -20,6 +17,7 @@ jobs:
           cache: "pnpm"
           node-version: 16.x
       - run: pnpm install --frozen-lockfile
+      - run: pnpm test
       - run: pnpm run lint && pnpm run build
 
       # - name: Test
