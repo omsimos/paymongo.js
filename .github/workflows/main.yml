@@ -17,14 +17,9 @@ jobs:
           cache: "pnpm"
           node-version: 16.x
       - run: pnpm install --frozen-lockfile
-      - run: pnpm test
+      - name: Run unit tests
+        env:
+          PM_SECRET_KEY: ${{ secrets.PM_SECRET_KEY }}
+        run: pnpm test
       - run: pnpm run lint && pnpm run build
 
-      # - name: Test
-      #   env:
-      #     PM_SECRET_KEY: ${{ secrets.PM_SECRET_KEY }}
-      #     PM_WEBHOOK_ID: ${{ secrets.PM_WEBHOOK_ID }}
-      #     PM_LINK_ID: ${{ secrets.PM_LINK_ID }}
-      #     PM_LINK_REF: ${{ secrets.PM_LINK_REF }}
-      #     PM_PAYMENT_ID: ${{ secrets.PM_PAYMENT_ID }}
-      #   run: pnpm test --clearCache && pnpm test --ci --coverage --maxWorkers=2
