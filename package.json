@@ -11,15 +11,12 @@
     "node": ">=10"
   },
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "test": "tsdx test",
+    "dev": "tsup src/index.ts",
+    "build": "tsup src/index.ts --dts --format cjs,esm",
+    "test": "echo \"TODO: implement\"",
     "lint": "eslint --fix src/**/*.{js,ts}",
-    "prepare": "husky install",
-    "size": "size-limit",
-    "release": "np"
+    "size": "size-limit"
   },
-  "peerDependencies": {},
   "name": "paymongo.js",
   "author": "princejoogie",
   "module": "dist/paymongo.js.esm.js",
@@ -40,13 +37,12 @@
     "dotenv": "^11.0.0",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
-    "husky": "^7.0.4",
     "lint-staged": "^12.1.7",
     "np": "^7.6.0",
     "prettier": "2.5.1",
     "size-limit": "^7.0.5",
-    "tsdx": "^0.14.1",
     "tslib": "^2.3.1",
+    "tsup": "^6.7.0",
     "typescript": "^4.5.4"
   },
   "dependencies": {
