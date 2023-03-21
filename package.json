@@ -13,7 +13,8 @@
   "scripts": {
     "dev": "tsup src/index.ts",
     "build": "tsup src/index.ts --dts --format cjs,esm",
-    "test": "echo \"TODO: implement\"",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
     "lint": "eslint --fix src/**/*.{js,ts}",
     "size": "size-limit"
   },
@@ -38,11 +39,11 @@
     "size-limit": "^8.2.4",
     "tslib": "^2.3.1",
     "tsup": "^6.7.0",
-    "typescript": "^5.0.2"
+    "typescript": "^5.0.2",
+    "vitest": "^0.29.7"
   },
   "dependencies": {
-    "axios": "^0.24.0",
-    "zustand": "^3.6.8"
+    "axios": "^0.24.0"
   },
   "publishConfig": {
     "access": "public"
