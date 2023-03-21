@@ -14,7 +14,8 @@
     "build": "tsup src/index.ts --dts --format cjs,esm",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "lint": "eslint --fix src/**/*.{js,ts}"
+    "lint": "eslint --fix src/**/*.{js,ts}",
+    "release": "pnpm build && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.0",
