@@ -1,5 +1,9 @@
 import { api } from "./api/base";
 import { createPaymentIntent } from "./api/payment-intent/create";
+export type {
+  PaymentIntentCreateInput,
+  PaymentIntentCreateOutput,
+} from "./api/payment-intent/create";
 
 export const createPaymongoClient = (key: string) => {
   api.defaults.auth = {

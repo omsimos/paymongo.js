@@ -15,35 +15,23 @@
     "build": "tsup src/index.ts --dts --format cjs,esm",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "lint": "eslint --fix src/**/*.{js,ts}",
-    "size": "size-limit"
+    "lint": "eslint --fix src/**/*.{js,ts}"
   },
-  "size-limit": [
-    {
-      "path": "dist/index.js",
-      "limit": "10 kB"
-    },
-    {
-      "path": "dist/index.mjs",
-      "limit": "10 kB"
-    }
-  ],
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^8.2.4",
     "@typescript-eslint/eslint-plugin": "^5.9.0",
     "@typescript-eslint/parser": "^5.9.0",
     "dotenv": "^16.0.3",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
     "prettier": "2.8.6",
-    "size-limit": "^8.2.4",
     "tslib": "^2.3.1",
     "tsup": "^6.7.0",
     "typescript": "^5.0.2",
     "vitest": "^0.29.7"
   },
   "dependencies": {
-    "axios": "^0.24.0"
+    "zod": "^3.21.4",
+    "axios": "^1.3.4"
   },
   "publishConfig": {
     "access": "public"
