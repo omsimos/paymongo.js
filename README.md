@@ -28,7 +28,7 @@ See [PaymentIntent Resource](https://developers.paymongo.com/reference/the-payme
 - [**Create a Intent**](https://developers.paymongo.com/reference/create-a-paymentintent)
 
   ```js
-  const res = await client.paymentIntent.create({
+  const res = await client.intent.create({
     amount: 10000,
     payment_method_allowed: ["card", "gcash"],
     currency: "PHP",
@@ -38,7 +38,7 @@ See [PaymentIntent Resource](https://developers.paymongo.com/reference/the-payme
 - [**Retrieve a PaymentIntent**](https://developers.paymongo.com/reference/retrieve-a-paymentintent)
 
   ```js
-  const res = client.paymentIntent.retrieve({
+  const res = client.intent.retrieve({
     paymentIntentId: "some_intent_id",
   });
   ```
@@ -46,7 +46,7 @@ See [PaymentIntent Resource](https://developers.paymongo.com/reference/the-payme
 - [**Attach to PaymentIntent**](https://developers.paymongo.com/reference/attach-to-paymentintent)
 
   ```js
-  const res = await client.paymentIntent.attach({
+  const res = await client.intent.attach({
     paymentIntentId: "some_intent_id",
     paymentMethodId: "some_method_id",
   });

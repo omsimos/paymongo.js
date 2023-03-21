@@ -43,7 +43,7 @@ export type PaymentIntentCreateInput = z.infer<
  *
  * const main = async () => {
  *  const client = createPaymongoClient("secret-key");
- *  const data = await client.paymentIntent.create({
+ *  const data = await client.intent.create({
  *    amount: 10000,
  *    payment_method_allowed: ["card", "gcash"],
  *    currency: "PHP",

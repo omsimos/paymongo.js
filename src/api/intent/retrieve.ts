@@ -22,7 +22,7 @@ export type PaymentIntentRetrieveInput = z.infer<
  *
  * const main = async () => {
  *  const client = createPaymongoClient("secret-key");
- *  const data = await client.paymentIntent.retrieve({
+ *  const data = await client.intent.retrieve({
  *    paymentIntentId: "pi_uP9jFcxB916dPGrhFURfbfVX",
  *  });
  *  return data;
