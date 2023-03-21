@@ -7,7 +7,7 @@ const client = createPaymongoClient(key);
 
 describe.skip("create payment intent", () => {
   it("can create payment intent", async () => {
-    const res = await client.paymentIntent.create({
+    const res = await client.intent.create({
       amount: 10000,
       payment_method_allowed: ["card", "gcash"],
       currency: "PHP",
@@ -17,7 +17,7 @@ describe.skip("create payment intent", () => {
   });
 
   it("rejects on zod error", async () => {
-    const res = client.paymentIntent.create({
+    const res = client.intent.create({
       amount: 10000,
       payment_method_allowed: ["card", "gcash"],
       // @ts-expect-error - test file
@@ -31,7 +31,7 @@ describe.skip("create payment intent", () => {
 describe.skip("retrieve payment intent", () => {
   it("can retrieve payment intent", async () => {
     const intentId = "pi_uP9jFcxB916dPGrhFURfbfVX";
-    const res = await client.paymentIntent.retrieve({
+    const res = await client.intent.retrieve({
       paymentIntentId: intentId,
     });
     expect(res.data.id).toEqual(intentId);
@@ -39,7 +39,7 @@ describe.skip("retrieve payment intent", () => {
 
   it("rejects on not found", async () => {
     const intentId = "does-not-exist";
-    const res = client.paymentIntent.retrieve({
+    const res = client.intent.retrieve({
       paymentIntentId: intentId,
     });
     await expect(res).rejects.toThrow();

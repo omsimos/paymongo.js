@@ -1,5 +1,5 @@
 export { createPaymongoClient } from "./client";
 
-export type { PaymentIntentOutput } from "./api/payment-intent/types";
-export type { PaymentIntentCreateInput } from "./api/payment-intent/create";
-export type { PaymentIntentRetrieveInput } from "./api/payment-intent/retrieve";
+export type { PaymentIntentOutput } from "./api/intent/types";
+export type { PaymentIntentCreateInput } from "./api/intent/create";
+export type { PaymentIntentRetrieveInput } from "./api/intent/retrieve";
