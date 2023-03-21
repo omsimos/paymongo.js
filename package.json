@@ -20,14 +20,15 @@
   "size-limit": [
     {
       "path": "dist/index.js",
-      "limit": "10 KB"
+      "limit": "10 kB"
     },
     {
       "path": "dist/index.mjs",
-      "limit": "10 KB"
+      "limit": "10 kB"
     }
   ],
   "devDependencies": {
+    "@size-limit/preset-small-lib": "^8.2.4",
     "@typescript-eslint/eslint-plugin": "^5.9.0",
     "@typescript-eslint/parser": "^5.9.0",
     "dotenv": "^16.0.3",
