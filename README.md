@@ -1,12 +1,10 @@
 # paymongo.js
 
 ![CI](https://github.com/princejoogie/paymongo.js/actions/workflows/main.yml/badge.svg)
-![CJS](https://img.badgesize.io/princejoogie/paymongo.js/main/dist/paymongo.js.cjs.production.min.js?label=CJS)
-![ESM](https://img.badgesize.io/princejoogie/paymongo.js/main/dist/paymongo.js.esm.js?label=ESM)
 ![License](https://img.shields.io/badge/license-MIT-brightgreen?style=flat)
 ![Version](https://img.shields.io/github/v/release/princejoogie/paymongo.js?color=%2349C31B&include_prereleases&label=version)
 
-A lightweight, fully-featured, modular, typescript-compatible javascript library for [PayMongo.](https://www.paymongo.com/)
+An end-to-end typesafe library for [PayMongo.](https://www.paymongo.com/)
 
 ## Installation
 
@@ -19,49 +17,39 @@ npm install paymongo.js # or yarn add paymongo.js
 ## Usage
 
 ```js
-import PaymongoClient from "paymongo.js";
-export const client = PaymongoClient("sk_key");
+import { createPaymongoClient } from "paymongo.js";
+const client = createPaymongoClient("sk_key");
 ```
 
-### (**_BETA_**) Links
+### Payment Intent
 
-To use this feature, install with
+See [PaymentIntent Resource](https://developers.paymongo.com/reference/the-payment-intent-object) reference.
 
-```bash
-npm install paymongo.js@next # or yarn add paymongo.js@next
-```
-
-- **Create a Link**
+- [**Create a Intent**](https://developers.paymongo.com/reference/create-a-paymentintent)
 
   ```js
-  const link = await client.link.create({
+  const res = await client.paymentIntent.create({
     amount: 10000,
-    description: "Test payment link",
+    payment_method_allowed: ["card", "gcash"],
+    currency: "PHP",
   });
   ```
 
-- **Retrieve a Link**
+- [**Retrieve a PaymentIntent**](https://developers.paymongo.com/reference/retrieve-a-paymentintent)
 
   ```js
-  const link = await client.link.retrieve("some_link_id");
+  const res = client.paymentIntent.retrieve({
+    paymentIntentId: "some_intent_id",
+  });
   ```
 
-- **Retrieve from Reference number**
+- [**Attach to PaymentIntent**](https://developers.paymongo.com/reference/attach-to-paymentintent)
 
   ```js
-  const link = await client.link.retrieveFromRef("some_ref_id");
-  ```
-
-- **Archive a Link**
-
-  ```js
-  const link = await client.link.archive("some_link_id");
-  ```
-
-- **Unarchive a Link**
-
-  ```js
-  const link = await client.link.unarchive("some_link_id");
+  const res = await client.paymentIntent.attach({
+    paymentIntentId: "some_intent_id",
+    paymentMethodId: "some_method_id",
+  });
   ```
 
 ### Payment Method
@@ -86,38 +74,6 @@ See [PaymentMethod Resource](https://developers.paymongo.com/reference/the-payme
 
   ```js
   const retrieveResponse = await client.method.retrieve("some_method_id");
-  ```
-
-### Payment Intent
-
-See [PaymentIntent Resource](https://developers.paymongo.com/reference/the-payment-intent-object) reference.
-
-- [**Create a Intent**](https://developers.paymongo.com/reference/create-a-paymentintent)
-
-  ```js
-  const createResponse = await client.intent.create({
-    amount: 10000,
-    metadata: {
-      order_id: "some_order_id",
-    },
-  });
-  ```
-
-- [**Retrieve a PaymentIntent**](https://developers.paymongo.com/reference/retrieve-a-paymentintent)
-
-  ```js
-  const retrieveResponse = await client.intent.retrieve({
-    intentId: "some_intent_id",
-  });
-  ```
-
-- [**Attach to PaymentIntent**](https://developers.paymongo.com/reference/attach-to-paymentintent)
-
-  ```js
-  const attachResponse = await client.intent.attach({
-    intentId: "some_intent_id",
-    methodId: "some_method_id",
-  });
   ```
 
 ### Sources

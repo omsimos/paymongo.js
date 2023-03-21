@@ -1,6 +1,8 @@
 import { AxiosError } from "axios";
-import { api } from "../base";
 import { ZodError, z } from "zod";
+
+import { PaymentIntentOutput, paymentIntentOutputSchema } from "./types";
+import { api } from "../base";
 
 export const paymentIntentCreateInputSchema = z.object({
   amount: z.number().min(0),
@@ -31,42 +33,9 @@ export type PaymentIntentCreateInput = z.infer<
   typeof paymentIntentCreateInputSchema
 >;
 
-export const paymentIntentCreateOutputSchema = z.object({
-  data: z.object({
-    id: z.string(),
-    type: z.string(),
-    attributes: z.object({
-      amount: z.number(),
-      capture_type: z.string(),
-      client_key: z.string(),
-      currency: z.string(),
-      description: z.string().nullable(),
-      livemode: z.boolean(),
-      statement_descriptor: z.string(),
-      status: z.string(),
-      last_payment_error: z.any().nullable(),
-      payment_method_allowed: z.array(z.string()),
-      payments: z.array(z.any()),
-      next_action: z.any().nullable(),
-      payment_method_options: z.object({
-        card: z.object({
-          request_three_d_secure: z.string(),
-        }),
-      }),
-      metadata: z.any().nullable(),
-      setup_future_usage: z.any().nullable(),
-      created_at: z.number(),
-      updated_at: z.number(),
-    }),
-  }),
-});
-
-export type PaymentIntentCreateOutput = z.infer<
-  typeof paymentIntentCreateOutputSchema
->;
-
 /**
- * # paymentIntent.create
+ * # Create a PaymentIntent
+ * @link https://developers.paymongo.com/reference/create-a-paymentintent
  *
  * @example
  * ```js
@@ -85,13 +54,13 @@ export type PaymentIntentCreateOutput = z.infer<
  */
 export const createPaymentIntent = async (
   input: PaymentIntentCreateInput
-): Promise<PaymentIntentCreateOutput> => {
+): Promise<PaymentIntentOutput> => {
   try {
     const parsedInput = paymentIntentCreateInputSchema.parse(input);
-    const res = await api.post<PaymentIntentCreateOutput>("/payment_intents", {
+    const res = await api.post<PaymentIntentOutput>("/payment_intents", {
       data: { attributes: parsedInput },
     });
-    return paymentIntentCreateOutputSchema.parse(res.data);
+    return paymentIntentOutputSchema.parse(res.data);
   } catch (e) {
     if (e instanceof AxiosError) {
       throw new Error(e.response?.data);
