@@ -2,13 +2,12 @@ import { z } from "zod";
 
 import { PaymentIntentOutput, paymentIntentOutputSchema } from "./types";
 import { api } from "../base";
-import { withError } from "../../hoc/with-error";
+import { methodTypeSchema } from "../types";
+import { handleError } from "../../utils/handle-error";
 
 export const paymentIntentCreateInputSchema = z.object({
   amount: z.number().min(0),
-  payment_method_allowed: z.array(
-    z.enum(["atome", "card", "dob", "paymaya", "billease", "gcash", "grab_pay"])
-  ),
+  payment_method_allowed: z.array(methodTypeSchema),
   payment_method_options: z
     .object({
       card: z.object({
@@ -52,12 +51,16 @@ export type PaymentIntentCreateInput = z.infer<
  * }
  * ```
  */
-export const createPaymentIntent = withError(
-  async (input: PaymentIntentCreateInput): Promise<PaymentIntentOutput> => {
+export const createPaymentIntent = async (
+  input: PaymentIntentCreateInput
+): Promise<PaymentIntentOutput> => {
+  try {
     const parsedInput = paymentIntentCreateInputSchema.parse(input);
     const res = await api.post<PaymentIntentOutput>("/payment_intents", {
       data: { attributes: parsedInput },
     });
     return paymentIntentOutputSchema.parse(res.data);
+  } catch (e) {
+    return handleError(e);
   }
-);
+};

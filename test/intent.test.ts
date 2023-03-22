@@ -1,11 +1,11 @@
 import "dotenv/config";
-import { createPaymongoClient } from "../src";
 import { it, expect, describe } from "vitest";
+import { createPaymongoClient } from "../src";
 
 const key = process.env.PM_SECRET_KEY as string;
 const client = createPaymongoClient(key);
 
-describe.skip("create payment intent", () => {
+describe("create payment intent", () => {
   it("can create payment intent", async () => {
     const res = await client.intent.create({
       amount: 10000,
@@ -28,7 +28,7 @@ describe.skip("create payment intent", () => {
   });
 });
 
-describe.skip("retrieve payment intent", () => {
+describe("retrieve payment intent", () => {
   it("can retrieve payment intent", async () => {
     const intentId = "pi_uP9jFcxB916dPGrhFURfbfVX";
     const res = await client.intent.retrieve({
