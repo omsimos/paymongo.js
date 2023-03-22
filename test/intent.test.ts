@@ -5,6 +5,8 @@ import { createPaymongoClient } from "../src";
 const key = process.env.PM_SECRET_KEY as string;
 const client = createPaymongoClient(key);
 
+let pi = "";
+
 describe("create payment intent", () => {
   it("can create payment intent", async () => {
     const res = await client.intent.create({
@@ -12,6 +14,7 @@ describe("create payment intent", () => {
       payment_method_allowed: ["card", "gcash"],
       currency: "PHP",
     });
+    pi = res.data.id;
     expect(res.data.type).toEqual("payment_intent");
     expect(res.data.attributes.amount).toEqual(10000);
   });
@@ -30,11 +33,10 @@ describe("create payment intent", () => {
 
 describe("retrieve payment intent", () => {
   it("can retrieve payment intent", async () => {
-    const intentId = "pi_uP9jFcxB916dPGrhFURfbfVX";
     const res = await client.intent.retrieve({
-      intentId,
+      intentId: pi,
     });
-    expect(res.data.id).toEqual(intentId);
+    expect(res.data.id).toEqual(pi);
   });
 
   it("rejects on not found", async () => {

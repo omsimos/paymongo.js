@@ -6,11 +6,14 @@ import { testCards } from "./utils";
 const key = process.env.PM_SECRET_KEY as string;
 const client = createPaymongoClient(key);
 
+let pm = "";
+
 describe("create payment method", () => {
   it("can create gcash payment method", async () => {
     const res = await client.method.create({
       type: "gcash",
     });
+    pm = res.data.id;
     expect(res.data.type).toEqual("payment_method");
     expect(res.data.attributes.type).toEqual("gcash");
   });
@@ -70,11 +73,10 @@ describe("create payment method", () => {
 
 describe("retrieve payment method", () => {
   it("can retrieve payment method", async () => {
-    const methodId = "pm_2QhZyVZEcFbq7RGQJ8YeZUQT";
     const res = await client.method.retrieve({
-      methodId,
+      methodId: pm,
     });
-    expect(res.data.id).toEqual(methodId);
+    expect(res.data.id).toEqual(pm);
   });
 
   it("rejects on not found", async () => {
