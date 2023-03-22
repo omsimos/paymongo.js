@@ -1,8 +1,9 @@
 # paymongo.js
 
-![CI](https://github.com/princejoogie/paymongo.js/actions/workflows/main.yml/badge.svg)
-![License](https://img.shields.io/badge/license-MIT-brightgreen?style=flat)
-![Version](https://img.shields.io/github/v/release/princejoogie/paymongo.js?color=%2349C31B&include_prereleases&label=version)
+![CI](https://img.shields.io/github/actions/workflow/status/princejoogie/paymongo.js/main.yml?label=CI&style=for-the-badge)
+![License](https://img.shields.io/github/license/princejoogie/paymongo.js?style=for-the-badge)
+![Size](https://img.shields.io/bundlephobia/minzip/paymongo.js?label=size&style=for-the-badge)
+![Version](https://img.shields.io/github/package-json/v/princejoogie/paymongo.js?style=for-the-badge)
 
 An end-to-end typesafe library for [PayMongo.](https://www.paymongo.com/)
 
@@ -11,7 +12,7 @@ An end-to-end typesafe library for [PayMongo.](https://www.paymongo.com/)
 [![NPM](https://nodei.co/npm/paymongo.js.png)](https://npmjs.org/package/paymongo.js)
 
 ```bash
-npm install paymongo.js # or yarn add paymongo.js
+npm install paymongo.js
 ```
 
 ## Usage
@@ -49,6 +50,7 @@ See [PaymentIntent Resource](https://developers.paymongo.com/reference/the-payme
   const res = await client.intent.attach({
     intentId: "some_intent_id",
     intentId: "some_method_id",
+    return_url: "https://example.com/success",
   });
   ```
 
@@ -91,8 +93,60 @@ See [PaymentMethod Resource](https://developers.paymongo.com/reference/the-payme
 - [**Retrieve a Method**](https://developers.paymongo.com/reference/create-a-paymentmethod)
 
   ```js
-  const retrieveResponse = await client.method.retrieve("some_method_id");
+  const retrieveResponse = await client.method.retrieve({
+    methodId: "some_method_id",
+  });
   ```
+
+### Webhooks
+
+See [Webhook Resource](https://developers.paymongo.com/reference/webhook-resource) reference.
+
+- [**Create a Webhook**](https://developers.paymongo.com/reference/create-a-webhook)
+
+  ```js
+  const webhook = await client.webhook.create({
+    events: ["payment.failed", "payment.paid", "source.chargeable"],
+    url: "https://example.com/webhook",
+  });
+  ```
+
+- [**Update a Webhook**](https://developers.paymongo.com/reference/update-a-webhook)
+
+  ```js
+  const webhook = await client.webhook.update({
+    webhookId: "some_webhook_id",
+    events: ["payment.failed"],
+  });
+  ```
+
+- [**List all Webhooks**](https://developers.paymongo.com/reference/list-all-webhooks)
+
+  ```js
+  const webhooks = await client.webhook.list();
+  ```
+
+- [**Retrieve a Webhook**](https://developers.paymongo.com/reference/retrieve-a-webhook)
+
+  ```js
+  const webhook = await client.webhook.retrieve("some_webhook_id");
+  ```
+
+- [**Enable a Webhook**](https://developers.paymongo.com/reference/enable-a-webhook)
+
+  ```js
+  const webhook = await client.webhook.enable("some_webhook_id");
+  ```
+
+- [**Disable a Webhook**](https://developers.paymongo.com/reference/disable-a-webhook)
+
+  ```js
+  const webhook = await client.webhook.disable("some_webhook_id");
+  ```
+
+## Older APIs
+
+The following API's are for older workflows, it is recommended that you use the [Payment Intent workflow](https://developers.paymongo.com/docs/pipm-workflow)
 
 ### Sources
 
@@ -144,52 +198,6 @@ See [Payment Resource](https://developers.paymongo.com/reference/payment-source)
 
   ```js
   const p = await client.payment.retrieve("some_payment_id");
-  ```
-
-### Webhooks
-
-See [Webhook Resource](https://developers.paymongo.com/reference/webhook-resource) reference.
-
-- [**Create a Webhook**](https://developers.paymongo.com/reference/create-a-webhook)
-
-  ```js
-  const webhook = await client.webhook.create({
-    events: ["payment.failed", "payment.paid", "source.chargeable"],
-    url: "https://example.com/webhook",
-  });
-  ```
-
-- [**Update a Webhook**](https://developers.paymongo.com/reference/update-a-webhook)
-
-  ```js
-  const webhook = await client.webhook.update({
-    webhookId: "some_webhook_id",
-    events: ["payment.failed"],
-  });
-  ```
-
-- [**List all Webhooks**](https://developers.paymongo.com/reference/list-all-webhooks)
-
-  ```js
-  const webhooks = await client.webhook.list();
-  ```
-
-- [**Retrieve a Webhook**](https://developers.paymongo.com/reference/retrieve-a-webhook)
-
-  ```js
-  const webhook = await client.webhook.retrieve("some_webhook_id");
-  ```
-
-- [**Enable a Webhook**](https://developers.paymongo.com/reference/enable-a-webhook)
-
-  ```js
-  const webhook = await client.webhook.enable("some_webhook_id");
-  ```
-
-- [**Disable a Webhook**](https://developers.paymongo.com/reference/disable-a-webhook)
-
-  ```js
-  const webhook = await client.webhook.disable("some_webhook_id");
   ```
 
 ---
