@@ -1,8 +1,8 @@
-import { AxiosError } from "axios";
-import { ZodError, z } from "zod";
+import { z } from "zod";
 
 import { PaymentIntentOutput, paymentIntentOutputSchema } from "./types";
 import { api } from "../base";
+import { withError } from "../../hoc/with-error";
 
 export const paymentIntentCreateInputSchema = z.object({
   amount: z.number().min(0),
@@ -52,21 +52,12 @@ export type PaymentIntentCreateInput = z.infer<
  * }
  * ```
  */
-export const createPaymentIntent = async (
-  input: PaymentIntentCreateInput
-): Promise<PaymentIntentOutput> => {
-  try {
+export const createPaymentIntent = withError(
+  async (input: PaymentIntentCreateInput): Promise<PaymentIntentOutput> => {
     const parsedInput = paymentIntentCreateInputSchema.parse(input);
     const res = await api.post<PaymentIntentOutput>("/payment_intents", {
       data: { attributes: parsedInput },
     });
     return paymentIntentOutputSchema.parse(res.data);
-  } catch (e) {
-    if (e instanceof AxiosError) {
-      throw new Error(e.response?.data);
-    } else if (e instanceof ZodError) {
-      throw new Error(e.message);
-    }
-    throw e;
   }
-};
+);

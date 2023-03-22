@@ -1,11 +1,11 @@
-import { AxiosError } from "axios";
-import { ZodError, z } from "zod";
+import { z } from "zod";
 
 import { PaymentIntentOutput, paymentIntentOutputSchema } from "./types";
 import { api } from "../base";
+import { withError } from "../../hoc/with-error";
 
 export const paymentIntentRetrieveInputSchema = z.object({
-  paymentIntentId: z.string(),
+  intentId: z.string(),
 });
 
 export type PaymentIntentRetrieveInput = z.infer<
@@ -23,28 +23,19 @@ export type PaymentIntentRetrieveInput = z.infer<
  * const main = async () => {
  *  const client = createPaymongoClient("secret-key");
  *  const data = await client.intent.retrieve({
- *    paymentIntentId: "pi_uP9jFcxB916dPGrhFURfbfVX",
+ *    intentId: "pi_uP9jFcxB916dPGrhFURfbfVX",
  *  });
  *  return data;
  * }
  * ```
  */
-export const retrievePaymentIntent = async (
-  input: PaymentIntentRetrieveInput
-): Promise<PaymentIntentOutput> => {
-  try {
+export const retrievePaymentIntent = withError(
+  async (input: PaymentIntentRetrieveInput): Promise<PaymentIntentOutput> => {
     const parsedInput = paymentIntentRetrieveInputSchema.parse(input);
-    const intentId = encodeURIComponent(parsedInput.paymentIntentId);
+    const intentId = encodeURIComponent(parsedInput.intentId);
     const res = await api.get<PaymentIntentOutput>(
       `/payment_intents/${intentId}`
     );
     return paymentIntentOutputSchema.parse(res.data);
-  } catch (e) {
-    if (e instanceof AxiosError) {
-      throw new Error(e.response?.data);
-    } else if (e instanceof ZodError) {
-      throw new Error(e.message);
-    }
-    throw e;
   }
-};
+);
