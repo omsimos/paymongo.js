@@ -1,4 +1,4 @@
-import {z} from "zod";
+import { z } from "zod";
 
 // TODO: Finsih this
 export const linkOutputSchema = z.object({
@@ -14,9 +14,11 @@ export const linkOutputSchema = z.object({
       fee: z.number(),
       remarks: z.string().nullable(),
       status: z.enum(["unpaid"]),
-    })
-  })
+    }),
+  }),
 });
+
+export type LinkOutput = z.infer<typeof linkOutputSchema>;
 
 // {
 //   "data": {
