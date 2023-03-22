@@ -7,6 +7,8 @@ import { attachToPaymentIntent } from "./api/intent/attach";
 import { createPaymentMethod } from "./api/method/create";
 import { retrievePaymentMethod } from "./api/method/retrieve";
 
+import { createLink } from "./api/links/create";
+
 export const createPaymongoClient = (key: string) => {
   api.defaults.auth = {
     username: key,
@@ -21,7 +23,7 @@ export const createPaymongoClient = (key: string) => {
     intent: {
       create: createPaymentIntent,
       retrieve: retrievePaymentIntent,
-      attach: attachToPaymentIntent
+      attach: attachToPaymentIntent,
     },
     /**
      * # PaymentMethod Resource
@@ -30,6 +32,13 @@ export const createPaymongoClient = (key: string) => {
     method: {
       create: createPaymentMethod,
       retrieve: retrievePaymentMethod,
+    },
+    /**
+     * # Links Resource
+     * @link https://developers.paymongo.com/reference/links-resource
+     */
+    links: {
+      create: createLink,
     },
   };
 };
