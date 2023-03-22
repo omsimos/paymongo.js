@@ -1,7 +1,10 @@
 import { api } from "./api/base";
+
 import { createPaymentIntent } from "./api/intent/create";
 import { retrievePaymentIntent } from "./api/intent/retrieve";
+
 import { createPaymentMethod } from "./api/method/create";
+import { retrievePaymentMethod } from "./api/method/retrieve";
 
 export const createPaymongoClient = (key: string) => {
   api.defaults.auth = {
@@ -24,6 +27,7 @@ export const createPaymongoClient = (key: string) => {
      */
     method: {
       create: createPaymentMethod,
+      retrieve: retrievePaymentMethod,
     },
   };
 };

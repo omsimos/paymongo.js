@@ -18,14 +18,9 @@ export type PaymentIntentRetrieveInput = z.infer<
  *
  * @example
  * ```js
- * import PaymongoClient from "paymongo.js";
- *
- * const main = async () => {
- *  const client = createPaymongoClient("secret-key");
- *  const data = await client.intent.retrieve({
- *    intentId: "pi_uP9jFcxB916dPGrhFURfbfVX",
+ *  const intent = await client.intent.retrieve({
+ *    intentId: "some_intent_id",
  *  });
- *  return data;
  * }
  * ```
  */

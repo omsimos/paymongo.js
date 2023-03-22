@@ -6,3 +6,4 @@ export type { PaymentIntentRetrieveInput } from "./api/intent/retrieve";
 
 export type { PaymentMethodOutput } from "./api/method/types";
 export type { PaymentMethodCreateInput } from "./api/method/create";
+export type { PaymentMethodRetrieveInput } from "./api/method/retrieve";

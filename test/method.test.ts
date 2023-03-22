@@ -68,20 +68,20 @@ describe("create payment method", () => {
   });
 });
 
-/* describe.skip("retrieve payment method", () => { */
-/*   it("can retrieve payment intent", async () => { */
-/*     const intentId = "pi_uP9jFcxB916dPGrhFURfbfVX"; */
-/*     const res = await client.intent.retrieve({ */
-/*       intentId: intentId, */
-/*     }); */
-/*     expect(res.data.id).toEqual(intentId); */
-/*   }); */
-/**/
-/*   it("rejects on not found", async () => { */
-/*     const intentId = "does-not-exist"; */
-/*     const res = client.intent.retrieve({ */
-/*       intentId: intentId, */
-/*     }); */
-/*     await expect(res).rejects.toThrow(); */
-/*   }); */
-/* }); */
+describe("retrieve payment method", () => {
+  it("can retrieve payment method", async () => {
+    const methodId = "pm_2QhZyVZEcFbq7RGQJ8YeZUQT";
+    const res = await client.method.retrieve({
+      methodId,
+    });
+    expect(res.data.id).toEqual(methodId);
+  });
+
+  it("rejects on not found", async () => {
+    const methodId = "does-not-exist";
+    const res = client.method.retrieve({
+      methodId,
+    });
+    await expect(res).rejects.toThrow();
+  });
+});

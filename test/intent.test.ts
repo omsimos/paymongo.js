@@ -32,7 +32,7 @@ describe("retrieve payment intent", () => {
   it("can retrieve payment intent", async () => {
     const intentId = "pi_uP9jFcxB916dPGrhFURfbfVX";
     const res = await client.intent.retrieve({
-      intentId: intentId,
+      intentId,
     });
     expect(res.data.id).toEqual(intentId);
   });
@@ -40,7 +40,7 @@ describe("retrieve payment intent", () => {
   it("rejects on not found", async () => {
     const intentId = "does-not-exist";
     const res = client.intent.retrieve({
-      intentId: intentId,
+      intentId,
     });
     await expect(res).rejects.toThrow();
   });
