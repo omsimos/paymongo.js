@@ -8,7 +8,7 @@ const client = createPaymongoClient(key);
 
 let pi = "";
 
-describe.skip("create payment intent", () => {
+describe("create payment intent", () => {
   it("can create payment intent", async () => {
     const res = await client.intent.create({
       amount: 10000,
@@ -113,7 +113,7 @@ describe("attach payment intent", () => {
   });
 });
 
-describe.skip("retrieve payment intent", () => {
+describe("retrieve payment intent", () => {
   it("can retrieve payment intent", async () => {
     const res = await client.intent.retrieve({
       intentId: pi,
