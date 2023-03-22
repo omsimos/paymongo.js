@@ -44,19 +44,46 @@ export type PaymentMethodCreateInput = z.infer<
  * # Create a PaymentMethod
  * @link https://developers.paymongo.com/reference/create-a-paymentmethod
  *
- * @example
- * ```js
- * import PaymongoClient from "paymongo.js";
+ * @example-gcash
  *
- * const main = async () => {
- *  const client = createPaymongoClient("secret-key");
- *  const data = await client.method.create({
- *    amount: 10000,
- *    payment_method_allowed: ["card", "gcash"],
- *    currency: "PHP",
+ * ```js
+ *  const method = await client.method.create({
+ *    type: "gcash",
  *  });
- *  return data;
- * }
+ * ```
+ *
+ * @example-card
+ *
+ * ```js
+ *  const res = await client.method.create({
+ *    type: "card",
+ *    details: {
+ *      card_number: "4242424242424242",
+ *      exp_month: 12,
+ *      exp_year: 2025,
+ *    }
+ *  });
+ * ```
+ *
+ * @example-with-billing
+ *
+ * ```js
+ *  const res = await client.method.create({
+ *    type: "gcash",
+ *    billing: {
+ *      name: "John Doe",
+ *      email: "john@email.com",
+ *      phone: "+639999999999",
+ *      address: {
+ *        city: "Manila",
+ *        line1: "line 1",
+ *        line2: "line 2",
+ *        state: "Metro Manila",
+ *        country: "PH",
+ *        postal_code: "1000",
+ *      },
+ *    }
+ * });
  * ```
  */
 export const createPaymentMethod = async (

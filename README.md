@@ -39,7 +39,7 @@ See [PaymentIntent Resource](https://developers.paymongo.com/reference/the-payme
 
   ```js
   const res = client.intent.retrieve({
-    paymentIntentId: "some_intent_id",
+    intentId: "some_intent_id",
   });
   ```
 
@@ -47,8 +47,8 @@ See [PaymentIntent Resource](https://developers.paymongo.com/reference/the-payme
 
   ```js
   const res = await client.intent.attach({
-    paymentIntentId: "some_intent_id",
-    paymentMethodId: "some_method_id",
+    intentId: "some_intent_id",
+    intentId: "some_method_id",
   });
   ```
 
@@ -59,14 +59,32 @@ See [PaymentMethod Resource](https://developers.paymongo.com/reference/the-payme
 - [**Create a Method**](https://developers.paymongo.com/reference/create-a-paymentmethod)
 
   ```js
-  const createResponse = await client.method.create({
-    details: {
-      cardNumber: "4343434343434345",
-      expMonth: 3,
-      expYear: 2023,
-      cvc: "321",
+  const res = await client.method.create({
+    type: "gcash",
+    billing: {
+      name: "John Doe",
+      email: "john@email.com",
+      phone: "+639999999999",
+      address: {
+        city: "Manila",
+        line1: "line 1",
+        line2: "line 2",
+        state: "Metro Manila",
+        country: "PH",
+        postal_code: "1000",
+      },
     },
-    type: "card", // card | paymaya
+  });
+  ```
+
+  ```js
+  const res = await client.method.create({
+    type: "card",
+    details: {
+      card_number: "4242424242424242",
+      exp_month: 12,
+      exp_year: 2025,
+    },
   });
   ```
 
