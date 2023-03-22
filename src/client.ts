@@ -2,6 +2,7 @@ import { api } from "./api/base";
 
 import { createPaymentIntent } from "./api/intent/create";
 import { retrievePaymentIntent } from "./api/intent/retrieve";
+import { attachToPaymentIntent } from "./api/intent/attach";
 
 import { createPaymentMethod } from "./api/method/create";
 import { retrievePaymentMethod } from "./api/method/retrieve";
@@ -20,6 +21,7 @@ export const createPaymongoClient = (key: string) => {
     intent: {
       create: createPaymentIntent,
       retrieve: retrievePaymentIntent,
+      attach: attachToPaymentIntent
     },
     /**
      * # PaymentMethod Resource

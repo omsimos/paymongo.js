@@ -20,6 +20,7 @@ export const paymentIntentOutputSchema = z.object({
       capture_type: z.enum(["manual", "automatic"]),
       last_payment_error: z.object({}).nullable(),
       payment_method_allowed: z.array(z.string()),
+      // TODO: Replace with paymentOutputSchema
       payments: z.array(z.any()),
       next_action: z
         .object({
@@ -34,7 +35,7 @@ export const paymentIntentOutputSchema = z.object({
         card: z.object({
           request_three_d_secure: z.enum(["any", "automatic"]),
         }),
-      }),
+      }).nullable(),
       setup_future_usage: z
         .object({
           session_type: z.enum(["on_session"]),
