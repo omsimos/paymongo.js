@@ -11,7 +11,7 @@ export const Container = ({
   ...rest
 }: ContainerProps) => {
   return (
-    <div {...rest} className={`mx-auto w-full max-w-4xl px-4 ${className}`}>
+    <div {...rest} className={`mx-auto w-full max-w-5xl px-4 ${className}`}>
       {children}
     </div>
   );

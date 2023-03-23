@@ -1,7 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import { useMemo, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Container } from "~/components/container";
 
 interface StepProps {
@@ -24,7 +24,7 @@ const Step = ({ step, currentStep, title, onClick }: StepProps) => {
 
   return (
     <button
-      className="flex flex-1 items-center gap-2 self-start"
+      className="flex flex-1 items-center gap-2 self-start text-lg"
       onClick={onClick}
     >
       <motion.div
@@ -39,7 +39,6 @@ const Step = ({ step, currentStep, title, onClick }: StepProps) => {
         transition={{ duration: 0.3, ease: "easeIn" }}
         className="rounded-full border p-1"
       >
-        {/* <AnimatePresence> */}
         {state === "done" ? (
           <motion.svg
             key="status-payment-information"
@@ -48,7 +47,7 @@ const Step = ({ step, currentStep, title, onClick }: StepProps) => {
             viewBox="0 0 24 24"
             strokeWidth={2}
             stroke="currentColor"
-            className="h-4 w-4"
+            className="h-5 w-5"
           >
             <motion.path
               initial={{ pathLength: 0 }}
@@ -60,20 +59,91 @@ const Step = ({ step, currentStep, title, onClick }: StepProps) => {
             />
           </motion.svg>
         ) : (
-          <p className="flex h-4 w-4 items-center justify-center text-sm">
+          <p className="flex h-5 w-5 items-center justify-center text-sm">
             {step}
           </p>
         )}
-        {/* </AnimatePresence> */}
       </motion.div>
 
-      <h3>{title}</h3>
+      <h3 className="text-left">{title}</h3>
     </button>
+  );
+};
+
+const PaymentInformation = () => {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{
+        duration: 0.3,
+        ease: "easeIn",
+      }}
+    >
+      Payment Information
+    </motion.div>
+  );
+};
+
+const BillingDetails = () => {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{
+        duration: 0.3,
+        ease: "easeIn",
+      }}
+    >
+      Billing Details
+    </motion.div>
+  );
+};
+
+const Summary = () => {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{
+        duration: 0.3,
+        ease: "easeIn",
+      }}
+    >
+      Summary
+    </motion.div>
+  );
+};
+
+const Payment = () => {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{
+        duration: 0.3,
+        ease: "easeIn",
+      }}
+    >
+      Payment
+    </motion.div>
   );
 };
 
 const Home: NextPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
+
+  const panel = useMemo(() => {
+    if (currentStep === 1) {
+      return <PaymentInformation key="payment-information-panel" />;
+    } else if (currentStep === 2) {
+      return <BillingDetails key="billing-details-panel" />;
+    } else if (currentStep === 3) {
+      return <Summary key="summary-panel" />;
+    } else if (currentStep === 4) {
+      return <Payment key="payment-panel" />;
+    }
+  }, [currentStep]);
 
   return (
     <>
@@ -119,7 +189,9 @@ const Home: NextPage = () => {
             />
           </div>
 
-          <h1 className="mt-4">Hello paymongo.js</h1>
+          <div className="mt-4">
+            <AnimatePresence mode="sync">{panel}</AnimatePresence>
+          </div>
         </Container>
       </main>
     </>
