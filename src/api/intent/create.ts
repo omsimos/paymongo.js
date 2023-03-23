@@ -32,19 +32,6 @@ export type PaymentIntentCreateInput = z.infer<
   typeof paymentIntentCreateInputSchema
 >;
 
-/**
- * # Create a PaymentIntent
- * @link https://developers.paymongo.com/reference/create-a-paymentintent
- *
- * @example
- * ```js
- *  const intent = await client.intent.create({
- *    amount: 10000,
- *    payment_method_allowed: ["card", "gcash"],
- *    currency: "PHP",
- *  });
- * ```
- */
 export const createPaymentIntent = async (
   input: PaymentIntentCreateInput
 ): Promise<PaymentIntentOutput> => {

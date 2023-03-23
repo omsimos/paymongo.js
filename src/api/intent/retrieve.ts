@@ -12,18 +12,6 @@ export type PaymentIntentRetrieveInput = z.infer<
   typeof paymentIntentRetrieveInputSchema
 >;
 
-/**
- * # Retrieve a PaymentIntent
- * @link https://developers.paymongo.com/reference/retrieve-a-paymentintent
- *
- * @example
- * ```js
- *  const intent = await client.intent.retrieve({
- *    intentId: "some_intent_id",
- *  });
- * }
- * ```
- */
 export const retrievePaymentIntent = async (
   input: PaymentIntentRetrieveInput
 ): Promise<PaymentIntentOutput> => {

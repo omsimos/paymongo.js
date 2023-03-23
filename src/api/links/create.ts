@@ -12,19 +12,6 @@ export const linkCreateInputSchema = z.object({
 
 export type LinkCreateInput = z.infer<typeof linkCreateInputSchema>;
 
-/**
- * # Create a Link
- * @link https://developers.paymongo.com/reference/create-a-link
- *
- * @example
- * ```js
- *  const intent = await client.intent.create({
- *    amount: 10000,
- *    payment_method_allowed: ["card", "gcash"],
- *    currency: "PHP",
- *  });
- * ```
- */
 export const createLink = async (input: LinkCreateInput) => {
   try {
     const parsedInput = linkCreateInputSchema.parse(input);

@@ -15,19 +15,6 @@ export type PaymentIntentAttachInput = z.infer<
   typeof paymentIntentAttachInputSchema
 >;
 
-/**
- * # Attach to PaymentIntent
- * @link https://developers.paymongo.com/reference/attach-to-paymentintent
- *
- * @example
- * ```js
- * const intent = await client.intent.attach({
- *   intentId: "some_intent_id",
- *   methodId: "some_method_id"",
- *   return_url: "https://example.com/success",
- * });
- * ```
- */
 export const attachToPaymentIntent = async (
   input: PaymentIntentAttachInput
 ): Promise<PaymentIntentOutput> => {
