@@ -3,6 +3,12 @@ on:
   push:
     branches:
       - "**"
+    paths-ignore:
+      - "example/**"
+      - "README.md"
+      - "LICENSE"
+      - "CONTRIBUTING.md"
+      - "CODE_OF_CONDUCT.md"
 
 jobs:
   build:
@@ -22,4 +28,3 @@ jobs:
           PM_SECRET_KEY: ${{ secrets.PM_SECRET_KEY }}
         run: pnpm test
       - run: pnpm run lint && pnpm run build
-
