@@ -29,7 +29,7 @@ export const Step = ({ step, currentStep, title, onClick }: StepProps) => {
           initial={false}
           animate={{
             backgroundColor: state === "active" ? "#16a34a" : "#ffffff",
-            color: state === "active" ? "#ffffff" : "#6b7280",
+            color: state === "active" ? "#ffffff" : "#9ca3af",
           }}
           transition={{ duration: 0.3, ease: "easeIn" }}
           className="rounded-full border border-gray-400 p-1"
@@ -70,7 +70,7 @@ export const Step = ({ step, currentStep, title, onClick }: StepProps) => {
 
         <motion.h3
           initial={false}
-          animate={{ color: state === "active" ? "#000000" : "#6b7280" }}
+          animate={{ color: state === "active" ? "#000000" : "#9ca3af" }}
           transition={{ duration: 0.3, ease: "easeIn" }}
           className="text-left"
         >

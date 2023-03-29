@@ -3,17 +3,16 @@ import { motion } from "framer-motion";
 
 interface PanelProps {
   children: ReactNode;
-  animation?: "left" | "right";
 }
 
-export const Panel = ({ children, animation = "right" }: PanelProps) => {
+export const Panel = ({ children }: PanelProps) => {
   return (
     <motion.div
-      initial={{ marginLeft: animation === "right" ? -100 : 100, opacity: 0 }}
-      animate={{ marginLeft: 0, opacity: 1 }}
-      exit={{ marginLeft: animation === "right" ? 100 : -100, opacity: 0 }}
+      initial={{  opacity: 0 }}
+      animate={{  opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{
-        duration: 0.3,
+        duration: 0.2,
         ease: "easeIn",
       }}
     >

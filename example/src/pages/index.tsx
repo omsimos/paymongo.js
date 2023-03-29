@@ -1,43 +1,23 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { useMemo, useState, useEffect, useRef } from "react";
+import { useMemo, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Container } from "~/components/container";
 import { Step } from "~/components/step";
 import { Panel } from "~/components/panel";
-
-const PaymentInformation = () => {
-  return <div>Payment Information</div>;
-};
-
-const BillingDetails = () => {
-  return <div>Billing Details</div>;
-};
-
-const Summary = () => {
-  return <div>Summary</div>;
-};
-
-const Payment = () => {
-  return <div>Payment</div>;
-};
-
-const usePrevValue = <T,>(value: T) => {
-  const ref = useRef<T>(value);
-  useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
-};
+import {
+  BillingDetails,
+  Payment,
+  PaymentInformation,
+  Summary,
+} from "~/components/panels";
 
 const Home: NextPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
-  const prevValue = usePrevValue(currentStep);
-  const animation = prevValue > currentStep ? "right" : "left";
 
   const panel = useMemo(() => {
     return (
-      <Panel animation={animation} key={`panel-step-${currentStep}`}>
+      <Panel key={`panel-step-${currentStep}`}>
         {currentStep === 1 ? (
           <PaymentInformation key="payment-information-panel" />
         ) : currentStep === 2 ? (
@@ -96,7 +76,30 @@ const Home: NextPage = () => {
           </div>
 
           <div className="mt-4">
-            <AnimatePresence mode="wait">{panel}</AnimatePresence>
+            <AnimatePresence mode="wait" initial={false}>
+              {panel}
+            </AnimatePresence>
+          </div>
+
+          <hr className="my-4 border-gray-300" />
+
+          <div className="flex items-center justify-end space-x-2">
+            {currentStep > 1 && (
+              <button
+                className="rounded border px-4 py-1 transition-all active:opacity-50"
+                onClick={() => setCurrentStep(currentStep - 1)}
+              >
+                Back
+              </button>
+            )}
+            {currentStep < 4 && (
+              <button
+                className="rounded border bg-green-600 px-4 py-1 text-white transition-all active:opacity-50"
+                onClick={() => setCurrentStep(currentStep + 1)}
+              >
+                Next
+              </button>
+            )}
           </div>
         </Container>
       </main>
