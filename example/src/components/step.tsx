@@ -20,11 +20,8 @@ export const Step = ({ step, currentStep, title, onClick }: StepProps) => {
   }, [step, currentStep]);
 
   return (
-    <button
-      className="flex flex-1 items-center self-start text-lg"
-      onClick={onClick}
-    >
-      <div className="flex items-center gap-2">
+    <div className="flex flex-1 items-center self-start text-lg">
+      <button className="flex items-center gap-2" onClick={onClick}>
         <motion.div
           initial={false}
           animate={{
@@ -76,7 +73,7 @@ export const Step = ({ step, currentStep, title, onClick }: StepProps) => {
         >
           {title}
         </motion.h3>
-      </div>
+      </button>
 
       <motion.div
         initial={false}
@@ -86,6 +83,6 @@ export const Step = ({ step, currentStep, title, onClick }: StepProps) => {
         transition={{ duration: 0.3, ease: "easeIn" }}
         className="mx-2 h-px flex-1"
       />
-    </button>
+    </div>
   );
 };

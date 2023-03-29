@@ -9,6 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@vercel/og": "^0.5.0",
     "framer-motion": "^10.8.5",
     "next": "^13.2.1",
     "paymongo.js": "link:../dist",
