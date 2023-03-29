@@ -1,14 +1,10 @@
 name: CI
 on:
   push:
-    branches:
-      - "**"
     paths-ignore:
       - "example/**"
-      - "README.md"
-      - "LICENSE"
-      - "CONTRIBUTING.md"
-      - "CODE_OF_CONDUCT.md"
+    branches:
+      - "**"
 
 jobs:
   build:
