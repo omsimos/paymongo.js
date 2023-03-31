@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@vercel/og": "^0.5.0",
-    "framer-motion": "^10.8.5",
+    "framer-motion": "^10.10.0",
     "next": "^13.2.1",
     "paymongo.js": "link:../dist",
     "react": "18.2.0",
@@ -18,21 +18,21 @@
     "zod": "^3.20.6"
   },
   "devDependencies": {
-    "@types/eslint": "^8.21.1",
-    "@types/node": "^18.14.0",
+    "@types/eslint": "^8.37.0",
+    "@types/node": "^18.15.11",
     "@types/prettier": "^2.7.2",
-    "@types/react": "^18.0.28",
+    "@types/react": "^18.0.31",
     "@types/react-dom": "^18.0.11",
-    "@typescript-eslint/eslint-plugin": "^5.53.0",
-    "@typescript-eslint/parser": "^5.53.0",
+    "@typescript-eslint/eslint-plugin": "^5.57.0",
+    "@typescript-eslint/parser": "^5.57.0",
     "autoprefixer": "^10.4.7",
-    "eslint": "^8.34.0",
+    "eslint": "^8.37.0",
     "eslint-config-next": "^13.2.1",
     "postcss": "^8.4.14",
-    "prettier": "^2.8.1",
-    "prettier-plugin-tailwindcss": "^0.2.1",
-    "tailwindcss": "^3.2.0",
-    "typescript": "^4.9.5"
+    "prettier": "^2.8.7",
+    "prettier-plugin-tailwindcss": "^0.2.6",
+    "tailwindcss": "^3.3.1",
+    "typescript": "^5.0.3"
   },
   "ct3aMetadata": {
     "initVersion": "7.8.0"
