@@ -9,7 +9,7 @@ export const PaymentInformation = () => {
         <p className="text-xl font-semibold text-gray-600">Sample payment </p>
         <div className="flex items-start">
           <span className="mr-2 mt-1 text-xl">₱</span>
-          <p className="text-6xl font-thin tracking-wider">100.0</p>
+          <p className="text-6xl font-thin tracking-wider">100.00</p>
         </div>
         <p className="text-green-600">Amount to Pay</p>
       </div>

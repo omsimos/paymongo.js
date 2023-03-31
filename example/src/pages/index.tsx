@@ -45,7 +45,10 @@ const Home: NextPage = () => {
 
       <main>
         <nav className="bg-gray-100 py-4">
-          <Container>Paymongo.js Example</Container>
+          <Container className="flex items-center justify-between">
+            <h1 className="text-xl font-semibold">Paymongo.js Example</h1>
+            <div></div>
+          </Container>
         </nav>
 
         <Container className="my-4">
