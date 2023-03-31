@@ -1,65 +1,89 @@
-import PaymongoClient, { PaymentMethodResponse } from "../src";
+import "dotenv/config";
+import { it, expect, describe } from "vitest";
+import { createPaymongoClient } from "../src";
+import { testCards } from "./utils";
 
-describe("PaymentMethod", () => {
-  const OLD_ENV = process.env;
-  let client: ReturnType<typeof PaymongoClient>;
-  let method: PaymentMethodResponse;
-  let SECRET_KEY = "";
+const key = process.env.PM_SECRET_KEY as string;
+const client = createPaymongoClient(key);
 
-  beforeAll(async () => {
-    process.env = { ...OLD_ENV };
-    SECRET_KEY = process.env.PM_SECRET_KEY as string;
-    client = PaymongoClient(SECRET_KEY);
-    method = await client.method.create({
-      details: {
-        cardNumber: "4343434343434345",
-        expMonth: 3,
-        expYear: 2023,
-        cvc: "321",
-      },
+let pm = "";
+
+describe("create payment method", () => {
+  it("can create gcash payment method", async () => {
+    const res = await client.method.create({
+      type: "gcash",
+    });
+    pm = res.data.id;
+    expect(res.data.type).toEqual("payment_method");
+    expect(res.data.attributes.type).toEqual("gcash");
+  });
+
+  it("can create card payment", async () => {
+    const res = await client.method.create({
       type: "card",
+      details: testCards.visa,
     });
+    expect(res.data.type).toEqual("payment_method");
+    expect(res.data.attributes.type).toEqual("card");
   });
 
-  afterAll(() => {
-    process.env = OLD_ENV;
+  it("can create dob payment", async () => {
+    const res = await client.method.create({
+      type: "dob",
+      details: { ...testCards.visa, bank_code: "bpi" },
+    });
+    expect(res.data.type).toEqual("payment_method");
+    // @ts-expect-error - test file
+    expect(res.data.attributes.details.provider).toEqual("bpi");
+    expect(res.data.attributes.type).toEqual("dob");
   });
 
-  describe("can create a payment method", () => {
-    it("has correct details", () => {
-      expect(method.data.attributes.details.last4).toBe("4345");
-      expect(method.data.attributes.details.exp_month).toBe(3);
-      expect(method.data.attributes.details.exp_year).toBe(2023);
+  it("can retrieve billing", async () => {
+    const billing = {
+      name: "John Doe",
+      email: "john@email.com",
+      phone: "+639999999999",
+      address: {
+        city: "Manila",
+        line1: "line 1",
+        line2: "line 2",
+        state: "Metro Manila",
+        country: "PH",
+        postal_code: "1000",
+      },
+    };
+    const res = await client.method.create({
+      type: "gcash",
+      billing,
     });
-
-    it("has correct resource type", () => {
-      expect(method.data.type).toBe("payment_method");
-    });
-
-    it("is a card method", () => {
-      expect(method.data.attributes.type).toBe("card");
-    });
+    expect(res.data.type).toEqual("payment_method");
+    expect(res.data.attributes.type).toEqual("gcash");
+    expect(res.data.attributes.billing).toEqual(billing);
   });
 
-  describe("can retrieve a payment method", () => {
-    let retrieved: PaymentMethodResponse;
-
-    beforeAll(async () => {
-      retrieved = await client.method.retrieve(method.data.id);
+  it("rejects on zod error", async () => {
+    const res = client.method.create({
+      // @ts-expect-error - test file
+      type: "invalid",
     });
 
-    it("has correct details", () => {
-      expect(retrieved.data.attributes.details.last4).toBe("4345");
-      expect(retrieved.data.attributes.details.exp_month).toBe(3);
-      expect(retrieved.data.attributes.details.exp_year).toBe(2023);
-    });
+    await expect(res).rejects.toThrow();
+  });
+});
 
-    it("has correct resource type", () => {
-      expect(retrieved.data.type).toBe("payment_method");
+describe("retrieve payment method", () => {
+  it("can retrieve payment method", async () => {
+    const res = await client.method.retrieve({
+      methodId: pm,
     });
+    expect(res.data.id).toEqual(pm);
+  });
 
-    it("is a card method", () => {
-      expect(retrieved.data.attributes.type).toBe("card");
+  it("rejects on not found", async () => {
+    const methodId = "does-not-exist";
+    const res = client.method.retrieve({
+      methodId,
     });
+    await expect(res).rejects.toThrow();
   });
 });

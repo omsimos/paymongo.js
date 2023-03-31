@@ -1,57 +1,131 @@
-import PaymongoClient, { PaymentIntentResponse } from "../src";
+import "dotenv/config";
+import { it, expect, describe } from "vitest";
+import { createPaymongoClient } from "../src";
+import { testCards } from "./utils";
 
-describe("PaymentIntent", () => {
-  const OLD_ENV = process.env;
-  let client: ReturnType<typeof PaymongoClient>;
-  let intent: PaymentIntentResponse;
-  let SECRET_KEY = "";
+const key = process.env.PM_SECRET_KEY as string;
+const client = createPaymongoClient(key);
 
-  beforeAll(async () => {
-    process.env = { ...OLD_ENV };
-    SECRET_KEY = process.env.PM_SECRET_KEY as string;
-    client = PaymongoClient(SECRET_KEY);
-    intent = await client.intent.create({
-      amount: 100000,
+let pi = "";
+
+describe("create payment intent", () => {
+  it("can create payment intent", async () => {
+    const res = await client.intent.create({
+      amount: 10000,
+      payment_method_allowed: ["card", "gcash"],
+      currency: "PHP",
     });
+    pi = res.data.id;
+    expect(res.data.type).toEqual("payment_intent");
+    expect(res.data.attributes.amount).toEqual(10000);
   });
 
-  afterAll(() => {
-    process.env = OLD_ENV;
+  it("rejects on zod error", async () => {
+    const res = client.intent.create({
+      amount: 10000,
+      payment_method_allowed: ["card", "gcash"],
+      // @ts-expect-error - test file
+      currency: "USD",
+    });
+
+    await expect(res).rejects.toThrow();
+  });
+});
+
+describe("attach payment intent", () => {
+  it("can attach to gcash payment intent", async () => {
+    const intent = await client.intent.create({
+      amount: 10000,
+      payment_method_allowed: ["gcash"],
+      currency: "PHP",
+      description: "vitest - gcash",
+    });
+
+    const method = await client.method.create({
+      type: "gcash",
+    });
+
+    const res = await client.intent.attach({
+      intentId: intent.data.id,
+      methodId: method.data.id,
+      return_url: "https://example.com/success",
+    });
+
+    expect(res.data.id).toEqual(intent.data.id);
+    expect(res.data.attributes.next_action?.type).toEqual("redirect");
+    expect(res.data.attributes.next_action?.redirect).toBeDefined();
   });
 
-  describe("can create a payment intent", () => {
-    it("has correct amount", () => {
-      expect(intent.data.attributes.amount).toBe(100000);
+  it("can attach to card payment intent", async () => {
+    const intent = await client.intent.create({
+      amount: 10000,
+      payment_method_allowed: ["card"],
+      currency: "PHP",
+      description: "vitest - card",
     });
 
-    it("has correct resource type", () => {
-      expect(intent.data.type).toBe("payment_intent");
+    const method = await client.method.create({
+      type: "card",
+      details: testCards.visa,
     });
 
-    it("is awaiting payment method", () => {
-      expect(intent.data.attributes.status).toBe("awaiting_payment_method");
+    const res = await client.intent.attach({
+      intentId: intent.data.id,
+      methodId: method.data.id,
     });
+
+    expect(res.data.id).toEqual(intent.data.id);
+    expect(res.data.attributes.payments).toBeDefined();
   });
 
-  describe("can retrieve a payment intent", () => {
-    let retrieved: PaymentIntentResponse;
-
-    beforeAll(async () => {
-      retrieved = await client.intent.retrieve({
-        intentId: intent.data.id,
-      });
+  it("can attach to dob payment intent", async () => {
+    const intent = await client.intent.create({
+      amount: 10000,
+      payment_method_allowed: ["dob"],
+      currency: "PHP",
+      description: "vitest - dob",
     });
 
-    it("has correct amount", () => {
-      expect(retrieved.data.attributes.amount).toBe(100000);
+    const method = await client.method.create({
+      type: "dob",
+      details: { ...testCards.visa, bank_code: "bpi" },
     });
 
-    it("has correct resource type", () => {
-      expect(retrieved.data.type).toBe("payment_intent");
+    const res = await client.intent.attach({
+      intentId: intent.data.id,
+      methodId: method.data.id,
+      return_url: "https://example.com/success",
     });
 
-    it("is awaiting payment method", () => {
-      expect(retrieved.data.attributes.status).toBe("awaiting_payment_method");
+    expect(res.data.id).toEqual(intent.data.id);
+    expect(res.data.attributes.next_action?.type).toEqual("redirect");
+    expect(res.data.attributes.next_action?.redirect).toBeDefined();
+  });
+
+  it("rejects on zod error", async () => {
+    const res = client.intent.attach({
+      intentId: pi,
+      // @ts-expect-error - test file
+      methodId: 123,
     });
+
+    await expect(res).rejects.toThrow();
+  });
+});
+
+describe("retrieve payment intent", () => {
+  it("can retrieve payment intent", async () => {
+    const res = await client.intent.retrieve({
+      intentId: pi,
+    });
+    expect(res.data.id).toEqual(pi);
+  });
+
+  it("rejects on not found", async () => {
+    const intentId = "does-not-exist";
+    const res = client.intent.retrieve({
+      intentId,
+    });
+    await expect(res).rejects.toThrow();
   });
 });

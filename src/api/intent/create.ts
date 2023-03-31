@@ -1,0 +1,47 @@
+import { z } from "zod";
+
+import { PaymentIntentOutput, paymentIntentOutputSchema } from "./types";
+import { api } from "../base";
+import { methodTypeSchema } from "../types";
+import { handleError } from "../../utils/handle-error";
+
+export const paymentIntentCreateInputSchema = z.object({
+  amount: z.number().min(0),
+  payment_method_allowed: z.array(methodTypeSchema),
+  payment_method_options: z
+    .object({
+      card: z.object({
+        request_three_d_secure: z.enum(["any", "automatic"]),
+      }),
+    })
+    .optional(),
+  description: z.string().optional(),
+  statement_descriptor: z.string().optional(),
+  currency: z.enum(["PHP"]),
+  capture_type: z.enum(["manual", "automatic"]).optional(),
+  setup_future_usage: z
+    .object({
+      session_type: z.enum(["on_session"]),
+      customer_id: z.string(),
+    })
+    .optional(),
+  metadata: z.any().optional(),
+});
+
+export type PaymentIntentCreateInput = z.infer<
+  typeof paymentIntentCreateInputSchema
+>;
+
+export const createPaymentIntent = async (
+  input: PaymentIntentCreateInput
+): Promise<PaymentIntentOutput> => {
+  try {
+    const parsedInput = paymentIntentCreateInputSchema.parse(input);
+    const res = await api.post<PaymentIntentOutput>("/payment_intents", {
+      data: { attributes: parsedInput },
+    });
+    return paymentIntentOutputSchema.parse(res.data);
+  } catch (e) {
+    return handleError(e);
+  }
+};
