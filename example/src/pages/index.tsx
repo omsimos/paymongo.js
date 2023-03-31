@@ -11,6 +11,7 @@ import {
   PaymentInformation,
   Summary,
 } from "~/components/panels";
+import { StoreProvider } from "~/lib/store";
 
 const Home: NextPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -83,23 +84,36 @@ const Home: NextPage = () => {
 
           <hr className="my-4 border-gray-300" />
 
-          <div className="flex items-center justify-end space-x-2">
-            {currentStep > 1 && (
-              <button
-                className="rounded border px-4 py-1 transition-all active:opacity-50"
-                onClick={() => setCurrentStep(currentStep - 1)}
-              >
-                Back
-              </button>
-            )}
-            {currentStep < 4 && (
-              <button
-                className="rounded border bg-green-600 px-4 py-1 text-white transition-all active:opacity-50"
-                onClick={() => setCurrentStep(currentStep + 1)}
-              >
-                Next
-              </button>
-            )}
+          <div className="flex items-center">
+            <a
+              href="https://github.com/omsimos"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-1 rounded border border-green-600 p-2 text-xs font-semibold text-green-600 transition-all duration-300 hover:bg-green-600 hover:text-white active:opacity-50"
+            >
+              <span>Powered by </span>
+              <img src="/omsimos.png" className="h-4 w-4 rounded-full" />
+              <span>Omsimos</span>
+            </a>
+
+            <div className="flex flex-1 items-center justify-end space-x-2">
+              {currentStep > 1 && (
+                <button
+                  className="rounded border px-4 py-1 transition-all active:opacity-50"
+                  onClick={() => setCurrentStep(currentStep - 1)}
+                >
+                  Back
+                </button>
+              )}
+              {currentStep < 4 && (
+                <button
+                  className="rounded border bg-green-600 px-4 py-1 text-white transition-all active:opacity-50"
+                  onClick={() => setCurrentStep(currentStep + 1)}
+                >
+                  Next
+                </button>
+              )}
+            </div>
           </div>
         </Container>
       </main>
@@ -107,4 +121,12 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+const Wrapper = () => {
+  return (
+    <StoreProvider>
+      <Home />
+    </StoreProvider>
+  );
+};
+
+export default Wrapper;
