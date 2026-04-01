@@ -21,23 +21,60 @@ export interface CreatePaymentMethodProps {
   type: PaymentType;
   billing?: BillingType;
   metadata?: MetaData;
+  expirySeconds?: number;
 }
 
-// response
-export interface PaymentMethodDetailsResponse {
-  exp_month: number;
-  exp_year: number;
-  last4: string;
+// response - card details
+export interface PaymentMethodCardDetails {
+  email: string | null;
+  first_name: string;
+  last_name: string;
+  type: string;
+  expiry_month: number;
+  expiry_year: number;
+  last_4: string;
+  network: string;
+  country: string;
+  description: string;
+  statement_description: string;
+  verification_url: string | null;
 }
+
+// response - generic details base
+export interface PaymentMethodDetailsResponse {
+  exp_month?: number;
+  exp_year?: number;
+  last4?: string;
+}
+
+// response - all possible detail types
+export type PaymentMethodMethodDetails =
+  | { type: "card"; card: PaymentMethodCardDetails }
+  | { type: "gcash"; gcash: Record<string, unknown> | null }
+  | { type: "paymaya"; paymaya: Record<string, unknown> | null }
+  | { type: "qrph"; qr: Record<string, unknown> | null }
+  | { type: "shopee_pay"; shopee_pay: Record<string, unknown> | null }
+  | { type: "dob"; dob: Record<string, unknown> | null }
+  | { type: "grab_pay"; grab_pay: Record<string, unknown> | null }
+  | { type: "billease"; billease: Record<string, unknown> | null }
+  | { type: "brankas"; brankas: Record<string, unknown> | null };
 
 export interface PaymentMethodAttributesResponse {
   livemode: boolean;
   type: string;
-  billing?: BillingType | null;
+  billing_details?: BillingType | null;
   created_at: number;
   updated_at: number;
-  details: PaymentMethodDetailsResponse;
   metadata?: MetaData | null;
+  card?: PaymentMethodCardDetails | null;
+  gcash_details?: Record<string, unknown> | null;
+  paymaya_details?: Record<string, unknown> | null;
+  qr_details?: Record<string, unknown> | null;
+  shopee_pay_details?: Record<string, unknown> | null;
+  dob_details?: Record<string, unknown> | null;
+  grab_pay_details?: Record<string, unknown> | null;
+  billease_details?: Record<string, unknown> | null;
+  brankas_details?: Record<string, unknown> | null;
 }
 
 export interface PaymentMethodDataResponse {

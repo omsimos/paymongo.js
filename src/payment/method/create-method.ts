@@ -30,7 +30,7 @@ import type { CreatePaymentMethodProps, PaymentMethodResponse } from "./types.js
  */
 export const createMethod = async (
   api: FetchClient,
-  { details, type, billing, metadata }: CreatePaymentMethodProps
+  { details, type, billing, metadata, expirySeconds }: CreatePaymentMethodProps
 ): Promise<PaymentMethodResponse> => {
   const mapDetails = (d: typeof details): Record<string, unknown> => {
     if ("cardNumber" in d) {
@@ -59,6 +59,7 @@ export const createMethod = async (
       type,
       ...(billing && { billing }),
       ...(metadata && { metadata }),
+      ...(expirySeconds && { expiry_seconds: expirySeconds }),
     },
   };
 

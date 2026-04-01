@@ -1,5 +1,6 @@
 export * from "./types.js";
 export * from "./intent/index.js";
+export * from "./checkout/index.js";
 
 export * from "./create-payment.js";
 export * from "./retrieve-payment.js";

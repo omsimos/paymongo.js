@@ -1,14 +1,41 @@
 import type { MetaData, PaymentType } from "../types.js";
 
-// props
+export interface SetupFutureUsage {
+  sessionType: "on_session" | "off_session";
+  customerId: string;
+}
+
+export interface SplitPaymentRecipient {
+  id: string;
+  amount: number;
+}
+
+export interface SplitPayment {
+  transferTo?: string;
+  recipients?: SplitPaymentRecipient[];
+}
+
+export interface PaymentIntentCardOptions {
+  requestThreeDSecure?: "any" | "automatic";
+  installments?: {
+    enabled?: boolean;
+  };
+}
+
+export interface PaymentMethodOptions {
+  card?: PaymentIntentCardOptions;
+}
+
 export interface CreatePaymentIntentProps {
   amount: number;
   paymentMethodAllowed?: PaymentType[];
-  request3DS?: "any" | "automatic";
+  paymentMethodOptions?: PaymentMethodOptions;
   currency?: "PHP" | string;
   description?: string;
   statementDescriptor?: string;
   captureType?: "automatic" | "manual";
+  setupFutureUsage?: SetupFutureUsage;
+  splitPayment?: SplitPayment;
   metadata?: MetaData;
 }
 
@@ -146,4 +173,18 @@ export interface AttachData {
 
 export interface AttachPaymentIntentResponse {
   data: AttachData;
+}
+
+// capture
+export interface CapturePaymentIntentProps {
+  amount?: number;
+}
+
+export interface CapturePaymentIntentResponse {
+  data: Record<string, unknown>;
+}
+
+// cancel
+export interface CancelPaymentIntentResponse {
+  data: Record<string, unknown>;
 }

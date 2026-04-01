@@ -1,5 +1,5 @@
 import { createFetchClient, type FetchClient } from "./utils/fetch-client.js";
-import { createIntent, retrieveIntent, attachIntent } from "./payment/intent/index.js";
+import { createIntent, retrieveIntent, attachIntent, captureIntent, cancelIntent } from "./payment/intent/index.js";
 import { createMethod, retrieveMethod } from "./payment/method/index.js";
 import {
   createWebhook,
@@ -18,12 +18,15 @@ import {
   unarchiveLink,
 } from "./payment/link/index.js";
 import { createPayment, retrievePayment, listPayments } from "./payment/index.js";
+import { createCheckout, retrieveCheckout } from "./payment/checkout/index.js";
 
 export * from "./payment/types.js";
 
 export interface PaymongoClient {
   intent: {
     attach: (props: Parameters<typeof attachIntent>[1]) => ReturnType<typeof attachIntent>;
+    cancel: (intentId: string) => ReturnType<typeof cancelIntent>;
+    capture: (intentId: string, props?: Parameters<typeof captureIntent>[2]) => ReturnType<typeof captureIntent>;
     create: (props: Parameters<typeof createIntent>[1]) => ReturnType<typeof createIntent>;
     retrieve: (props: Parameters<typeof retrieveIntent>[1]) => ReturnType<typeof retrieveIntent>;
   };
@@ -55,6 +58,10 @@ export interface PaymongoClient {
     retrieve: (paymentId: string) => ReturnType<typeof retrievePayment>;
     list: () => ReturnType<typeof listPayments>;
   };
+  checkout: {
+    create: (props: Parameters<typeof createCheckout>[1]) => ReturnType<typeof createCheckout>;
+    retrieve: (checkoutId: string) => ReturnType<typeof retrieveCheckout>;
+  };
 }
 
 export type ClientFunction = (secretKey: string) => PaymongoClient;
@@ -80,6 +87,8 @@ const PaymongoClient: ClientFunction = (secretKey: string) => {
   return {
     intent: {
       attach: (props) => attachIntent(api, props),
+      cancel: (intentId) => cancelIntent(api, intentId),
+      capture: (intentId, props) => captureIntent(api, intentId, props),
       create: (props) => createIntent(api, props),
       retrieve: (props) => retrieveIntent(api, props),
     },
@@ -110,6 +119,10 @@ const PaymongoClient: ClientFunction = (secretKey: string) => {
       create: (props) => createPayment(api, props),
       retrieve: (paymentId) => retrievePayment(api, paymentId),
       list: () => listPayments(api),
+    },
+    checkout: {
+      create: (props) => createCheckout(api, props),
+      retrieve: (checkoutId) => retrieveCheckout(api, checkoutId),
     },
   };
 };

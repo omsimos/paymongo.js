@@ -71,6 +71,7 @@ See [PaymentMethod Resource](https://developers.paymongo.com/reference/the-payme
 - [**Create a Method**](https://developers.paymongo.com/reference/create-a-paymentmethod)
 
   ```js
+  // Card
   const createResponse = await client.method.create({
     details: {
       cardNumber: "4343434343434345",
@@ -78,7 +79,23 @@ See [PaymentMethod Resource](https://developers.paymongo.com/reference/the-payme
       expYear: 2023,
       cvc: "321",
     },
-    type: "card", // card | paymaya
+    type: "card",
+  });
+
+  // GCash / PayMaya
+  const createResponse = await client.method.create({
+    details: {
+      phoneNumber: "09171234567",
+    },
+    type: "gcash",
+  });
+
+  // DOB / Brankas
+  const createResponse = await client.method.create({
+    details: {
+      bankCode: "bpi",
+    },
+    type: "dob",
   });
   ```
 
@@ -118,6 +135,38 @@ See [PaymentIntent Resource](https://developers.paymongo.com/reference/the-payme
     intentId: "some_intent_id",
     methodId: "some_method_id",
   });
+  ```
+
+- [**Capture a PaymentIntent**](https://developers.paymongo.com/reference/capture-a-payment)
+
+  ```js
+  const captureResponse = await client.intent.capture("some_intent_id", {
+    amount: 10000,
+  });
+  ```
+
+- [**Cancel a PaymentIntent**](https://developers.paymongo.com/reference/cancel-a-paymentintent)
+
+  ```js
+  const cancelResponse = await client.intent.cancel("some_intent_id");
+  ```
+
+### Checkout Session
+
+- [**Create a Checkout Session**](https://developers.paymongo.com/reference/create-a-checkout)
+
+  ```js
+  const checkout = await client.checkout.create({
+    lineItems: [{ name: "Item", amount: 10000, quantity: 1 }],
+    paymentMethodTypes: ["card", "gcash"],
+    successUrl: "https://example.com/success",
+  });
+  ```
+
+- [**Retrieve a Checkout Session**](https://developers.paymongo.com/reference/checkout-session-resource)
+
+  ```js
+  const checkout = await client.checkout.retrieve("cs_test_123");
   ```
 
 ### Sources
