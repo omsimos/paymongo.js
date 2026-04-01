@@ -1,4 +1,4 @@
-import { MetaData, BillingType } from "../types";
+import type { MetaData, BillingType, PaymentType } from "../types.js";
 
 // props
 export interface PaymentMethodDetails {
@@ -19,7 +19,7 @@ export interface PaymentMethodAddress {
 
 export interface CreatePaymentMethodProps {
   details: PaymentMethodDetails;
-  type: string;
+  type: PaymentType;
   billing?: BillingType;
   metadata?: MetaData;
 }
@@ -34,11 +34,11 @@ export interface PaymentMethodDetailsResponse {
 export interface PaymentMethodAttributesResponse {
   livemode: boolean;
   type: string;
-  billing?: any;
+  billing?: BillingType | null;
   created_at: number;
   updated_at: number;
   details: PaymentMethodDetailsResponse;
-  metadata?: any;
+  metadata?: MetaData | null;
 }
 
 export interface PaymentMethodDataResponse {

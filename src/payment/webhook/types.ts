@@ -1,4 +1,4 @@
-import { WebhookEvent } from "../types";
+import type { WebhookEvent } from "../types.js";
 
 export interface CreateWebhookProps {
   url: string;

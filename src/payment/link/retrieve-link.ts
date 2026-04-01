@@ -1,10 +1,10 @@
-import api from "../../utils/api-base";
-import { PaymentLinkResponse } from "./types";
+import type { FetchClient } from "../../utils/fetch-client.js";
+import type { PaymentLinkResponse } from "./types.js";
 
 /**
  * @module retrieveLink
  * @property {string} linkId - The id of the payment link.
- * @returns {PaymentLinkResponse} - The payment intent data.
+ * @returns {PaymentLinkResponse} - The payment link data.
  *
  * @example
  * ```js
@@ -18,13 +18,11 @@ import { PaymentLinkResponse } from "./types";
  * ```
  */
 export const retrieveLink = async (
+  api: FetchClient,
   linkId: string
 ): Promise<PaymentLinkResponse> => {
-  try {
-    const res = await api.get(`/links/${linkId}`);
-    return res.data;
-  } catch (err) {
-    const error: any = err;
-    throw error.response.data;
-  }
+  return api<PaymentLinkResponse>({
+    method: "GET",
+    path: `/links/${linkId}`,
+  });
 };

@@ -1,6 +1,6 @@
-export * from "./types";
-export * from "./intent";
+export * from "./types.js";
+export * from "./intent/index.js";
 
-export * from "./create-payment";
-export * from "./retrieve-payment";
-export * from "./list-payments";
+export * from "./create-payment.js";
+export * from "./retrieve-payment.js";
+export * from "./list-payments.js";

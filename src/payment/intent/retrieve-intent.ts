@@ -1,5 +1,5 @@
-import api from "../../utils/api-base";
-import { PaymentIntentResponse, RetrievePaymentIntentProps } from "./types";
+import type { FetchClient } from "../../utils/fetch-client.js";
+import type { PaymentIntentResponse, RetrievePaymentIntentProps } from "./types.js";
 
 /**
  * @module retrieveIntent
@@ -20,17 +20,12 @@ import { PaymentIntentResponse, RetrievePaymentIntentProps } from "./types";
  * }
  * ```
  */
-export const retrieveIntent = async ({
-  intentId,
-  clientKey,
-}: RetrievePaymentIntentProps): Promise<PaymentIntentResponse> => {
-  try {
-    let url = `/payment_intents/${intentId}`;
-    if (clientKey) url = `${url}?client_key=${clientKey}`;
-    const res = await api.get<PaymentIntentResponse>(url);
-    return res.data;
-  } catch (err) {
-    const error: any = err;
-    throw error.response.data;
-  }
+export const retrieveIntent = async (
+  api: FetchClient,
+  { intentId, clientKey }: RetrievePaymentIntentProps
+): Promise<PaymentIntentResponse> => {
+  let path = `/payment_intents/${intentId}`;
+  if (clientKey) path = `${path}?client_key=${clientKey}`;
+
+  return api<PaymentIntentResponse>({ method: "GET", path });
 };

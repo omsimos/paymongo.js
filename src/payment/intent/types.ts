@@ -1,4 +1,4 @@
-import { MetaData, PaymentType } from "../types";
+import type { MetaData, PaymentType } from "../types.js";
 
 // props
 export interface CreatePaymentIntentProps {
@@ -8,6 +8,7 @@ export interface CreatePaymentIntentProps {
   currency?: "PHP" | string;
   description?: string;
   statementDescriptor?: string;
+  captureType?: "automatic" | "manual";
   metadata?: MetaData;
 }
 
@@ -24,6 +25,14 @@ export interface AttachPaymentIntentProps {
 }
 
 // response
+export interface PaymentIntentNextAction {
+  type: string;
+  redirect: {
+    url: string;
+    return_url: string;
+  };
+}
+
 export interface PaymentIntentCardResponse {
   request_three_d_secure: string;
 }
@@ -34,6 +43,7 @@ export interface PaymentIntentPaymentMethodOptionsResponse {
 
 export interface PaymentIntentAttributesResponse {
   amount: number;
+  capture_type: string;
   currency: string;
   description?: string;
   statement_descriptor: string;
@@ -42,10 +52,10 @@ export interface PaymentIntentAttributesResponse {
   client_key: string;
   created_at: number;
   updated_at: number;
-  last_payment_error?: any;
+  last_payment_error?: unknown;
   payment_method_allowed: PaymentType[];
-  payments: any[];
-  next_action?: any;
+  payments: unknown[];
+  next_action?: PaymentIntentNextAction | null;
   payment_method_options?: PaymentIntentPaymentMethodOptionsResponse;
   metadata?: MetaData;
 }
@@ -72,24 +82,24 @@ export interface AttachPaymentAttributes {
   access_url?: string;
   amount: number;
   balance_transaction_id: string;
-  billing?: any;
+  billing?: unknown;
   currency: string;
   description?: string;
   disputed: boolean;
-  external_reference_number?: any;
+  external_reference_number?: string | null;
   fee: number;
   foreign_fee: number;
   livemode: boolean;
   net_amount: number;
   origin: string;
   payment_intent_id: string;
-  payout?: any;
+  payout?: unknown;
   source: AttachSource;
   statement_descriptor: string;
   status: string;
-  tax_amount?: any;
-  refunds: any[];
-  taxes: any[];
+  tax_amount?: number | null;
+  refunds: unknown[];
+  taxes: unknown[];
   available_at: number;
   created_at: number;
   paid_at: number;
@@ -120,10 +130,10 @@ export interface AttachAttributes {
   client_key: string;
   created_at: number;
   updated_at: number;
-  last_payment_error?: any;
+  last_payment_error?: unknown;
   payment_method_allowed: string[];
   payments: AttachPayment[];
-  next_action?: any;
+  next_action?: PaymentIntentNextAction | null;
   payment_method_options: AttachPaymentMethodOptions;
   metadata?: MetaData;
 }

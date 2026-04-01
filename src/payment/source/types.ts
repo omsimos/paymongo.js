@@ -1,10 +1,10 @@
-import {
+import type {
   CurrencyType,
   RedirectType,
   SourceType,
   StatusType,
   BillingType,
-} from "../types";
+} from "../types.js";
 
 export interface CreateSourceProps {
   amount: number;
@@ -25,10 +25,10 @@ export interface PaymentSourceAttributes {
   amount: number;
   billing?: BillingType;
   currency: CurrencyType;
-  description?: any;
+  description?: string | null;
   livemode: boolean;
   redirect: RedirectType;
-  statement_descriptor?: any;
+  statement_descriptor?: string | null;
   status: StatusType;
   type: SourceType;
   created_at: number;

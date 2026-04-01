@@ -1,5 +1,5 @@
-import api from "../../utils/api-base";
-import { PaymentWebhookResponse } from "./types";
+import type { FetchClient } from "../../utils/fetch-client.js";
+import type { PaymentWebhookResponse } from "./types.js";
 
 /**
  * @module retrieveWebhook
@@ -18,15 +18,11 @@ import { PaymentWebhookResponse } from "./types";
  * ```
  */
 export const retrieveWebhook = async (
+  api: FetchClient,
   webhookId: string
 ): Promise<PaymentWebhookResponse> => {
-  try {
-    const response = await api.get<PaymentWebhookResponse>(
-      `/webhooks/${webhookId}`
-    );
-    return response.data;
-  } catch (err) {
-    const error: any = err;
-    throw error.response.data;
-  }
+  return api<PaymentWebhookResponse>({
+    method: "GET",
+    path: `/webhooks/${webhookId}`,
+  });
 };

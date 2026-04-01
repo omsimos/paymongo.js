@@ -1,5 +1,5 @@
-import api from "../../utils/api-base";
-import { PaymentIntentResponse, CreatePaymentIntentProps } from "./types";
+import type { FetchClient } from "../../utils/fetch-client.js";
+import type { PaymentIntentResponse, CreatePaymentIntentProps } from "./types.js";
 
 const defaultProps: CreatePaymentIntentProps = {
   amount: 0,
@@ -15,7 +15,7 @@ const defaultProps: CreatePaymentIntentProps = {
  * @property {string} request3DS - This is the only current option for card payment method. Depending on the value, this option decides whether the card must require 3DS authentication or adjust depending on the default 3D Secure configuration of the card. Possible values are either any or automatic. any requires 3D Secure authentication if supported while automatic uses the default 3D Secure configuration of the card.
  * @property {string} currency - Three-letter ISO currency code, in uppercase. PHP is the only supported currency as of the moment.
  * @property {string} description - Description of the payment intent. The value saved here will also be saved to the Payments resource that will be generated on attach PaymentMethod to PaymentIntent endpoint.
- * @property {string} statementDescriptor - You can use this value as the complete description that appears on your customers’ statements. Your account's business name is the default value if not passed. The characters accepted are alphanumeric, , . - ) ( @ + &, and space.
+ * @property {string} statementDescriptor - You can use this value as the complete description that appears on your customers' statements. Your account's business name is the default value if not passed. The characters accepted are alphanumeric, , . - ) ( @ + &, and space.
  * @property {MetaData} metadata - A set of key-value pairs that you can attach to the resource. This can be useful for storing additional information about the object in a structured format. Only string values are accepted
  * @returns {PaymentIntentResponse} - The payment intent data.
  *
@@ -35,16 +35,20 @@ const defaultProps: CreatePaymentIntentProps = {
  * }
  * ```
  */
-export const createIntent = async ({
-  amount = defaultProps.amount,
-  currency = defaultProps.currency,
-  paymentMethodAllowed = defaultProps.paymentMethodAllowed,
-  request3DS = defaultProps.request3DS,
-  description,
-  statementDescriptor,
-  metadata,
-}: CreatePaymentIntentProps): Promise<PaymentIntentResponse> => {
-  const data: any = {
+export const createIntent = async (
+  api: FetchClient,
+  {
+    amount = defaultProps.amount,
+    currency = defaultProps.currency,
+    paymentMethodAllowed = defaultProps.paymentMethodAllowed,
+    request3DS = defaultProps.request3DS,
+    description,
+    statementDescriptor,
+    captureType,
+    metadata,
+  }: CreatePaymentIntentProps
+): Promise<PaymentIntentResponse> => {
+  const data: Record<string, unknown> = {
     attributes: {
       amount,
       payment_method_allowed: paymentMethodAllowed,
@@ -54,21 +58,16 @@ export const createIntent = async ({
         },
       },
       currency,
+      ...(description && { description }),
+      ...(statementDescriptor && { statement_descriptor: statementDescriptor }),
+      ...(captureType && { capture_type: captureType }),
+      ...(metadata && { metadata }),
     },
   };
 
-  if (description) data.attributes.description = description;
-  if (statementDescriptor)
-    data.attributes.statement_descriptor = statementDescriptor;
-  if (metadata) data.attributes.metadata = metadata;
-
-  try {
-    const res = await api.post<PaymentIntentResponse>("/payment_intents", {
-      data,
-    });
-    return res.data;
-  } catch (err) {
-    const error: any = err;
-    throw error.response.data;
-  }
+  return api<PaymentIntentResponse>({
+    method: "POST",
+    path: "/payment_intents",
+    body: { data },
+  });
 };

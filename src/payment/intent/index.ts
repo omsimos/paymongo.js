@@ -1,3 +1,3 @@
-export * from "./attach-intent";
-export * from "./create-intent";
-export * from "./retrieve-intent";
+export * from "./attach-intent.js";
+export * from "./create-intent.js";
+export * from "./retrieve-intent.js";

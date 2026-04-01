@@ -1,5 +1,5 @@
-import api from "../../utils/api-base";
-import { AttachPaymentIntentProps, AttachPaymentIntentResponse } from "./types";
+import type { FetchClient } from "../../utils/fetch-client.js";
+import type { AttachPaymentIntentProps, AttachPaymentIntentResponse } from "./types.js";
 
 /**
  * @module attachIntent
@@ -23,29 +23,21 @@ import { AttachPaymentIntentProps, AttachPaymentIntentResponse } from "./types";
  * }
  * ```
  */
-export const attachIntent = async ({
-  intentId,
-  methodId,
-  clientKey,
-  returnUrl,
-}: AttachPaymentIntentProps): Promise<AttachPaymentIntentResponse> => {
-  const data: any = {
+export const attachIntent = async (
+  api: FetchClient,
+  { intentId, methodId, clientKey, returnUrl }: AttachPaymentIntentProps
+): Promise<AttachPaymentIntentResponse> => {
+  const data: Record<string, unknown> = {
     attributes: {
       payment_method: methodId,
+      ...(clientKey && { client_key: clientKey }),
+      ...(returnUrl && { return_url: returnUrl }),
     },
   };
 
-  if (clientKey) data.attributes.client_key = clientKey;
-  if (returnUrl) data.attributes.return_url = returnUrl;
-
-  try {
-    const res = await api.post<AttachPaymentIntentResponse>(
-      `/payment_intents/${intentId}/attach`,
-      { data }
-    );
-    return res.data;
-  } catch (err) {
-    const error: any = err;
-    throw error.response.data;
-  }
+  return api<AttachPaymentIntentResponse>({
+    method: "POST",
+    path: `/payment_intents/${intentId}/attach`,
+    body: { data },
+  });
 };

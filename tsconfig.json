@@ -1,16 +1,10 @@
 {
-  // see https://www.typescriptlang.org/tsconfig to better understand tsconfigs
-  "include": [
-    "src",
-    "types"
-  ],
+  "include": ["src"],
   "compilerOptions": {
-    "module": "esnext",
-    "lib": [
-      "dom",
-      "esnext"
-    ],
-    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ESNext", "DOM"],
     "declaration": true,
     "sourceMap": true,
     "rootDir": "./src",
@@ -19,11 +13,9 @@
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "moduleResolution": "node",
-    "jsx": "react",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
+    "noEmit": true
   }
 }

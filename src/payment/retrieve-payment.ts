@@ -1,5 +1,5 @@
-import api from "../utils/api-base";
-import { PaymentResponse } from "./types";
+import type { FetchClient } from "../utils/fetch-client.js";
+import type { PaymentResponse } from "./types.js";
 
 /**
  * @module retrievePayment
@@ -18,13 +18,11 @@ import { PaymentResponse } from "./types";
  * ```
  */
 export const retrievePayment = async (
+  api: FetchClient,
   paymentId: string
 ): Promise<PaymentResponse> => {
-  try {
-    const res = await api.get<PaymentResponse>(`/payments/${paymentId}`);
-    return res.data;
-  } catch (err) {
-    const error: any = err;
-    throw error.response.data;
-  }
+  return api<PaymentResponse>({
+    method: "GET",
+    path: `/payments/${paymentId}`,
+  });
 };

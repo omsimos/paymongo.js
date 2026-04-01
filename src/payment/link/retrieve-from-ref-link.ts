@@ -1,10 +1,10 @@
-import api from "../../utils/api-base";
-import { RetrieveFromRefResponse } from "./types";
+import type { FetchClient } from "../../utils/fetch-client.js";
+import type { RetrieveFromRefResponse } from "./types.js";
 
 /**
  * @module retrieveFromRefLink
  * @property {string} refId - The unique identifier of the PayMongo link checkout URL.
- * @returns {RetrieveFromRefResponse} - The payment intent data.
+ * @returns {RetrieveFromRefResponse} - The payment link data.
  *
  * @example
  * ```js
@@ -18,13 +18,11 @@ import { RetrieveFromRefResponse } from "./types";
  * ```
  */
 export const retrieveFromRefLink = async (
+  api: FetchClient,
   refId: string
 ): Promise<RetrieveFromRefResponse> => {
-  try {
-    const res = await api.get(`/links?reference_number=${refId}`);
-    return res.data;
-  } catch (err) {
-    const error: any = err;
-    throw error.response.data;
-  }
+  return api<RetrieveFromRefResponse>({
+    method: "GET",
+    path: `/links?reference_number=${refId}`,
+  });
 };

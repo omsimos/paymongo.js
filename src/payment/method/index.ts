@@ -1,2 +1,2 @@
-export * from "./create-method";
-export * from "./retrieve-method";
+export * from "./create-method.js";
+export * from "./retrieve-method.js";

@@ -13,13 +13,13 @@ export interface PaymentLinkAttributes {
   fee: number;
   remarks?: string;
   status: string;
-  tax_amount?: any;
-  taxes: any[];
+  tax_amount?: number | null;
+  taxes: unknown[];
   checkout_url: string;
   reference_number: string;
   created_at: number;
   updated_at: number;
-  payments: any[];
+  payments: unknown[];
 }
 
 export interface PaymentLinkData {

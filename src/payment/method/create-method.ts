@@ -1,5 +1,5 @@
-import api from "../../utils/api-base";
-import { CreatePaymentMethodProps, PaymentMethodResponse } from "./types";
+import type { FetchClient } from "../../utils/fetch-client.js";
+import type { CreatePaymentMethodProps, PaymentMethodResponse } from "./types.js";
 
 /**
  * @module createPaymentMethod
@@ -28,13 +28,11 @@ import { CreatePaymentMethodProps, PaymentMethodResponse } from "./types";
  * }
  * ```
  */
-export const createMethod = async ({
-  details,
-  type,
-  billing,
-  metadata,
-}: CreatePaymentMethodProps): Promise<PaymentMethodResponse> => {
-  const data: any = {
+export const createMethod = async (
+  api: FetchClient,
+  { details, type, billing, metadata }: CreatePaymentMethodProps
+): Promise<PaymentMethodResponse> => {
+  const data: Record<string, unknown> = {
     attributes: {
       details: {
         card_number: details.cardNumber,
@@ -43,19 +41,14 @@ export const createMethod = async ({
         cvc: details.cvc,
       },
       type,
+      ...(billing && { billing }),
+      ...(metadata && { metadata }),
     },
   };
 
-  if (billing) data.attributes.billing = billing;
-  if (metadata) data.attributes.metadata = metadata;
-
-  try {
-    const res = await api.post<PaymentMethodResponse>("/payment_methods", {
-      data,
-    });
-    return res.data;
-  } catch (err) {
-    const error: any = err;
-    throw error.response.data;
-  }
+  return api<PaymentMethodResponse>({
+    method: "POST",
+    path: "/payment_methods",
+    body: { data },
+  });
 };

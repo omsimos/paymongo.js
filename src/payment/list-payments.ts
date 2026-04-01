@@ -1,9 +1,9 @@
-import api from "../utils/api-base";
-import { ListPaymentResponse } from "./types";
+import type { FetchClient } from "../utils/fetch-client.js";
+import type { ListPaymentResponse } from "./types.js";
 
 /**
  * @module listPayments
- * @returns {ListPaymentResponse} - The list of payment webhooks.
+ * @returns {ListPaymentResponse} - The list of payments.
  *
  * @example
  * ```js
@@ -11,17 +11,16 @@ import { ListPaymentResponse } from "./types";
  *
  * const main = async () => {
  *  const client = PaymongoClient("sk_test_key");
- *  const webhooks = await client.payment.list();
- *  return webhooks;
+ *  const payments = await client.payment.list();
+ *  return payments;
  * }
  * ```
  */
-export const listPayments = async (): Promise<ListPaymentResponse> => {
-  try {
-    const response = await api.get<ListPaymentResponse>("/payments");
-    return response.data;
-  } catch (err) {
-    const error: any = err;
-    throw error.response.data;
-  }
+export const listPayments = async (
+  api: FetchClient
+): Promise<ListPaymentResponse> => {
+  return api<ListPaymentResponse>({
+    method: "GET",
+    path: "/payments",
+  });
 };

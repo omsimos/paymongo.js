@@ -1,17 +1,17 @@
 // intent
-export * from "./intent/types";
+export * from "./intent/types.js";
 
 // method
-export * from "./method/types";
+export * from "./method/types.js";
 
 // webhook
-export * from "./webhook/types";
+export * from "./webhook/types.js";
 
 // source
-export * from "./source/types";
+export * from "./source/types.js";
 
 // links
-export * from "./link/types";
+export * from "./link/types.js";
 
 // payments
 export interface PaymentProps {
@@ -36,26 +36,26 @@ export interface PaymentData {
 }
 
 export interface PaymentAttributes {
-  access_url?: any;
+  access_url?: string | null;
   amount: number;
   balance_transaction_id: string;
   billing?: BillingType;
   currency: CurrencyType;
   description: string;
   disputed: boolean;
-  external_reference_number?: any;
+  external_reference_number?: string | null;
   fee: number;
   livemode: boolean;
   net_amount: number;
   origin: string;
-  payment_intent_id?: any;
-  payout?: any;
+  payment_intent_id?: string | null;
+  payout?: string | null;
   source: PaymentSource;
   statement_descriptor: string;
   status: StatusType;
-  tax_amount?: any;
-  refunds: any[];
-  taxes: any[];
+  tax_amount?: number | null;
+  refunds: unknown[];
+  taxes: unknown[];
   available_at: number;
   created_at: number;
   paid_at: number;
@@ -77,20 +77,47 @@ export type MetaData = {
   [key: string]: string;
 };
 
-export type PaymentType = "card" | "paymaya" | string;
-export type SourceType = "gcash" | "grab_pay" | string;
+export type PaymentType =
+  | "billease"
+  | "card"
+  | "dob"
+  | "gcash"
+  | "grab_pay"
+  | "paymaya"
+  | "brankas"
+  | "qrph"
+  | "shopee_pay"
+  | (string & {});
+
+export type SourceType = "gcash" | "grab_pay" | (string & {});
+
 export type CurrencyType = "PHP";
+
 export type RedirectType = {
   success: string;
   failed: string;
   checkout_url?: string;
 };
-export type StatusType = "pending" | "paid" | string;
+
+export type StatusType = "pending" | "paid" | "failed" | "refunded" | (string & {});
 
 export type WebhookEvent =
+  | "checkout_session.payment.paid"
   | "source.chargeable"
   | "payment.paid"
-  | "payment.failed";
+  | "payment.failed"
+  | "payment.refunded"
+  | "payment.refund.updated"
+  | "link.payment.paid"
+  | "qrph.expired"
+  | "subscription.past_due"
+  | "subscription.unpaid"
+  | "subscription.updated"
+  | "subscription.invoice.created"
+  | "subscription.invoice.finalized"
+  | "subscription.invoice.paid"
+  | "subscription.invoice.payment_failed"
+  | (string & {});
 
 /**
  * @property {string} name - Name of the billing information

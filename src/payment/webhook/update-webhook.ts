@@ -1,11 +1,11 @@
-import api from "../../utils/api-base";
-import { UpdateWebhookProps, PaymentWebhookResponse } from "./types";
+import type { FetchClient } from "../../utils/fetch-client.js";
+import type { UpdateWebhookProps, PaymentWebhookResponse } from "./types.js";
 
 /**
  * @module updateWebhook
  * @property {string} webhookId - The ID of the webhook to update.
  * @property {string} url - The webhook url
- * @property {string[]} events - The webhook events ("source.chargeable" | "payment.paid" | "payment.failed")
+ * @property {string[]} events - The webhook events
  * @returns {PaymentWebhookResponse} - The payment webhook data.
  *
  * @example
@@ -23,26 +23,20 @@ import { UpdateWebhookProps, PaymentWebhookResponse } from "./types";
  * }
  * ```
  */
-export const updateWebhook = async ({
-  webhookId,
-  url,
-  events,
-}: UpdateWebhookProps): Promise<PaymentWebhookResponse> => {
-  const data: any = {
+export const updateWebhook = async (
+  api: FetchClient,
+  { webhookId, url, events }: UpdateWebhookProps
+): Promise<PaymentWebhookResponse> => {
+  const data: Record<string, unknown> = {
     attributes: {
-      url,
-      events,
+      ...(url && { url }),
+      ...(events && { events }),
     },
   };
 
-  try {
-    const response = await api.put<PaymentWebhookResponse>(
-      `/webhooks/${webhookId}`,
-      { data }
-    );
-    return response.data;
-  } catch (err) {
-    const error: any = err;
-    throw error.response.data;
-  }
+  return api<PaymentWebhookResponse>({
+    method: "PUT",
+    path: `/webhooks/${webhookId}`,
+    body: { data },
+  });
 };

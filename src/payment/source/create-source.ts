@@ -1,6 +1,6 @@
-import api from "../../utils/api-base";
-import { CurrencyType } from "../types";
-import { PaymentSourceResponse, CreateSourceProps } from "./types";
+import type { FetchClient } from "../../utils/fetch-client.js";
+import type { CurrencyType } from "../types.js";
+import type { PaymentSourceResponse, CreateSourceProps } from "./types.js";
 
 const defaultProps = {
   amount: 0,
@@ -37,31 +37,29 @@ const defaultProps = {
  * }
  * ```
  */
-export const createSource = async ({
-  amount = defaultProps.amount,
-  type = defaultProps.type,
-  currency = defaultProps.currency as CurrencyType,
-  redirect,
-  billing,
-}: CreateSourceProps): Promise<PaymentSourceResponse> => {
-  const data: any = {
+export const createSource = async (
+  api: FetchClient,
+  {
+    amount = defaultProps.amount,
+    type = defaultProps.type,
+    currency = defaultProps.currency as CurrencyType,
+    redirect,
+    billing,
+  }: CreateSourceProps
+): Promise<PaymentSourceResponse> => {
+  const data: Record<string, unknown> = {
     attributes: {
       amount,
       redirect,
       type,
       currency,
+      ...(billing && { billing }),
     },
   };
 
-  if (billing) data.attributes.billing = billing;
-
-  try {
-    const response = await api.post<PaymentSourceResponse>("/sources", {
-      data,
-    });
-    return response.data;
-  } catch (err) {
-    const error: any = err;
-    throw error.response.data;
-  }
+  return api<PaymentSourceResponse>({
+    method: "POST",
+    path: "/sources",
+    body: { data },
+  });
 };

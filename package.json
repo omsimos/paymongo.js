@@ -1,61 +1,51 @@
 {
-  "version": "1.2.1-0",
+  "name": "paymongo.js",
+  "version": "2.0.0",
   "license": "MIT",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "author": "princejoogie",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "engines": {
-    "node": ">=10"
+    "node": ">=18"
   },
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "test": "tsdx test",
-    "lint": "eslint --fix src/**/*.{js,ts}",
-    "prepare": "husky install",
-    "size": "size-limit",
-    "release": "np"
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint --fix src/**/*.ts",
+    "typecheck": "tsc --noEmit"
   },
-  "peerDependencies": {},
-  "name": "paymongo.js",
-  "author": "princejoogie",
-  "module": "dist/paymongo.js.esm.js",
-  "size-limit": [
-    {
-      "path": "dist/paymongo.js.cjs.production.min.js",
-      "limit": "15 KB"
-    },
-    {
-      "path": "dist/paymongo.js.esm.js",
-      "limit": "15 KB"
-    }
-  ],
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^7.0.5",
-    "@typescript-eslint/eslint-plugin": "^5.9.0",
-    "@typescript-eslint/parser": "^5.9.0",
-    "dotenv": "^11.0.0",
-    "eslint": "^8.6.0",
-    "eslint-config-prettier": "^8.3.0",
-    "husky": "^7.0.4",
-    "lint-staged": "^12.1.7",
-    "np": "^7.6.0",
-    "prettier": "2.5.1",
-    "size-limit": "^7.0.5",
-    "tsdx": "^0.14.1",
-    "tslib": "^2.3.1",
-    "typescript": "^4.5.4"
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "dotenv": "^16.4.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.4.0",
+    "tsdown": "^0.21.0",
+    "typescript": "^5.8.0",
+    "vitest": "^3.1.0"
   },
-  "dependencies": {
-    "axios": "^0.24.0",
-    "zustand": "^3.6.8"
-  },
-  "lint-staged": {
-    "*.{ts,d.ts}": "eslint --cache --fix --no-ignore",
-    "*.{ts,d.ts,md,json}": "prettier --write"
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild", "@rolldown/binding-darwin-arm64"]
   },
   "repository": {
     "type": "git",
