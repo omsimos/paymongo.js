@@ -1,12 +1,11 @@
 import type { MetaData, BillingType, PaymentType } from "../types.js";
 
-// props
-export interface PaymentMethodDetails {
-  cardNumber: string;
-  expMonth: number;
-  expYear: number;
-  cvc: string;
-}
+export type PaymentMethodDetails =
+  | { type: "card"; cardNumber: string; expMonth: number; expYear: number; cvc: string }
+  | { type: "gcash" | "paymaya"; phoneNumber: string }
+  | { type: "dob" | "brankas"; bankCode: string }
+  | { type: Exclude<PaymentType, "card" | "gcash" | "paymaya" | "dob" | "brankas">; details: Record<string, unknown> }
+  | { type: string; details?: Record<string, unknown> };
 
 export interface PaymentMethodAddress {
   line1: string;

@@ -32,14 +32,30 @@ export const createMethod = async (
   api: FetchClient,
   { details, type, billing, metadata }: CreatePaymentMethodProps
 ): Promise<PaymentMethodResponse> => {
+  const mapDetails = (d: typeof details): Record<string, unknown> => {
+    if ("cardNumber" in d) {
+      return {
+        card_number: d.cardNumber,
+        exp_month: d.expMonth,
+        exp_year: d.expYear,
+        cvc: d.cvc,
+      };
+    }
+    if ("phoneNumber" in d) {
+      return { phone_number: d.phoneNumber };
+    }
+    if ("bankCode" in d) {
+      return { bank_code: d.bankCode };
+    }
+    if ("details" in d) {
+      return d.details ?? {};
+    }
+    return {};
+  };
+
   const data: Record<string, unknown> = {
     attributes: {
-      details: {
-        card_number: details.cardNumber,
-        exp_month: details.expMonth,
-        exp_year: details.expYear,
-        cvc: details.cvc,
-      },
+      details: mapDetails(details),
       type,
       ...(billing && { billing }),
       ...(metadata && { metadata }),
