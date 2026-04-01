@@ -4,9 +4,10 @@ import type { CreatePaymentMethodProps, PaymentMethodResponse } from "./types.js
 /**
  * @module createPaymentMethod
  * @property {PaymentMethodDetails} details - The details of the payment method.
- * @property {string} type - The type of payment method. The possible values are card and paymaya for now.
- * @property {PaymentMethodBilling} billing - The billing details
- * @property {MetaData} metadata - A set of key-value pairs that you can attach to the resource. This can be useful for storing additional information about the object in a structured format. Only string values are accepted.
+ * @property {string} type - The type of payment method (card, gcash, paymaya, dob, brankas, etc.).
+ * @property {BillingType} billing - The billing details
+ * @property {MetaData} metadata - A set of key-value pairs for additional information.
+ * @property {number} expiry_seconds - Seconds until the payment method expires. Only applicable for qrph and shopee_pay.
  * @returns {PaymentMethodResponse} - The payment method data.
  *
  * @example
@@ -17,9 +18,9 @@ import type { CreatePaymentMethodProps, PaymentMethodResponse } from "./types.js
  *  const client = PaymongoClient("sk_test_key");
  *  const data = await client.method.create({
  *    details: {
- *      cardNumber: "4343434343434345",
- *      expMonth: 3,
- *      expYear: 2023,
+ *      card_number: "4343434343434345",
+ *      exp_month: 3,
+ *      exp_year: 2023,
  *      cvc: "321",
  *    },
  *    type: "card",
@@ -30,42 +31,11 @@ import type { CreatePaymentMethodProps, PaymentMethodResponse } from "./types.js
  */
 export const createMethod = async (
   api: FetchClient,
-  { details, type, billing, metadata, expirySeconds }: CreatePaymentMethodProps
+  props: CreatePaymentMethodProps
 ): Promise<PaymentMethodResponse> => {
-  const mapDetails = (d: typeof details): Record<string, unknown> => {
-    if ("cardNumber" in d) {
-      return {
-        card_number: d.cardNumber,
-        exp_month: d.expMonth,
-        exp_year: d.expYear,
-        cvc: d.cvc,
-      };
-    }
-    if ("phoneNumber" in d) {
-      return { phone_number: d.phoneNumber };
-    }
-    if ("bankCode" in d) {
-      return { bank_code: d.bankCode };
-    }
-    if ("details" in d) {
-      return d.details ?? {};
-    }
-    return {};
-  };
-
-  const data: Record<string, unknown> = {
-    attributes: {
-      details: mapDetails(details),
-      type,
-      ...(billing && { billing }),
-      ...(metadata && { metadata }),
-      ...(expirySeconds && { expiry_seconds: expirySeconds }),
-    },
-  };
-
   return api<PaymentMethodResponse>({
     method: "POST",
     path: "/payment_methods",
-    body: { data },
+    body: { data: { attributes: props } },
   });
 };

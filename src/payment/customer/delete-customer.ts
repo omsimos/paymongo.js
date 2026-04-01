@@ -3,7 +3,7 @@ import type { CustomerResponse } from "./types.js";
 
 /**
  * @module deleteCustomer
- * @property {string} customerId - The unique identifier of the customer to delete.
+ * @property {string} customer_id - The unique identifier of the customer to delete.
  * @returns {CustomerResponse} - The deleted customer data.
  *
  * @example
@@ -19,10 +19,10 @@ import type { CustomerResponse } from "./types.js";
  */
 export const deleteCustomer = async (
   api: FetchClient,
-  customerId: string
+  customer_id: string
 ): Promise<CustomerResponse> => {
   return api<CustomerResponse>({
     method: "DELETE",
-    path: `/v2/customers/${customerId}`,
+    path: `/v2/customers/${customer_id}`,
   });
 };

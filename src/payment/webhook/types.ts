@@ -6,7 +6,7 @@ export interface CreateWebhookProps {
 }
 
 export interface UpdateWebhookProps extends Partial<CreateWebhookProps> {
-  webhookId: string;
+  webhook_id: string;
 }
 
 export interface WebhookAttributes {

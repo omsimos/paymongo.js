@@ -4,18 +4,11 @@ import type { ChangeSubscriptionPaymentMethodProps, SubscriptionResponse } from 
 export const changeSubscriptionPaymentMethod = async (
   api: FetchClient,
   subscriptionId: string,
-  { paymentMethodId, redirectUrl }: ChangeSubscriptionPaymentMethodProps
+  props: ChangeSubscriptionPaymentMethodProps
 ): Promise<SubscriptionResponse> => {
-  const data: Record<string, unknown> = {
-    attributes: {
-      payment_method_id: paymentMethodId,
-      ...(redirectUrl && { redirect_url: redirectUrl }),
-    },
-  };
-
   return api<SubscriptionResponse>({
     method: "PUT",
     path: `/v1/subscriptions/${subscriptionId}/payment_method`,
-    body: { data },
+    body: { data: { attributes: props } },
   });
 };

@@ -3,8 +3,8 @@ import type { PaymentIntentResponse, RetrievePaymentIntentProps } from "./types.
 
 /**
  * @module retrieveIntent
- * @property {string} id - Id of the PaymentIntent.
- * @property {string} clientKey - Client key of the PaymentIntent if the key used is a public key.
+ * @property {string} intent_id - Id of the PaymentIntent.
+ * @property {string} client_key - Client key of the PaymentIntent if the key used is a public key.
  * @returns {PaymentIntentResponse} - The payment intent data.
  *
  * @example
@@ -14,7 +14,7 @@ import type { PaymentIntentResponse, RetrievePaymentIntentProps } from "./types.
  * const main = async () => {
  *  const client = PaymongoClient("sk_test_key");
  *  data = await client.intent.retrieve({
- *    id: "pi_key",
+ *    intent_id: "pi_key",
  *  });
  *  return data
  * }
@@ -22,10 +22,10 @@ import type { PaymentIntentResponse, RetrievePaymentIntentProps } from "./types.
  */
 export const retrieveIntent = async (
   api: FetchClient,
-  { intentId, clientKey }: RetrievePaymentIntentProps
+  { intent_id, client_key }: RetrievePaymentIntentProps
 ): Promise<PaymentIntentResponse> => {
-  let path = `/payment_intents/${intentId}`;
-  if (clientKey) path = `${path}?client_key=${clientKey}`;
+  let path = `/payment_intents/${intent_id}`;
+  if (client_key) path = `${path}?client_key=${client_key}`;
 
   return api<PaymentIntentResponse>({ method: "GET", path });
 };

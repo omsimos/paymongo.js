@@ -3,7 +3,7 @@ import type { RetrieveCheckoutSessionResponse } from "./types.js";
 
 /**
  * @module retrieveCheckout
- * @property {string} checkoutId - The unique identifier of the Checkout Session (prefixed with cs_).
+ * @property {string} checkout_id - The unique identifier of the Checkout Session (prefixed with cs_).
  * @returns {RetrieveCheckoutSessionResponse} - The checkout session data.
  *
  * @example
@@ -19,10 +19,10 @@ import type { RetrieveCheckoutSessionResponse } from "./types.js";
  */
 export const retrieveCheckout = async (
   api: FetchClient,
-  checkoutId: string
+  checkout_id: string
 ): Promise<RetrieveCheckoutSessionResponse> => {
   return api<RetrieveCheckoutSessionResponse>({
     method: "GET",
-    path: `/checkout_sessions/${checkoutId}`,
+    path: `/checkout_sessions/${checkout_id}`,
   });
 };

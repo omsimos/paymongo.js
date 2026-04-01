@@ -41,17 +41,17 @@ export interface SubscriptionResponse {
 }
 
 export interface CreateSubscriptionProps {
-  customerId: string;
-  planId: string;
+  customer_id: string;
+  plan_id: string;
 }
 
 export interface ListSubscriptionProps {
   limit?: number;
   after?: string;
   before?: string;
-  customerId?: string;
-  planId?: string;
-  sortBy?: string;
+  customer_id?: string;
+  plan_id?: string;
+  sort_by?: string;
   order?: "asc" | "desc";
 }
 
@@ -62,14 +62,14 @@ export interface ListSubscriptionResponse {
 }
 
 export interface CancelSubscriptionProps {
-  cancellationReason: "too_expensive" | "missing_features" | "switched_service" | "unused" | "other";
+  cancellation_reason: "too_expensive" | "missing_features" | "switched_service" | "unused" | "other";
 }
 
 export interface ChangeSubscriptionPlanProps {
-  planId: string;
+  plan_id: string;
 }
 
 export interface ChangeSubscriptionPaymentMethodProps {
-  paymentMethodId: string;
-  redirectUrl?: string;
+  payment_method_id: string;
+  redirect_url?: string;
 }

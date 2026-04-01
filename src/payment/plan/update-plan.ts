@@ -4,20 +4,11 @@ import type { UpdatePlanProps, PlanResponse } from "./types.js";
 export const updatePlan = async (
   api: FetchClient,
   planId: string,
-  { name, amount, description, metadata }: UpdatePlanProps
+  props: UpdatePlanProps
 ): Promise<PlanResponse> => {
-  const data: Record<string, unknown> = {
-    attributes: {
-      ...(name && { name }),
-      ...(amount && { amount }),
-      ...(description && { description }),
-      ...(metadata && { metadata }),
-    },
-  };
-
   return api<PlanResponse>({
     method: "PUT",
     path: `/v1/subscriptions/plans/${planId}`,
-    body: { data },
+    body: { data: { attributes: props } },
   });
 };

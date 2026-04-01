@@ -3,12 +3,12 @@ import type { CreateCheckoutSessionProps, CheckoutSessionResponse } from "./type
 
 /**
  * @module createCheckout
- * @property {CheckoutLineItem[]} lineItems - List of items to be purchased.
- * @property {PaymentType[]} paymentMethodTypes - List of allowed payment methods (e.g., ["card", "gcash"]).
- * @property {string} successUrl - The URL to redirect the user to after a successful payment.
- * @property {string} cancelUrl - The URL to redirect the user to after a cancelled payment.
+ * @property {CheckoutLineItem[]} line_items - List of items to be purchased.
+ * @property {PaymentType[]} payment_method_types - List of allowed payment methods (e.g., ["card", "gcash"]).
+ * @property {string} success_url - The URL to redirect the user to after a successful payment.
+ * @property {string} cancel_url - The URL to redirect the user to after a cancelled payment.
  * @property {string} description - Description of the checkout session.
- * @property {string} statementDescriptor - Text that appears on customer statements.
+ * @property {string} statement_descriptor - Text that appears on customer statements.
  * @property {MetaData} metadata - A set of key-value pairs for additional information.
  * @returns {CheckoutSessionResponse} - The checkout session data.
  *
@@ -19,9 +19,9 @@ import type { CreateCheckoutSessionProps, CheckoutSessionResponse } from "./type
  * const main = async () => {
  *  const client = PaymongoClient("sk_test_key");
  *  const data = await client.checkout.create({
- *    lineItems: [{ name: "Test Item", amount: 10000, quantity: 1 }],
- *    paymentMethodTypes: ["card"],
- *    successUrl: "https://example.com/success",
+ *    line_items: [{ name: "Test Item", amount: 10000, quantity: 1 }],
+ *    payment_method_types: ["card"],
+ *    success_url: "https://example.com/success",
  *  });
  *  return data
  * }
@@ -29,38 +29,11 @@ import type { CreateCheckoutSessionProps, CheckoutSessionResponse } from "./type
  */
 export const createCheckout = async (
   api: FetchClient,
-  {
-    lineItems,
-    paymentMethodTypes,
-    successUrl,
-    cancelUrl,
-    description,
-    statementDescriptor,
-    metadata,
-  }: CreateCheckoutSessionProps
+  props: CreateCheckoutSessionProps
 ): Promise<CheckoutSessionResponse> => {
-  const data: Record<string, unknown> = {
-    attributes: {
-      line_items: lineItems.map((item) => ({
-        name: item.name,
-        amount: item.amount,
-        currency: item.currency || "PHP",
-        quantity: item.quantity,
-        ...(item.description && { description: item.description }),
-        ...(item.imageUrl && { image_url: item.imageUrl }),
-      })),
-      payment_method_types: paymentMethodTypes,
-      success_url: successUrl,
-      ...(cancelUrl && { cancel_url: cancelUrl }),
-      ...(description && { description }),
-      ...(statementDescriptor && { statement_descriptor: statementDescriptor }),
-      ...(metadata && { metadata }),
-    },
-  };
-
   return api<CheckoutSessionResponse>({
     method: "POST",
     path: "/checkout_sessions",
-    body: { data },
+    body: { data: { attributes: props } },
   });
 };

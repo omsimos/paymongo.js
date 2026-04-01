@@ -3,7 +3,7 @@ import type { MetaData } from "../types.js";
 export type RefundReason = "duplicate" | "fraudulent" | "requested_by_customer" | "others";
 
 export interface CreateRefundProps {
-  paymentId: string;
+  payment_id: string;
   amount?: number;
   reason: RefundReason;
   notes?: string;
@@ -58,7 +58,7 @@ export interface RefundResponse {
 }
 
 export interface ListRefundProps {
-  paymentId?: string;
+  payment_id?: string;
   limit?: number;
   after?: string;
   before?: string;

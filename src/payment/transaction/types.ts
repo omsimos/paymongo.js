@@ -4,8 +4,8 @@ export interface ListTransactionProps {
   limit?: number;
   cursor?: string;
   type?: TransactionType;
-  createdAtStart?: number;
-  createdAtEnd?: number;
+  created_at_start?: number;
+  created_at_end?: number;
 }
 
 export interface TransactionAttributes {

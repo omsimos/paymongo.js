@@ -3,7 +3,7 @@ import type { CancelPaymentIntentResponse } from "./types.js";
 
 /**
  * @module cancelIntent
- * @property {string} intentId - The unique identifier of the PaymentIntent to cancel.
+ * @property {string} intent_id - The unique identifier of the PaymentIntent to cancel.
  * @returns {CancelPaymentIntentResponse} - Empty object on success.
  *
  * @example
@@ -19,10 +19,10 @@ import type { CancelPaymentIntentResponse } from "./types.js";
  */
 export const cancelIntent = async (
   api: FetchClient,
-  intentId: string
+  intent_id: string
 ): Promise<CancelPaymentIntentResponse> => {
   return api<CancelPaymentIntentResponse>({
     method: "POST",
-    path: `/payment_intents/${intentId}/cancel`,
+    path: `/payment_intents/${intent_id}/cancel`,
   });
 };

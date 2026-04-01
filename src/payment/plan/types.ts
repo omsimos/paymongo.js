@@ -9,9 +9,9 @@ export interface CreatePlanProps {
   currency?: string;
   description?: string;
   interval: PlanInterval;
-  intervalCount: number;
+  interval_count: number;
   type?: PlanType;
-  cycleCount?: number;
+  cycle_count?: number;
   metadata?: MetaData;
 }
 

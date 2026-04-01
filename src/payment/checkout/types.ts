@@ -1,29 +1,34 @@
 import type { MetaData, PaymentType } from "../types.js";
 
-export interface CheckoutLineItem {
-  name: string;
-  amount: number;
-  currency?: "PHP";
-  quantity: number;
-  description?: string;
-  imageUrl?: string;
-}
-
 export interface CreateCheckoutSessionProps {
-  lineItems: CheckoutLineItem[];
-  paymentMethodTypes: PaymentType[];
-  successUrl: string;
-  cancelUrl?: string;
+  line_items: {
+    name: string;
+    amount: number;
+    currency?: "PHP";
+    quantity: number;
+    description?: string;
+    image_url?: string;
+  }[];
+  payment_method_types: PaymentType[];
+  success_url: string;
+  cancel_url?: string;
   description?: string;
-  statementDescriptor?: string;
+  statement_descriptor?: string;
   metadata?: MetaData;
 }
 
 export interface CheckoutSessionAttributes {
-  checkoutUrl: string;
-  referenceNumber?: string;
+  checkout_url: string;
+  reference_number?: string;
   status: string;
-  lineItems?: CheckoutLineItem[];
+  line_items?: {
+    name: string;
+    amount: number;
+    currency?: "PHP";
+    quantity: number;
+    description?: string;
+    image_url?: string;
+  }[];
   payments?: unknown[];
   metadata?: MetaData;
 }
@@ -39,11 +44,11 @@ export interface CheckoutSessionResponse {
 }
 
 export interface RetrieveCheckoutSessionProps {
-  checkoutId: string;
+  checkout_id: string;
 }
 
 export interface RetrieveCheckoutSessionAttributes {
-  referenceNumber: string;
+  reference_number: string;
   status: string;
   payments: unknown[];
   metadata?: MetaData;

@@ -3,12 +3,12 @@ import type { ListRefundProps, ListRefundResponse } from "./types.js";
 
 export const listRefunds = async (
   api: FetchClient,
-  { paymentId, limit = 10, after, before }: ListRefundProps = {}
+  props: ListRefundProps = {}
 ): Promise<ListRefundResponse> => {
-  const query: Record<string, unknown> = { limit };
-  if (paymentId) query["data.attributes.payment_id"] = paymentId;
-  if (after) query["data.attributes.after"] = after;
-  if (before) query["data.attributes.before"] = before;
+  const query: Record<string, unknown> = { limit: props.limit ?? 10 };
+  if (props.payment_id) query["data.attributes.payment_id"] = props.payment_id;
+  if (props.after) query["data.attributes.after"] = props.after;
+  if (props.before) query["data.attributes.before"] = props.before;
 
   return api<ListRefundResponse>({
     method: "GET",

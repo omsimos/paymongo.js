@@ -3,7 +3,7 @@ import type { CustomerResponse } from "./types.js";
 
 /**
  * @module retrieveCustomer
- * @property {string} customerId - The unique identifier of the customer.
+ * @property {string} customer_id - The unique identifier of the customer.
  * @returns {CustomerResponse} - The customer data.
  *
  * @example
@@ -19,10 +19,10 @@ import type { CustomerResponse } from "./types.js";
  */
 export const retrieveCustomer = async (
   api: FetchClient,
-  customerId: string
+  customer_id: string
 ): Promise<CustomerResponse> => {
   return api<CustomerResponse>({
     method: "GET",
-    path: `/v2/customers/${customerId}`,
+    path: `/v2/customers/${customer_id}`,
   });
 };

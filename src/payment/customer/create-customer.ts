@@ -4,7 +4,7 @@ import type { CreateCustomerProps, CustomerResponse } from "./types.js";
 /**
  * @module createCustomer
  * @property {string} name - The name of the customer.
- * @property {string} mobilePhone - The mobile phone number in E.164 format (must start with +).
+ * @property {string} mobile_phone - The mobile phone number in E.164 format (must start with +).
  * @property {string} email - The email address of the customer.
  * @property {CustomerAddress} address - The address of the customer.
  * @property {CustomerShipping} shipping - The shipping information for the customer.
@@ -27,20 +27,11 @@ import type { CreateCustomerProps, CustomerResponse } from "./types.js";
  */
 export const createCustomer = async (
   api: FetchClient,
-  { name, mobilePhone, email, address, shipping, metadata }: CreateCustomerProps
+  props: CreateCustomerProps
 ): Promise<CustomerResponse> => {
-  const data: Record<string, unknown> = {
-    name,
-    ...(mobilePhone && { mobile_phone: mobilePhone }),
-    ...(email && { email }),
-    ...(address && { address }),
-    ...(shipping && { shipping }),
-    ...(metadata && { metadata }),
-  };
-
   return api<CustomerResponse>({
     method: "POST",
     path: "/v2/customers",
-    body: { data },
+    body: { data: props },
   });
 };
