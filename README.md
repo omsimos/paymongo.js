@@ -267,6 +267,198 @@ See [Webhook Resource](https://developers.paymongo.com/reference/webhook-resourc
   const webhook = await client.webhook.disable("some_webhook_id");
   ```
 
+### Customers
+
+- **Create a Customer**
+
+  ```js
+  const customer = await client.customer.create({
+    name: "John Doe",
+    email: "john@example.com",
+    mobilePhone: "+631234567890",
+  });
+  ```
+
+- **List Customers**
+
+  ```js
+  const customers = await client.customer.list({ limit: 10, page: 1 });
+  ```
+
+- **Retrieve a Customer**
+
+  ```js
+  const customer = await client.customer.retrieve("cus_123");
+  ```
+
+- **Update a Customer**
+
+  ```js
+  const customer = await client.customer.update("cus_123", { name: "Updated Name" });
+  ```
+
+- **Delete a Customer**
+
+  ```js
+  const customer = await client.customer.delete("cus_123");
+  ```
+
+### Products
+
+- **Create a Product**
+
+  ```js
+  const product = await client.product.create({
+    name: "Test Product",
+    price: 10000,
+    currency: "PHP",
+  });
+  ```
+
+- **List Products**
+
+  ```js
+  const products = await client.product.list({ limit: 10, page: 1 });
+  ```
+
+- **Retrieve a Product**
+
+  ```js
+  const product = await client.product.retrieve("prod_123");
+  ```
+
+- **Update a Product**
+
+  ```js
+  const product = await client.product.update("prod_123", { name: "Updated Name" });
+  ```
+
+- **Delete a Product**
+
+  ```js
+  const product = await client.product.delete("prod_123");
+  ```
+
+### Plans
+
+- **Create a Plan**
+
+  ```js
+  const plan = await client.plan.create({
+    name: "Monthly Plan",
+    amount: 1000,
+    currency: "PHP",
+    interval: "monthly",
+    intervalCount: 1,
+  });
+  ```
+
+- **List Plans**
+
+  ```js
+  const plans = await client.plan.list({ limit: 10, page: 1 });
+  ```
+
+- **Retrieve a Plan**
+
+  ```js
+  const plan = await client.plan.retrieve("plan_123");
+  ```
+
+- **Update a Plan**
+
+  ```js
+  const plan = await client.plan.update("plan_123", { name: "Updated Plan" });
+  ```
+
+### Subscriptions
+
+- **Create a Subscription**
+
+  ```js
+  const subscription = await client.subscription.create({
+    customerId: "cus_123",
+    planId: "plan_123",
+  });
+  ```
+
+- **List Subscriptions**
+
+  ```js
+  const subscriptions = await client.subscription.list({ limit: 10 });
+  ```
+
+- **Retrieve a Subscription**
+
+  ```js
+  const subscription = await client.subscription.retrieve("sub_123");
+  ```
+
+- **Cancel a Subscription**
+
+  ```js
+  const subscription = await client.subscription.cancel("sub_123", {
+    cancellationReason: "too_expensive",
+  });
+  ```
+
+- **Change Subscription Plan**
+
+  ```js
+  const subscription = await client.subscription.changePlan("sub_123", {
+    planId: "plan_456",
+  });
+  ```
+
+- **Change Payment Method**
+
+  ```js
+  const subscription = await client.subscription.changePaymentMethod("sub_123", {
+    paymentMethodId: "pm_123",
+    redirectUrl: "https://example.com/success",
+  });
+  ```
+
+### Refunds
+
+- **Create a Refund**
+
+  ```js
+  const refund = await client.refund.create({
+    paymentId: "pay_123",
+    amount: 5000,
+    reason: "requested_by_customer",
+  });
+  ```
+
+- **List Refunds**
+
+  ```js
+  const refunds = await client.refund.list({ limit: 10 });
+  ```
+
+- **Retrieve a Refund**
+
+  ```js
+  const refund = await client.refund.retrieve("ref_123");
+  ```
+
+### Transactions
+
+- **List Transactions**
+
+  ```js
+  const transactions = await client.transaction.list({ limit: 10, type: "payment" });
+  ```
+
+### Fraud
+
+- **List Fraud Reviews**
+
+  ```js
+  const reviews = await client.fraud.listReviews({ limit: 10 });
+  ```
+
 ---
 
 ## Contributing
