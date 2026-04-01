@@ -19,6 +19,37 @@ import {
 } from "./payment/link/index.js";
 import { createPayment, retrievePayment, listPayments } from "./payment/index.js";
 import { createCheckout, retrieveCheckout } from "./payment/checkout/index.js";
+import {
+  createCustomer,
+  listCustomers,
+  retrieveCustomer,
+  updateCustomer,
+  deleteCustomer,
+} from "./payment/customer/index.js";
+import {
+  createProduct,
+  listProducts,
+  retrieveProduct,
+  updateProduct,
+  deleteProduct,
+} from "./payment/product/index.js";
+import {
+  createPlan,
+  listPlans,
+  retrievePlan,
+  updatePlan,
+} from "./payment/plan/index.js";
+import {
+  createSubscription,
+  listSubscriptions,
+  retrieveSubscription,
+  cancelSubscription,
+  changeSubscriptionPlan,
+  changeSubscriptionPaymentMethod,
+} from "./payment/subscription/index.js";
+import { createRefund, listRefunds, retrieveRefund } from "./payment/refund/index.js";
+import { listTransactions } from "./payment/transaction/index.js";
+import { listFraudReviews } from "./payment/fraud/index.js";
 
 export * from "./payment/types.js";
 
@@ -61,6 +92,45 @@ export interface PaymongoClient {
   checkout: {
     create: (props: Parameters<typeof createCheckout>[1]) => ReturnType<typeof createCheckout>;
     retrieve: (checkoutId: string) => ReturnType<typeof retrieveCheckout>;
+  };
+  customer: {
+    create: (props: Parameters<typeof createCustomer>[1]) => ReturnType<typeof createCustomer>;
+    list: (props?: Parameters<typeof listCustomers>[1]) => ReturnType<typeof listCustomers>;
+    retrieve: (customerId: string) => ReturnType<typeof retrieveCustomer>;
+    update: (customerId: string, props: Parameters<typeof updateCustomer>[2]) => ReturnType<typeof updateCustomer>;
+    delete: (customerId: string) => ReturnType<typeof deleteCustomer>;
+  };
+  product: {
+    create: (props: Parameters<typeof createProduct>[1]) => ReturnType<typeof createProduct>;
+    list: (props?: Parameters<typeof listProducts>[1]) => ReturnType<typeof listProducts>;
+    retrieve: (productId: string) => ReturnType<typeof retrieveProduct>;
+    update: (productId: string, props: Parameters<typeof updateProduct>[2]) => ReturnType<typeof updateProduct>;
+    delete: (productId: string) => ReturnType<typeof deleteProduct>;
+  };
+  plan: {
+    create: (props: Parameters<typeof createPlan>[1]) => ReturnType<typeof createPlan>;
+    list: (props?: Parameters<typeof listPlans>[1]) => ReturnType<typeof listPlans>;
+    retrieve: (planId: string) => ReturnType<typeof retrievePlan>;
+    update: (planId: string, props: Parameters<typeof updatePlan>[2]) => ReturnType<typeof updatePlan>;
+  };
+  subscription: {
+    create: (props: Parameters<typeof createSubscription>[1]) => ReturnType<typeof createSubscription>;
+    list: (props?: Parameters<typeof listSubscriptions>[1]) => ReturnType<typeof listSubscriptions>;
+    retrieve: (subscriptionId: string) => ReturnType<typeof retrieveSubscription>;
+    cancel: (subscriptionId: string, props: Parameters<typeof cancelSubscription>[2]) => ReturnType<typeof cancelSubscription>;
+    changePlan: (subscriptionId: string, props: Parameters<typeof changeSubscriptionPlan>[2]) => ReturnType<typeof changeSubscriptionPlan>;
+    changePaymentMethod: (subscriptionId: string, props: Parameters<typeof changeSubscriptionPaymentMethod>[2]) => ReturnType<typeof changeSubscriptionPaymentMethod>;
+  };
+  refund: {
+    create: (props: Parameters<typeof createRefund>[1]) => ReturnType<typeof createRefund>;
+    list: (props?: Parameters<typeof listRefunds>[1]) => ReturnType<typeof listRefunds>;
+    retrieve: (refundId: string) => ReturnType<typeof retrieveRefund>;
+  };
+  transaction: {
+    list: (props?: Parameters<typeof listTransactions>[1]) => ReturnType<typeof listTransactions>;
+  };
+  fraud: {
+    listReviews: (props?: Parameters<typeof listFraudReviews>[1]) => ReturnType<typeof listFraudReviews>;
   };
 }
 
@@ -123,6 +193,45 @@ const PaymongoClient: ClientFunction = (secretKey: string) => {
     checkout: {
       create: (props) => createCheckout(api, props),
       retrieve: (checkoutId) => retrieveCheckout(api, checkoutId),
+    },
+    customer: {
+      create: (props) => createCustomer(api, props),
+      list: (props) => listCustomers(api, props),
+      retrieve: (customerId) => retrieveCustomer(api, customerId),
+      update: (customerId, props) => updateCustomer(api, customerId, props),
+      delete: (customerId) => deleteCustomer(api, customerId),
+    },
+    product: {
+      create: (props) => createProduct(api, props),
+      list: (props) => listProducts(api, props),
+      retrieve: (productId) => retrieveProduct(api, productId),
+      update: (productId, props) => updateProduct(api, productId, props),
+      delete: (productId) => deleteProduct(api, productId),
+    },
+    plan: {
+      create: (props) => createPlan(api, props),
+      list: (props) => listPlans(api, props),
+      retrieve: (planId) => retrievePlan(api, planId),
+      update: (planId, props) => updatePlan(api, planId, props),
+    },
+    subscription: {
+      create: (props) => createSubscription(api, props),
+      list: (props) => listSubscriptions(api, props),
+      retrieve: (subscriptionId) => retrieveSubscription(api, subscriptionId),
+      cancel: (subscriptionId, props) => cancelSubscription(api, subscriptionId, props),
+      changePlan: (subscriptionId, props) => changeSubscriptionPlan(api, subscriptionId, props),
+      changePaymentMethod: (subscriptionId, props) => changeSubscriptionPaymentMethod(api, subscriptionId, props),
+    },
+    refund: {
+      create: (props) => createRefund(api, props),
+      list: (props) => listRefunds(api, props),
+      retrieve: (refundId) => retrieveRefund(api, refundId),
+    },
+    transaction: {
+      list: (props) => listTransactions(api, props),
+    },
+    fraud: {
+      listReviews: (props) => listFraudReviews(api, props),
     },
   };
 };

@@ -6,15 +6,27 @@ export interface FetchClientOptions {
   method: "GET" | "POST" | "PUT" | "DELETE";
   path: string;
   body?: unknown;
+  query?: Record<string, unknown>;
 }
 
 export function createFetchClient(secretKey: string) {
   const auth = btoa(`${secretKey}:`);
 
   return async <T>(options: FetchClientOptions): Promise<T> => {
-    const { method, path, body } = options;
+    const { method, path, body, query } = options;
 
-    const res = await fetch(`${BASE_URL}${path}`, {
+    let url = `${BASE_URL}${path}`;
+    if (query && Object.keys(query).length > 0) {
+      const searchParams = new URLSearchParams();
+      Object.entries(query).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          searchParams.append(key, String(value));
+        }
+      });
+      url += `?${searchParams.toString()}`;
+    }
+
+    const res = await fetch(url, {
       method,
       headers: {
         "Content-Type": "application/json",
