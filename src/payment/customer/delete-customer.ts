@@ -2,10 +2,6 @@ import type { FetchClient } from "../../utils/fetch-client.js";
 import type { CustomerResponse } from "./types.js";
 
 /**
- * @module deleteCustomer
- * @property {string} customer_id - The unique identifier of the customer to delete.
- * @returns {CustomerResponse} - The deleted customer data.
- *
  * @example
  * ```js
  * import PaymongoClient from "paymongo.js";

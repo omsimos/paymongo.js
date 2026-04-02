@@ -2,16 +2,6 @@ import type { FetchClient } from "../../utils/fetch-client.js";
 import type { CreateCheckoutSessionProps, CheckoutSessionResponse } from "./types.js";
 
 /**
- * @module createCheckout
- * @property {CheckoutLineItem[]} line_items - List of items to be purchased.
- * @property {PaymentType[]} payment_method_types - List of allowed payment methods (e.g., ["card", "gcash"]).
- * @property {string} success_url - The URL to redirect the user to after a successful payment.
- * @property {string} cancel_url - The URL to redirect the user to after a cancelled payment.
- * @property {string} description - Description of the checkout session.
- * @property {string} statement_descriptor - Text that appears on customer statements.
- * @property {MetaData} metadata - A set of key-value pairs for additional information.
- * @returns {CheckoutSessionResponse} - The checkout session data.
- *
  * @example
  * ```js
  * import PaymongoClient from "paymongo.js";

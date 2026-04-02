@@ -2,10 +2,6 @@ import type { FetchClient } from "../../utils/fetch-client.js";
 import type { PaymentLinkResponse } from "./types.js";
 
 /**
- * @module retrieveLink
- * @property {string} linkId - The id of the payment link.
- * @returns {PaymentLinkResponse} - The payment link data.
- *
  * @example
  * ```js
  * import PaymongoClient from "paymongo.js";

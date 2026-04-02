@@ -2,11 +2,6 @@ import type { FetchClient } from "../../utils/fetch-client.js";
 import type { ListCustomerProps, ListCustomerResponse } from "./types.js";
 
 /**
- * @module listCustomers
- * @property {number} limit - The number of results to return per page. Default is 20.
- * @property {number} page - The page number of the results to retrieve. Default is 1.
- * @returns {ListCustomerResponse} - List of customers.
- *
  * @example
  * ```js
  * import PaymongoClient from "paymongo.js";

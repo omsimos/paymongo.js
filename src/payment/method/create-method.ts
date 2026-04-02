@@ -2,14 +2,6 @@ import type { FetchClient } from "../../utils/fetch-client.js";
 import type { CreatePaymentMethodProps, PaymentMethodResponse } from "./types.js";
 
 /**
- * @module createPaymentMethod
- * @property {PaymentMethodDetails} details - The details of the payment method.
- * @property {string} type - The type of payment method (card, gcash, paymaya, dob, brankas, etc.).
- * @property {BillingType} billing - The billing details
- * @property {MetaData} metadata - A set of key-value pairs for additional information.
- * @property {number} expiry_seconds - Seconds until the payment method expires. Only applicable for qrph and shopee_pay.
- * @returns {PaymentMethodResponse} - The payment method data.
- *
  * @example
  * ```js
  * import PaymongoClient from "paymongo.js";

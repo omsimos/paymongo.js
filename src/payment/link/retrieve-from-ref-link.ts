@@ -2,10 +2,6 @@ import type { FetchClient } from "../../utils/fetch-client.js";
 import type { RetrieveFromRefResponse } from "./types.js";
 
 /**
- * @module retrieveFromRefLink
- * @property {string} refId - The unique identifier of the PayMongo link checkout URL.
- * @returns {RetrieveFromRefResponse} - The payment link data.
- *
  * @example
  * ```js
  * import PaymongoClient from "paymongo.js";

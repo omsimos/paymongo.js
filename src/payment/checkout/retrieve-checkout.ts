@@ -2,10 +2,6 @@ import type { FetchClient } from "../../utils/fetch-client.js";
 import type { RetrieveCheckoutSessionResponse } from "./types.js";
 
 /**
- * @module retrieveCheckout
- * @property {string} checkout_id - The unique identifier of the Checkout Session (prefixed with cs_).
- * @returns {RetrieveCheckoutSessionResponse} - The checkout session data.
- *
  * @example
  * ```js
  * import PaymongoClient from "paymongo.js";

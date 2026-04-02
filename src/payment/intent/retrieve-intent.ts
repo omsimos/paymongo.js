@@ -2,11 +2,6 @@ import type { FetchClient } from "../../utils/fetch-client.js";
 import type { PaymentIntentResponse, RetrievePaymentIntentProps } from "./types.js";
 
 /**
- * @module retrieveIntent
- * @property {string} intent_id - Id of the PaymentIntent.
- * @property {string} client_key - Client key of the PaymentIntent if the key used is a public key.
- * @returns {PaymentIntentResponse} - The payment intent data.
- *
  * @example
  * ```js
  * import PaymongoClient from "paymongo.js";

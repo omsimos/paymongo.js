@@ -2,11 +2,6 @@ import type { FetchClient } from "../../utils/fetch-client.js";
 import type { UpdateCustomerProps, CustomerResponse } from "./types.js";
 
 /**
- * @module updateCustomer
- * @property {string} customer_id - The unique identifier of the customer.
- * @property {UpdateCustomerProps} props - The fields to update.
- * @returns {CustomerResponse} - The updated customer data.
- *
  * @example
  * ```js
  * import PaymongoClient from "paymongo.js";

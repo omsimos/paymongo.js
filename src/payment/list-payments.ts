@@ -2,9 +2,6 @@ import type { FetchClient } from "../utils/fetch-client.js";
 import type { ListPaymentResponse } from "./types.js";
 
 /**
- * @module listPayments
- * @returns {ListPaymentResponse} - The list of payments.
- *
  * @example
  * ```js
  * import PaymongoClient from "paymongo.js";

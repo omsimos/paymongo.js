@@ -2,10 +2,6 @@ import type { FetchClient } from "../../utils/fetch-client.js";
 import type { PaymentMethodResponse } from "./types.js";
 
 /**
- * @module retrievePaymentMethod
- * @property {string} id - The id of the payment method.
- * @returns {PaymentMethodResponse} - The payment method data.
- *
  * @example
  * ```js
  * import PaymongoClient from "paymongo.js";

@@ -2,9 +2,6 @@ import type { FetchClient } from "../../utils/fetch-client.js";
 import type { PaymentWebhookResponse } from "./types.js";
 
 /**
- * @module listWebhook
- * @returns {PaymentWebhookResponse[]} - The list of payment webhooks.
- *
  * @example
  * ```js
  * import PaymongoClient from "paymongo.js";

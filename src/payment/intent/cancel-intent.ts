@@ -2,10 +2,6 @@ import type { FetchClient } from "../../utils/fetch-client.js";
 import type { CancelPaymentIntentResponse } from "./types.js";
 
 /**
- * @module cancelIntent
- * @property {string} intent_id - The unique identifier of the PaymentIntent to cancel.
- * @returns {CancelPaymentIntentResponse} - Empty object on success.
- *
  * @example
  * ```js
  * import PaymongoClient from "paymongo.js";
